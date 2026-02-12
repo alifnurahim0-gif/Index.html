@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Database Jackpot Pejuang Kasino</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: linear-gradient(180deg, #0d1b4c, #091237);
+    color: white;
+}
+
+/* ===== HEADER ===== */
+.header {
+    background: linear-gradient(90deg, #1a2b8f, #3d2bbf);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.logo span {
+    margin-left: 10px;
+}
+
+.nav {
+    display: flex;
+    gap: 30px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.nav a:hover {
+    opacity: 1;
+}
+
+/* ===== TITLE ===== */
+.container {
+    padding: 40px;
+}
+
+.title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* ===== TABLE ===== */
+.table-wrapper {
+    background: linear-gradient(180deg, #1b2a8f, #111d63);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+td {
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ===== BUTTON STATUS ===== */
+.badge {
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+}
+
+.claimed {
+    background: linear-gradient(90deg, #a3b8ff, #ffffff);
+    color: #1a2b8f;
+}
+
+.claim-now {
+    background: linear-gradient(90deg, #9ec5ff, #dff1ff);
+    color: #1a2b8f;
+}
+
+.not-taken {
+    background: linear-gradient(90deg, #cfd8ff, #ffffff);
+    color: #1a2b8f;
+}
+
+/* ===== PAGINATION ===== */
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.page-btn {
+    padding: 8px 12px;
+    background: #1a2b8f;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.page-btn.active {
+    background: #3d5bff;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    margin-top: 40px;
+    padding: 20px 40px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    opacity: 0.7;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="logo">
+        👑 <span>PEJUANG KASINO</span>
+    </div>
+    <div class="nav">
+        <a href="#">Home</a>
+        <a href="#">Games</a>
+        <a href="#">Promotions</a>
+        <a href="#"><b>Jackpot Database</b></a>
+    </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+    <div class="title">DATABASE JACKPOT PEJUANG KASINO</div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Game</th>
+                    <th>Status</th>
+                    <th>Phone Number</th>
+                    <th>Withdraw</th>
+                    <th>Keterangan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PG/PRAGMATIC</td>
+                    <td>DONE</td>
+                    <td>857-4716-6188</td>
+                    <td>800.000</td>
+                    <td><span class="badge claimed">CLAIMED</span></td>
+                </tr>
+                <tr>
+                    <td>PG/PRAGMATIC</td>
+                    <td>PENDING</td>
+                    <td>-</td>
+                    <td>800.000</td>
+                    <td><span class="badge claim-now">CLAIM NOW</span></td>
+                </tr>
+                <tr>
+                    <td>PG/PRAGMATIC</td>
+                    <td>DONE</td>
+                    <td>858-9157-9941</td>
+                    <td>800.000</td>
+                    <td><span class="badge claimed">CLAIMED</span></td>
+                </tr>
+                <tr>
+                    <td>PG/PRAGMATIC</td>
+                    <td>DONE</td>
+                    <td>857-2163-0755</td>
+                    <td>800.000</td>
+                    <td><span class="badge claimed">CLAIMED</span></td>
+                </tr>
+                <tr>
+                    <td>PG/PRAGMATIC</td>
+                    <td>DONE</td>
+                    <td>857-9747-2137</td>
+                    <td>800.000</td>
+                    <td><span class="badge claimed">CLAIMED</span></td>
+                </tr>
+                <tr>
+                    <td>PG/PRAGMATIC</td>
+                    <td>NOT TAKEN</td>
+                    <td>895-6017-71870</td>
+                    <td>0</td>
+                    <td><span class="badge not-taken">NOT TAKEN</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <div class="page-btn active">1</div>
+            <div class="page-btn">2</div>
+            <div class="page-btn">Next</div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <div>© 2024 Pejuang Kasino, All rights reserved.</div>
+    <div>Privacy Policy | Terms of Service</div>
+</div>
+
+</body>
+</html>
