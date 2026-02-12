@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pejuang Kasino</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: gold;
+        }
+        .box {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        button {
+            background: gold;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: orange;
+        }
+        input {
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            width: 80%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🔥 PEJUANG KASINO 🔥</h1>
+
+    <div class="box">
+        <h2>Selamat Datang</h2>
+        <p>Selamat datang di website resmi Pejuang Kasino!</p>
+
+        <button onclick="alert('Semangat terus pejuang!')">
+            Klik Disini
+        </button>
+    </div>
+
+    <div class="box">
+        <h2>Edit Phone Number</h2>
+
+        <input type="text" id="phoneInput" placeholder="Masukkan nomor HP">
+        <br>
+        <button onclick="simpanNomor()">Simpan Nomor</button>
+
+        <p>Nomor tersimpan:</p>
+        <h3 id="hasil">Belum ada nomor</h3>
+    </div>
+
+<script>
+function simpanNomor() {
+    var nomor = document.getElementById("phoneInput").value;
+    localStorage.setItem("phoneNumber", nomor);
+    document.getElementById("hasil").innerText = nomor;
+}
+
+window.onload = function() {
+    var saved = localStorage.getItem("phoneNumber");
+    if (saved) {
+        document.getElementById("hasil").innerText = saved;
+    }
+}
+</script>
+
+</body>
+</html>
