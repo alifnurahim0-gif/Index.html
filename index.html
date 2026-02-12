@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Database Jackpot Pejuang Kasino</title>
+<title>Database Jackpot</title>
 
 <style>
 body {
@@ -21,6 +21,7 @@ th, td {
 }
 td[contenteditable="true"] {
     background-color: #1a2b8f;
+    cursor: text;
 }
 button {
     margin-top: 15px;
@@ -35,7 +36,7 @@ button {
 
 <body>
 
-<h2>DATABASE JACKPOT PEJUANG KASINO</h2>
+<h2>DATABASE JACKPOT</h2>
 
 <table id="jackpotTable">
 <tr>
@@ -65,13 +66,13 @@ button {
 
 <script>
 function saveData() {
-    let table = document.getElementById("jackpotTable").innerHTML;
-    localStorage.setItem("tableData", table);
+    let data = document.getElementById("jackpotTable").innerHTML;
+    localStorage.setItem("savedTable", data);
     alert("Perubahan disimpan!");
 }
 
 window.onload = function() {
-    let saved = localStorage.getItem("tableData");
+    let saved = localStorage.getItem("savedTable");
     if (saved) {
         document.getElementById("jackpotTable").innerHTML = saved;
     }
