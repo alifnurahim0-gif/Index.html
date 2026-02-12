@@ -2,41 +2,78 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Database Jackpot</title>
+<title>DATABASE JACKPOT PEJUANG KASINO</title>
 
 <style>
 body {
-    background: #0d1b4c;
-    color: white;
-    font-family: Arial;
+    margin: 0;
     padding: 20px;
+    background-color: #0d1b4c;
+    font-family: Arial, sans-serif;
+    color: white;
 }
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
+    background-color: #111a3a;
 }
-th, td {
-    padding: 10px;
-    border-bottom: 1px solid #444;
+
+th {
+    background-color: #1f2d7a;
+    padding: 12px;
+    text-align: left;
 }
-td[contenteditable="true"] {
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #333;
+}
+
+tr:hover {
     background-color: #1a2b8f;
-    cursor: text;
 }
+
+.status-done {
+    color: #00ff88;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: orange;
+    font-weight: bold;
+}
+
 button {
     margin-top: 15px;
-    padding: 8px 15px;
-    background: gold;
+    padding: 10px 15px;
+    background-color: gold;
     border: none;
     border-radius: 5px;
+    font-weight: bold;
     cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Supaya kolom editable tetap rapi */
+td[contenteditable="true"] {
+    outline: none;
+    cursor: text;
 }
 </style>
 </head>
 
 <body>
 
-<h2>DATABASE JACKPOT</h2>
+<h2>DATABASE JACKPOT PEJUANG KASINO</h2>
 
 <table id="jackpotTable">
 <tr>
@@ -48,16 +85,30 @@ button {
 
 <tr>
 <td>PG/PRAGMATIC</td>
-<td>DONE</td>
+<td class="status-done">DONE</td>
 <td contenteditable="true">857-4716-6188</td>
 <td>800.000</td>
 </tr>
 
 <tr>
 <td>PG/PRAGMATIC</td>
-<td>PENDING</td>
+<td class="status-pending">PENDING</td>
 <td contenteditable="true">-</td>
 <td>800.000</td>
+</tr>
+
+<tr>
+<td>HABANERO</td>
+<td class="status-done">DONE</td>
+<td contenteditable="true">812-3456-7890</td>
+<td>1.200.000</td>
+</tr>
+
+<tr>
+<td>PRAGMATIC</td>
+<td class="status-pending">PENDING</td>
+<td contenteditable="true">-</td>
+<td>500.000</td>
 </tr>
 
 </table>
@@ -66,8 +117,8 @@ button {
 
 <script>
 function saveData() {
-    let data = document.getElementById("jackpotTable").innerHTML;
-    localStorage.setItem("savedTable", data);
+    let table = document.getElementById("jackpotTable").innerHTML;
+    localStorage.setItem("savedTable", table);
     alert("Perubahan disimpan!");
 }
 
