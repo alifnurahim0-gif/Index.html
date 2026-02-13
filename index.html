@@ -211,11 +211,12 @@ function setupDeleteLongPress(){
         const deleteBtn = row.querySelector(".delete-row-btn");
         deleteBtn.style.display = "none";
 
+        // Start long press
         const startPress = (e)=>{
             if(e.target===deleteBtn) return;
-            e.preventDefault(); // agar contenteditable tidak mengganggu
             pressTimer = setTimeout(()=>{ deleteBtn.style.display="inline-block"; }, 700);
         };
+
         const cancelPress = ()=>{
             clearTimeout(pressTimer);
         };
