@@ -5,56 +5,92 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Database Jackpot Pejuang Kasino</title>
 
+<!-- Google Font Montserrat -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family: Arial, Helvetica, sans-serif; }
-body { background: linear-gradient(180deg, #0d1b4c, #091237); color: white; }
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Montserrat', 'Inter', sans-serif; }
+body { 
+    background: linear-gradient(180deg, #050505, #002200); 
+    color: #e0e0e0; 
+    font-weight:400; letter-spacing:0.5px;
+}
 
-/* ===== HEADER ===== */
-.header { background: linear-gradient(90deg, #1a2b8f, #003300); padding:15px 40px; display:flex; justify-content:space-between; align-items:center; }
-.logo { display:flex; align-items:center; font-size:22px; font-weight:bold; }
+/* HEADER FORMAL 3D */
+.header { 
+    background: linear-gradient(90deg, #003300, #006600); 
+    padding:15px 40px; display:flex; justify-content:space-between; align-items:center; 
+    box-shadow:0 8px 25px rgba(0,0,0,0.7);
+    border-bottom:2px solid rgba(255,255,255,0.05);
+    font-weight:600;
+}
+.logo { display:flex; align-items:center; font-size:28px; font-weight:700; color:#aaffaa; text-shadow:0 0 6px rgba(0,255,0,0.5); }
 .logo span { margin-left:10px; }
-.nav { display:flex; gap:30px; }
-.nav a { color:white; text-decoration:none; font-size:14px; opacity:0.9; }
-.nav a:hover { opacity:1; }
+.nav { display:flex; gap:25px; flex-wrap:wrap; }
+.nav a { color:#e0e0e0; text-decoration:none; font-size:14px; font-weight:500; transition:0.3s; }
+.nav a:hover { color:#b0ffb0; }
 
-/* ===== TITLE ===== */
-.container { padding:40px; }
-.title { font-size:28px; margin-bottom:20px; font-weight:bold; cursor:text; }
+/* TITLE */
+.container { padding:40px 20px; }
+.title { 
+    font-size:28px; margin-bottom:25px; font-weight:700; cursor:text; 
+    color:#aaffaa; text-shadow:0 0 5px rgba(0,255,0,0.4); 
+}
 
-/* ===== TABLE ===== */
-.table-wrapper { background: linear-gradient(180deg, #003300, #001a00); padding:20px; border-radius:10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-table { width:100%; border-collapse: collapse; }
-th, td { padding:15px; text-align:left; }
-th { font-size:14px; opacity:0.8; cursor:text; }
-td { border-top: 1px solid rgba(0,255,0,0.3); cursor:text; }
+/* TABLE WRAPPER FORMAL 3D */
+.table-wrapper { 
+    background: linear-gradient(180deg, #001100, #004400); 
+    padding:25px; border-radius:20px; overflow-x:auto; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+}
 
-/* ===== BUTTON STATUS ===== */
-.badge { padding:8px 18px; border-radius:20px; font-size:12px; font-weight:bold; text-align:center; display:inline-block; cursor:pointer; }
-.claimed { background: linear-gradient(90deg, #70ff5c, #a3ff9e); color:#003300; }
-.claim-now { background: linear-gradient(90deg, #9ec5ff, #dff1ff); color:#003300; }
-.not-taken { background: linear-gradient(90deg, #ff4a4a, #ff7a7a); color:#003300; }
+/* TABLE FORMAL 3D */
+table { width:100%; min-width:750px; border-collapse: separate; border-spacing:0 18px; }
+th, td { padding:18px 24px; text-align:left; white-space: nowrap; font-size:15px; font-weight:500; }
+thead th { border-bottom: 2px solid rgba(170,255,170,0.5); cursor:text; color:#aaffaa; font-weight:600; text-shadow:0 0 3px rgba(0,255,0,0.3); }
 
-/* ===== PAGINATION ===== */
-.pagination { margin-top:20px; display:flex; justify-content:center; gap:10px; }
-.page-btn { padding:8px 12px; background:#003300; border-radius:5px; cursor:pointer; }
-.page-btn.active { background:#00cc00; }
+/* ROWS FORMAL 3D */
+tbody tr { 
+    cursor:pointer; transition: all 0.25s ease; 
+    background: linear-gradient(90deg, rgba(0,120,0,0.05), rgba(0,120,0,0.09)); 
+    border-radius:14px; box-shadow: 0 6px 20px rgba(0,0,0,0.55);
+}
+tbody tr td { border:none; padding:18px 24px; transition: all 0.25s ease; }
+tbody tr:hover { background: linear-gradient(90deg, rgba(0,150,0,0.1), rgba(0,200,0,0.15)); transform: translateY(-1px); }
+tbody tr.selected { outline: 2px solid #55ff88; outline-offset:-2px; }
 
-/* ===== FOOTER ===== */
-.footer { margin-top:40px; padding:20px 40px; font-size:12px; display:flex; justify-content:space-between; opacity:0.7; }
+/* BADGE FORMAL 3D */
+.badge { 
+    padding:12px 26px; border-radius:24px; font-size:14px; font-weight:600; 
+    text-align:center; display:inline-block; cursor:pointer; user-select:none; 
+    transition: all 0.25s ease; box-shadow:0 4px 18px rgba(0,0,0,0.55);
+}
+.claimed { background: linear-gradient(90deg, #55ff88, #88ffbb); color:#001100; box-shadow:0 0 8px rgba(0,255,128,0.5); }
+.claim-now { background: linear-gradient(90deg, #339966, #66cc88); color:#001100; box-shadow:0 0 6px rgba(0,255,128,0.4); }
+.not-taken { background: linear-gradient(90deg, #cc4444, #ff7777); color:#ffffff; box-shadow:0 0 6px rgba(255,0,0,0.4); }
 
-/* ===== TOMBOL TAMBAH DAN SAVE ===== */
-.button-wrapper { margin-top:20px; display:flex; gap:10px; justify-content:flex-end; }
-button { padding:8px 16px; border:none; border-radius:5px; cursor:pointer; }
-#addRow { background:#00cc00; color:white; }
-#saveTable { background:#003300; color:white; }
+/* PAGINATION */
+.pagination { margin-top:20px; display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
+.page-btn { padding:10px 16px; background:#003300; border-radius:10px; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,0.55); font-weight:500; }
+.page-btn.active { background:#55ff88; color:#001100; }
 
-/* ===== EFECT 3D CAHAYA ===== */
-td, th, .badge { box-shadow: inset 0 0 6px rgba(255,255,255,0.1), 0 2px 4px rgba(0,0,0,0.4); border-radius:5px; }
+/* FOOTER */
+.footer { margin-top:40px; padding:20px 40px; font-size:12px; display:flex; justify-content:space-between; opacity:0.7; flex-wrap:wrap; font-weight:400; }
+
+/* BUTTON TAMBAH, SAVE, HAPUS */
+.button-wrapper { margin-top:25px; display:flex; gap:15px; justify-content:flex-end; flex-wrap:wrap; }
+button { padding:12px 26px; font-size:14px; font-weight:600; border:none; border-radius:12px; cursor:pointer; transition: all 0.25s ease; box-shadow:0 4px 18px rgba(0,0,0,0.55); }
+button:hover { opacity:0.9; }
+#addRow { background:#008800; color:white; }
+#saveTable { background:#005500; color:white; }
+#deleteRow { background:#cc0000; color:white; }
+
+@media (max-width: 600px) { .title{font-size:22px;} .nav{gap:15px;} }
 </style>
 </head>
+
 <body>
 
-<!-- HEADER -->
 <div class="header">
     <div class="logo">👑 <span>PEJUANG KASINO</span></div>
     <div class="nav">
@@ -65,7 +101,6 @@ td, th, .badge { box-shadow: inset 0 0 6px rgba(255,255,255,0.1), 0 2px 4px rgba
     </div>
 </div>
 
-<!-- CONTENT -->
 <div class="container">
     <div class="title" contenteditable="true">DATABASE JACKPOT PEJUANG KASINO</div>
 
@@ -106,12 +141,12 @@ td, th, .badge { box-shadow: inset 0 0 6px rgba(255,255,255,0.1), 0 2px 4px rgba
 
         <div class="button-wrapper">
             <button id="addRow">Tambah Baris</button>
+            <button id="deleteRow">Hapus Baris</button>
             <button id="saveTable">Save</button>
         </div>
     </div>
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
     <div>© 2024 Pejuang Kasino, All rights reserved.</div>
     <div>Privacy Policy | Terms of Service</div>
@@ -119,18 +154,30 @@ td, th, .badge { box-shadow: inset 0 0 6px rgba(255,255,255,0.1), 0 2px 4px rgba
 
 <script>
 const table = document.getElementById("jackpotTable");
+const title = document.querySelector(".title");
 const addRowBtn = document.getElementById("addRow");
 const saveBtn = document.getElementById("saveTable");
-const title = document.querySelector(".title");
+const deleteRowBtn = document.getElementById("deleteRow");
 
-// Load saved data
+let selectedRow = null;
+
 window.onload = function(){
     const savedTable = localStorage.getItem("savedTableData");
     const savedTitle = localStorage.getItem("savedTitle");
     if(savedTable) table.querySelector("tbody").innerHTML = savedTable;
     if(savedTitle) title.innerText = savedTitle;
+    makeEditable();
     setupBadgeToggle();
+    setupRowSelection();
 };
+
+function makeEditable(){
+    const tds = table.querySelectorAll("tbody td[contenteditable=true]");
+    tds.forEach(td => td.addEventListener("input", ()=>{}));
+    const ths = table.querySelectorAll("thead th[contenteditable=true]");
+    ths.forEach(th => th.addEventListener("input", ()=>{}));
+    title.addEventListener("input", ()=>{});
+}
 
 // Tambah baris
 addRowBtn.addEventListener("click", ()=>{
@@ -144,17 +191,29 @@ addRowBtn.addEventListener("click", ()=>{
         <td><span class="badge claim-now">CLAIM NOW</span></td>
     `;
     tbody.appendChild(newRow);
+    makeEditable();
     setupBadgeToggle();
+    setupRowSelection();
 });
 
-// Save
+// Hapus baris yang dipilih
+deleteRowBtn.addEventListener("click", ()=>{
+    if(selectedRow){
+        selectedRow.remove();
+        selectedRow = null;
+    } else {
+        alert("Pilih baris terlebih dahulu untuk dihapus.");
+    }
+});
+
+// Save data
 saveBtn.addEventListener("click", ()=>{
     localStorage.setItem("savedTableData", table.querySelector("tbody").innerHTML);
     localStorage.setItem("savedTitle", title.innerText);
     alert("Data berhasil disimpan!");
 });
 
-// Badge toggle
+// Badge toggle click
 function setupBadgeToggle(){
     const badges = table.querySelectorAll(".badge");
     badges.forEach(span=>{
@@ -163,6 +222,18 @@ function setupBadgeToggle(){
             if(txt==="CLAIM NOW"){span.innerText="CLAIMED"; span.className="badge claimed";}
             else if(txt==="CLAIMED"){span.innerText="NOT TAKEN"; span.className="badge not-taken";}
             else if(txt==="NOT TAKEN"){span.innerText="CLAIM NOW"; span.className="badge claim-now";}
+        }
+    });
+}
+
+// Row selection for deletion
+function setupRowSelection(){
+    const rows = table.querySelectorAll("tbody tr");
+    rows.forEach(row=>{
+        row.onclick = ()=>{
+            if(selectedRow) selectedRow.classList.remove("selected");
+            selectedRow = row;
+            row.classList.add("selected");
         }
     });
 }
