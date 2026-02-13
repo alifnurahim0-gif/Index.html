@@ -65,14 +65,14 @@ body {
     font-weight: bold;
 }
 
-/* ===== TABLE ===== */
+/* ===== TABLE WRAPPER ===== */
 .table-wrapper {
     background: linear-gradient(180deg, #1b2a8f, #111d63);
     padding: 20px;
     border-radius: 10px;
 }
 
-/* 🔥 APP STYLE EFFECT (DITAMBAHKAN SAJA) */
+/* ===== TABLE STYLE MODERN / APP FEEL ===== */
 table {
     width: 100%;
     border-collapse: separate;
@@ -90,16 +90,24 @@ thead th {
 
 tbody tr {
     background: rgba(255,255,255,0.03);
+    border-radius: 10px;
     transition: 0.2s ease;
+    cursor: pointer; /* efek bisa diklik */
+}
+
+tbody tr td {
+    border: none;
 }
 
 tbody tr:hover {
     background: rgba(255,255,255,0.08);
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-td {
-    border: none;
+tbody tr:active {
+    transform: scale(0.99);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 /* ===== BUTTON STATUS ===== */
@@ -160,6 +168,7 @@ td {
 
 <body>
 
+<!-- HEADER -->
 <div class="header">
     <div class="logo">
         👑 <span>PEJUANG KASINO</span>
@@ -172,6 +181,7 @@ td {
     </div>
 </div>
 
+<!-- CONTENT -->
 <div class="container">
     <div class="title">DATABASE JACKPOT PEJUANG KASINO</div>
 
@@ -240,11 +250,13 @@ td {
     </div>
 </div>
 
+<!-- FOOTER -->
 <div class="footer">
     <div>© 2024 Pejuang Kasino, All rights reserved.</div>
     <div>Privacy Policy | Terms of Service</div>
 </div>
 
+<!-- SIMPAN NOMOR SECARA LOKAL -->
 <script>
 window.onload = function() {
     const table = document.getElementById("jackpotTable");
