@@ -88,26 +88,31 @@ thead th {
     border-bottom: 2px solid rgba(255,255,255,0.2);
 }
 
+/* ===== HANYA BAGIAN BARIS TABLE APP-LIKE ===== */
 tbody tr {
-    background: rgba(255,255,255,0.03);
-    border-radius: 10px;
-    transition: all 0.2s ease;
-    cursor: pointer; /* tanda bisa diklik */
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.04));
+    border-radius: 12px;
+    padding: 10px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 tbody tr td {
     border: none;
+    padding: 15px 20px;
+    transition: all 0.25s ease;
 }
 
 tbody tr:hover {
-    background: rgba(255,255,255,0.08);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* efek halus ala card */
+    background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.08));
+    box-shadow: 0 6px 15px rgba(0,0,0,0.18);
+    transform: translateY(-3px);
 }
 
 tbody tr:active {
-    transform: scale(0.98);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* efek ditekan */
+    transform: scale(0.975);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
 }
 
 /* ===== BUTTON STATUS ===== */
@@ -274,4 +279,4 @@ window.onload = function() {
 </script>
 
 </body>
-</html>
+                        </html>
