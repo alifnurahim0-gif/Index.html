@@ -5,15 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Database Jackpot Pejuang Kasino</title>
 
-<!-- Google Font Montserrat -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Montserrat', 'Inter', sans-serif; }
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Montserrat', sans-serif; }
 body { 
     background: linear-gradient(180deg, #050505, #002200); 
     color: #e0e0e0; 
-    font-weight:400; letter-spacing:0.5px;
 }
 
 /* HEADER FORMAL 3D */
@@ -54,6 +52,7 @@ tbody tr {
     cursor:pointer; transition: all 0.25s ease; 
     background: linear-gradient(90deg, rgba(0,120,0,0.05), rgba(0,120,0,0.09)); 
     border-radius:14px; box-shadow: 0 6px 20px rgba(0,0,0,0.55);
+    position:relative;
 }
 tbody tr td { border:none; padding:18px 24px; transition: all 0.25s ease; }
 tbody tr:hover { background: linear-gradient(90deg, rgba(0,150,0,0.1), rgba(0,200,0,0.15)); transform: translateY(-1px); }
@@ -76,15 +75,30 @@ tbody tr:hover { background: linear-gradient(90deg, rgba(0,150,0,0.1), rgba(0,20
 /* FOOTER */
 .footer { margin-top:40px; padding:20px 40px; font-size:12px; display:flex; justify-content:space-between; opacity:0.7; flex-wrap:wrap; font-weight:400; }
 
-/* BUTTON TAMBAH, SAVE, HAPUS */
+/* BUTTON TAMBAH, SAVE */
 .button-wrapper { margin-top:25px; display:flex; gap:15px; justify-content:flex-end; flex-wrap:wrap; }
 button { padding:12px 26px; font-size:14px; font-weight:600; border:none; border-radius:12px; cursor:pointer; transition: all 0.25s ease; box-shadow:0 4px 18px rgba(0,0,0,0.55); }
 button:hover { opacity:0.9; }
 #addRow { background:#008800; color:white; }
 #saveTable { background:#005500; color:white; }
-#deleteRow { background:#cc0000; color:white; }
 
-@media (max-width: 600px) { .title{font-size:22px;} .nav{gap:15px;} }
+/* Hapus baris kecil */
+.delete-row-btn {
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    padding:6px 12px;
+    font-size:12px;
+    background:#cc0000;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    display:none;
+    box-shadow:0 2px 10px rgba(0,0,0,0.5);
+    z-index:10;
+}
 </style>
 </head>
 
@@ -121,6 +135,7 @@ button:hover { opacity:0.9; }
                     <td contenteditable="true">857-4716-6188</td>
                     <td contenteditable="true">VIP</td>
                     <td><span class="badge claim-now">CLAIM NOW</span></td>
+                    <button class="delete-row-btn">Hapus Baris</button>
                 </tr>
                 <tr>
                     <td contenteditable="true">PG/PRAGMATIC</td>
@@ -128,6 +143,7 @@ button:hover { opacity:0.9; }
                     <td contenteditable="true">-</td>
                     <td contenteditable="true">VIP</td>
                     <td><span class="badge claim-now">CLAIM NOW</span></td>
+                    <button class="delete-row-btn">Hapus Baris</button>
                 </tr>
             </tbody>
         </table>
@@ -140,7 +156,6 @@ button:hover { opacity:0.9; }
 
         <div class="button-wrapper">
             <button id="addRow">Tambah Baris</button>
-            <button id="deleteRow">Hapus Baris</button>
             <button id="saveTable">Save</button>
         </div>
     </div>
@@ -156,7 +171,6 @@ const table = document.getElementById("jackpotTable");
 const title = document.querySelector(".title");
 const addRowBtn = document.getElementById("addRow");
 const saveBtn = document.getElementById("saveTable");
-const deleteRowBtn = document.getElementById("deleteRow");
 
 window.onload = function(){
     const savedTable = localStorage.getItem("savedTableData");
@@ -165,6 +179,7 @@ window.onload = function(){
     if(savedTitle) title.innerText = savedTitle;
     makeEditable();
     setupBadgeToggle();
+    setupDeleteLongPress();
 };
 
 function makeEditable(){
@@ -185,16 +200,12 @@ addRowBtn.addEventListener("click", ()=>{
         <td contenteditable="true">-</td>
         <td contenteditable="true">VIP</td>
         <td><span class="badge claim-now">CLAIM NOW</span></td>
+        <button class="delete-row-btn">Hapus Baris</button>
     `;
     tbody.appendChild(newRow);
     makeEditable();
     setupBadgeToggle();
-});
-
-// Hapus baris terakhir
-deleteRowBtn.addEventListener("click", ()=>{
-    const tbody = table.querySelector("tbody");
-    if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1);
+    setupDeleteLongPress();
 });
 
 // Save data
@@ -214,6 +225,26 @@ function setupBadgeToggle(){
             else if(txt==="CLAIMED"){span.innerText="NOT TAKEN"; span.className="badge not-taken";}
             else if(txt==="NOT TAKEN"){span.innerText="CLAIM NOW"; span.className="badge claim-now";}
         }
+    });
+}
+
+// Hapus baris via long press
+function setupDeleteLongPress(){
+    const rows = table.querySelectorAll("tbody tr");
+    rows.forEach(row=>{
+        let pressTimer;
+        const deleteBtn = row.querySelector(".delete-row-btn");
+
+        row.addEventListener("mousedown", (e)=>{
+            if(e.target===deleteBtn) return;
+            pressTimer = setTimeout(()=>{ deleteBtn.style.display="inline-block"; }, 600);
+        });
+        row.addEventListener("mouseup", ()=>{ clearTimeout(pressTimer); });
+        row.addEventListener("mouseleave", ()=>{ clearTimeout(pressTimer); });
+
+        deleteBtn.onclick = ()=>{
+            row.remove();
+        };
     });
 }
 </script>
