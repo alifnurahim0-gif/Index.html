@@ -9,19 +9,10 @@
 
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Montserrat', sans-serif; }
-body { 
-    background: linear-gradient(180deg, #050505, #002200); 
-    color: #e0e0e0; 
-}
+body { background: linear-gradient(180deg, #050505, #002200); color: #e0e0e0; }
 
 /* HEADER FORMAL 3D */
-.header { 
-    background: linear-gradient(90deg, #003300, #006600); 
-    padding:15px 40px; display:flex; justify-content:space-between; align-items:center; 
-    box-shadow:0 8px 25px rgba(0,0,0,0.7);
-    border-bottom:2px solid rgba(255,255,255,0.05);
-    font-weight:600;
-}
+.header { background: linear-gradient(90deg, #003300, #006600); padding:15px 40px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 8px 25px rgba(0,0,0,0.7); border-bottom:2px solid rgba(255,255,255,0.05); font-weight:600; }
 .logo { display:flex; align-items:center; font-size:28px; font-weight:700; color:#aaffaa; text-shadow:0 0 6px rgba(0,255,0,0.5); }
 .logo span { margin-left:10px; }
 .nav { display:flex; gap:25px; flex-wrap:wrap; }
@@ -30,17 +21,10 @@ body {
 
 /* TITLE */
 .container { padding:40px 20px; }
-.title { 
-    font-size:28px; margin-bottom:25px; font-weight:700; cursor:text; 
-    color:#aaffaa; text-shadow:0 0 5px rgba(0,255,0,0.4); 
-}
+.title { font-size:28px; margin-bottom:25px; font-weight:700; cursor:text; color:#aaffaa; text-shadow:0 0 5px rgba(0,255,0,0.4); }
 
 /* TABLE WRAPPER FORMAL 3D */
-.table-wrapper { 
-    background: linear-gradient(180deg, #001100, #004400); 
-    padding:25px; border-radius:20px; overflow-x:auto; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-}
+.table-wrapper { background: linear-gradient(180deg, #001100, #004400); padding:25px; border-radius:20px; overflow-x:auto; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
 
 /* TABLE FORMAL 3D */
 table { width:100%; min-width:750px; border-collapse: separate; border-spacing:0 18px; }
@@ -48,21 +32,12 @@ th, td { padding:18px 24px; text-align:left; white-space: nowrap; font-size:15px
 thead th { border-bottom: 2px solid rgba(170,255,170,0.5); cursor:text; color:#aaffaa; font-weight:600; text-shadow:0 0 3px rgba(0,255,0,0.3); }
 
 /* ROWS FORMAL 3D */
-tbody tr { 
-    cursor:pointer; transition: all 0.25s ease; 
-    background: linear-gradient(90deg, rgba(0,120,0,0.05), rgba(0,120,0,0.09)); 
-    border-radius:14px; box-shadow: 0 6px 20px rgba(0,0,0,0.55);
-    position:relative;
-}
+tbody tr { cursor:pointer; transition: all 0.25s ease; background: linear-gradient(90deg, rgba(0,120,0,0.05), rgba(0,120,0,0.09)); border-radius:14px; box-shadow: 0 6px 20px rgba(0,0,0,0.55); position:relative; }
 tbody tr td { border:none; padding:18px 24px; transition: all 0.25s ease; }
 tbody tr:hover { background: linear-gradient(90deg, rgba(0,150,0,0.1), rgba(0,200,0,0.15)); transform: translateY(-1px); }
 
 /* BADGE FORMAL 3D */
-.badge { 
-    padding:12px 26px; border-radius:24px; font-size:14px; font-weight:600; 
-    text-align:center; display:inline-block; cursor:pointer; user-select:none; 
-    transition: all 0.25s ease; box-shadow:0 4px 18px rgba(0,0,0,0.55);
-}
+.badge { padding:12px 26px; border-radius:24px; font-size:14px; font-weight:600; text-align:center; display:inline-block; cursor:pointer; user-select:none; transition: all 0.25s ease; box-shadow:0 4px 18px rgba(0,0,0,0.55); }
 .claimed { background: linear-gradient(90deg, #55ff88, #88ffbb); color:#001100; box-shadow:0 0 8px rgba(0,255,128,0.5); }
 .claim-now { background: linear-gradient(90deg, #339966, #66cc88); color:#001100; box-shadow:0 0 6px rgba(0,255,128,0.4); }
 .not-taken { background: linear-gradient(90deg, #cc4444, #ff7777); color:#ffffff; box-shadow:0 0 6px rgba(255,0,0,0.4); }
@@ -185,7 +160,7 @@ window.onload = function(){
 function makeEditable(){
     const tds = table.querySelectorAll("tbody td[contenteditable=true]");
     tds.forEach(td => td.addEventListener("input", ()=>{}));
-    const ths = table.querySelectorAll("thead th");
+    const ths = table.querySelectorAll("thead th[contenteditable=true]");
     ths.forEach(th => th.addEventListener("input", ()=>{}));
     title.addEventListener("input", ()=>{});
 }
@@ -228,7 +203,7 @@ function setupBadgeToggle(){
     });
 }
 
-// Hapus baris via long press
+// Hapus baris via long press 0.7 detik
 function setupDeleteLongPress(){
     const rows = table.querySelectorAll("tbody tr");
     rows.forEach(row=>{
@@ -237,10 +212,12 @@ function setupDeleteLongPress(){
 
         row.addEventListener("mousedown", (e)=>{
             if(e.target===deleteBtn) return;
-            pressTimer = setTimeout(()=>{ deleteBtn.style.display="inline-block"; }, 600);
+            pressTimer = setTimeout(()=>{ deleteBtn.style.display="inline-block"; }, 700);
         });
         row.addEventListener("mouseup", ()=>{ clearTimeout(pressTimer); });
         row.addEventListener("mouseleave", ()=>{ clearTimeout(pressTimer); });
+        row.addEventListener("touchstart", ()=>{ pressTimer = setTimeout(()=>{ deleteBtn.style.display="inline-block"; }, 700); });
+        row.addEventListener("touchend", ()=>{ clearTimeout(pressTimer); });
 
         deleteBtn.onclick = ()=>{
             row.remove();
