@@ -13,21 +13,21 @@ body { background: linear-gradient(180deg, #0d1b4c, #091237); color: white; }
 .header { background: linear-gradient(90deg, #1a2b8f, #3d2bbf); padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; }
 .logo { display: flex; align-items: center; font-size: 22px; font-weight: bold; }
 .logo span { margin-left: 10px; }
-.nav { display: flex; gap: 30px; }
+.nav { display: flex; gap: 30px; flex-wrap: wrap; }
 .nav a { color: white; text-decoration: none; font-size: 14px; opacity: 0.9; }
 .nav a:hover { opacity: 1; }
 
 /* TITLE */
-.container { padding: 40px; }
+.container { padding: 40px 20px; }
 .title { font-size: 28px; margin-bottom: 20px; font-weight: bold; cursor: text; }
 
-/* TABLE WRAPPER */
-.table-wrapper { background: linear-gradient(180deg, #1b2a8f, #111d63); padding: 20px; border-radius: 10px; }
+/* TABLE WRAPPER RESPONSIVE */
+.table-wrapper { background: linear-gradient(180deg, #1b2a8f, #111d63); padding: 20px; border-radius: 10px; overflow-x: auto; }
 
 /* TABLE */
-table { width: 100%; border-collapse: separate; border-spacing: 0 14px; }
-th, td { padding: 20px 18px; text-align: left; }
-thead th { border-bottom: 2px solid rgba(255,255,255,0.25); cursor: text; } /* header editable pointer */
+table { width: 100%; min-width: 700px; border-collapse: separate; border-spacing: 0 14px; }
+th, td { padding: 20px 18px; text-align: left; white-space: nowrap; }
+thead th { border-bottom: 2px solid rgba(255,255,255,0.25); cursor: text; }
 
 /* ROWS */
 tbody tr { cursor: pointer; transition: all 0.25s ease; background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.08)); border-radius: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.35); }
@@ -42,12 +42,18 @@ tbody tr:active { transform: scale(0.97); box-shadow: 0 6px 25px rgba(0,0,0,0.45
 .not-taken { background: linear-gradient(90deg, #cfd8ff, #ffffff); color: #1a2b8f; }
 
 /* PAGINATION */
-.pagination { margin-top: 20px; display: flex; justify-content: center; gap: 10px; }
+.pagination { margin-top: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
 .page-btn { padding: 8px 12px; background: #1a2b8f; border-radius: 5px; cursor: pointer; }
 .page-btn.active { background: #3d5bff; }
 
 /* FOOTER */
-.footer { margin-top: 40px; padding: 20px 40px; font-size: 12px; display: flex; justify-content: space-between; opacity: 0.7; }
+.footer { margin-top: 40px; padding: 20px 40px; font-size: 12px; display: flex; justify-content: space-between; opacity: 0.7; flex-wrap: wrap; }
+
+/* RESPONSIVE TEXT */
+@media (max-width: 600px) {
+    .title { font-size: 22px; }
+    .nav { gap: 15px; }
+}
 </style>
 </head>
 <body>
