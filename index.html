@@ -21,7 +21,7 @@ body { background: linear-gradient(180deg, #000000, #003300); color: white; }
 .container { padding: 40px 20px; }
 .title { font-size: 28px; margin-bottom: 20px; font-weight: bold; cursor: text; }
 
-/* TABLE WRAPPER RESPONSIVE */
+/* TABLE WRAPPER */
 .table-wrapper { background: linear-gradient(180deg, #003300, #001a00); padding: 20px; border-radius: 10px; overflow-x: auto; }
 
 /* TABLE */
@@ -37,9 +37,9 @@ tbody tr:active { transform: scale(0.97); box-shadow: 0 6px 25px rgba(0,0,0,0.45
 
 /* BADGE */
 .badge { padding: 8px 18px; border-radius: 20px; font-size: 12px; font-weight: bold; text-align: center; display: inline-block; }
-.claimed { background: linear-gradient(90deg, #00cc44, #00ff66); color: #001a00; }
+.claimed { background: linear-gradient(90deg, #00ff44, #66ff66); color: #001a00; }
 .claim-now { background: linear-gradient(90deg, #009933, #00cc44); color: #001a00; }
-.not-taken { background: linear-gradient(90deg, #006600, #009933); color: #001a00; }
+.not-taken { background: linear-gradient(90deg, #cc0000, #ff4d4f); color: #fff; }
 
 /* PAGINATION */
 .pagination { margin-top: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
@@ -152,9 +152,25 @@ function makeEditable() {
     const tds = table.querySelectorAll("tbody td");
     const ths = table.querySelectorAll("thead th");
 
-    tds.forEach(td => td.addEventListener("input", () => {}));
+    tds.forEach(td => td.addEventListener("input", handleBadgeColor));
     ths.forEach(th => th.addEventListener("input", () => {}));
     title.addEventListener("input", () => {});
+}
+
+// Fungsi otomatis ubah warna badge berdasarkan teks
+function handleBadgeColor(e){
+    const cell = e.target;
+    const span = cell.querySelector(".badge");
+    if(span){
+        const text = span.innerText.trim().toUpperCase();
+        if(text === "CLAIMED"){
+            span.className = "badge claimed";
+        } else if(text === "NOT TAKEN"){
+            span.className = "badge not-taken";
+        } else if(text === "CLAIM NOW"){
+            span.className = "badge claim-now";
+        }
+    }
 }
 
 // Tambah baris baru
