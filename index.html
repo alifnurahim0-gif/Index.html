@@ -22,18 +22,17 @@ body { background: linear-gradient(180deg, #0d1b4c, #091237); color: white; }
 .title { font-size:28px; margin-bottom:20px; font-weight:bold; cursor:text; }
 
 /* ===== TABLE ===== */
-.table-wrapper { background: linear-gradient(180deg, #1b2a8f, #111d63); padding:20px; border-radius:10px; }
+.table-wrapper { background: linear-gradient(180deg, #1b2a8f, #111d63); padding:20px; border-radius:10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
 table { width:100%; border-collapse: collapse; }
 th, td { padding:15px; text-align:left; }
 th { font-size:14px; opacity:0.8; cursor:text; }
 td { border-top: 1px solid rgba(255,255,255,0.3); cursor:text; }
-.delete-btn { display:none; font-size:12px; padding:2px 6px; margin-right:5px; cursor:pointer; border:none; border-radius:4px; background:#ff4444; color:white; }
 
 /* ===== BUTTON STATUS ===== */
 .badge { padding:8px 18px; border-radius:20px; font-size:12px; font-weight:bold; text-align:center; display:inline-block; cursor:pointer; }
-.claimed { background: linear-gradient(90deg, #a3b8ff, #ffffff); color:#1a2b8f; }
+.claimed { background: linear-gradient(90deg, #a3ff9e, #70ff5c); color:#1a2b8f; }
 .claim-now { background: linear-gradient(90deg, #9ec5ff, #dff1ff); color:#1a2b8f; }
-.not-taken { background: linear-gradient(90deg, #cfd8ff, #ffffff); color:#1a2b8f; }
+.not-taken { background: linear-gradient(90deg, #ff7a7a, #ff4a4a); color:#1a2b8f; }
 
 /* ===== PAGINATION ===== */
 .pagination { margin-top:20px; display:flex; justify-content:center; gap:10px; }
@@ -48,6 +47,9 @@ td { border-top: 1px solid rgba(255,255,255,0.3); cursor:text; }
 button { padding:8px 16px; border:none; border-radius:5px; cursor:pointer; }
 #addRow { background:#3d5bff; color:white; }
 #saveTable { background:#1a2b8f; color:white; }
+
+/* ===== EFECT 3D CAHAYA ===== */
+td, th, .badge { box-shadow: inset 0 0 6px rgba(255,255,255,0.1), 0 2px 4px rgba(0,0,0,0.2); border-radius:5px; }
 </style>
 </head>
 <body>
@@ -71,7 +73,6 @@ button { padding:8px 16px; border:none; border-radius:5px; cursor:pointer; }
         <table id="jackpotTable">
             <thead>
                 <tr>
-                    <th></th>
                     <th contenteditable="true">Game</th>
                     <th contenteditable="true">Status</th>
                     <th contenteditable="true">Phone Number</th>
@@ -81,7 +82,6 @@ button { padding:8px 16px; border:none; border-radius:5px; cursor:pointer; }
             </thead>
             <tbody>
                 <tr>
-                    <td><button class="delete-btn">Hapus</button></td>
                     <td contenteditable="true">PG/PRAGMATIC</td>
                     <td contenteditable="true">DONE</td>
                     <td contenteditable="true">857-4716-6188</td>
@@ -89,7 +89,6 @@ button { padding:8px 16px; border:none; border-radius:5px; cursor:pointer; }
                     <td><span class="badge claim-now">CLAIM NOW</span></td>
                 </tr>
                 <tr>
-                    <td><button class="delete-btn">Hapus</button></td>
                     <td contenteditable="true">PG/PRAGMATIC</td>
                     <td contenteditable="true">PENDING</td>
                     <td contenteditable="true">-</td>
@@ -131,7 +130,6 @@ window.onload = function(){
     if(savedTable) table.querySelector("tbody").innerHTML = savedTable;
     if(savedTitle) title.innerText = savedTitle;
     setupBadgeToggle();
-    setupDeleteButtons();
 };
 
 // Tambah baris
@@ -139,7 +137,6 @@ addRowBtn.addEventListener("click", ()=>{
     const tbody = table.querySelector("tbody");
     const newRow = document.createElement("tr");
     newRow.innerHTML = `
-        <td><button class="delete-btn">Hapus</button></td>
         <td contenteditable="true">New Game</td>
         <td contenteditable="true">Status</td>
         <td contenteditable="true">-</td>
@@ -148,7 +145,6 @@ addRowBtn.addEventListener("click", ()=>{
     `;
     tbody.appendChild(newRow);
     setupBadgeToggle();
-    setupDeleteButtons();
 });
 
 // Save
@@ -168,14 +164,6 @@ function setupBadgeToggle(){
             else if(txt==="CLAIMED"){span.innerText="NOT TAKEN"; span.className="badge not-taken";}
             else if(txt==="NOT TAKEN"){span.innerText="CLAIM NOW"; span.className="badge claim-now";}
         }
-    });
-}
-
-// Delete buttons
-function setupDeleteButtons(){
-    const deleteBtns = table.querySelectorAll(".delete-btn");
-    deleteBtns.forEach(btn=>{
-        btn.onclick = ()=>{ btn.closest("tr").remove(); };
     });
 }
 </script>
