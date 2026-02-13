@@ -100,7 +100,7 @@ button:hover { opacity:0.9; }
                     <th contenteditable="true">Status</th>
                     <th contenteditable="true">Phone Number</th>
                     <th contenteditable="true">Reward</th>
-                    <th>Keterangan</th>
+                    <th>Keterangan</th> <!-- Tidak editable -->
                 </tr>
             </thead>
             <tbody>
@@ -203,21 +203,28 @@ function setupBadgeToggle(){
     });
 }
 
-// Hapus baris via long press 0.7 detik
+// Hapus baris via long press 0.7 detik meski contenteditable aktif
 function setupDeleteLongPress(){
     const rows = table.querySelectorAll("tbody tr");
     rows.forEach(row=>{
         let pressTimer;
         const deleteBtn = row.querySelector(".delete-row-btn");
+        deleteBtn.style.display = "none";
 
-        row.addEventListener("mousedown", (e)=>{
+        const startPress = (e)=>{
             if(e.target===deleteBtn) return;
+            e.preventDefault(); // agar contenteditable tidak mengganggu
             pressTimer = setTimeout(()=>{ deleteBtn.style.display="inline-block"; }, 700);
-        });
-        row.addEventListener("mouseup", ()=>{ clearTimeout(pressTimer); });
-        row.addEventListener("mouseleave", ()=>{ clearTimeout(pressTimer); });
-        row.addEventListener("touchstart", ()=>{ pressTimer = setTimeout(()=>{ deleteBtn.style.display="inline-block"; }, 700); });
-        row.addEventListener("touchend", ()=>{ clearTimeout(pressTimer); });
+        };
+        const cancelPress = ()=>{
+            clearTimeout(pressTimer);
+        };
+
+        row.addEventListener("mousedown", startPress);
+        row.addEventListener("touchstart", startPress);
+        row.addEventListener("mouseup", cancelPress);
+        row.addEventListener("mouseleave", cancelPress);
+        row.addEventListener("touchend", cancelPress);
 
         deleteBtn.onclick = ()=>{
             row.remove();
