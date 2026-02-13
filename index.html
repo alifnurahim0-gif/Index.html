@@ -27,7 +27,7 @@ body { background: linear-gradient(180deg, #0d1b4c, #091237); color: white; }
 /* TABLE */
 table { width: 100%; border-collapse: separate; border-spacing: 0 14px; }
 th, td { padding: 20px 18px; text-align: left; }
-thead th { border-bottom: 2px solid rgba(255,255,255,0.25); }
+thead th { border-bottom: 2px solid rgba(255,255,255,0.25); cursor: text; } /* header editable pointer */
 
 /* ROWS */
 tbody tr { cursor: pointer; transition: all 0.25s ease; background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.08)); border-radius: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.35); }
@@ -67,7 +67,7 @@ tbody tr:active { transform: scale(0.97); box-shadow: 0 6px 25px rgba(0,0,0,0.45
 </div>
 
 <div class="container">
-    <div class="title">DATABASE JACKPOT PEJUANG KASINO</div>
+    <div class="title" contenteditable="true">DATABASE JACKPOT PEJUANG KASINO</div>
 
     <button id="addRowBtn">Tambah Baris</button>
 
@@ -75,34 +75,27 @@ tbody tr:active { transform: scale(0.97); box-shadow: 0 6px 25px rgba(0,0,0,0.45
         <table id="jackpotTable">
             <thead>
                 <tr>
-                    <th>Game</th>
-                    <th>Status</th>
-                    <th>Phone Number</th>
-                    <th>Withdraw</th>
-                    <th>Keterangan</th>
+                    <th contenteditable="true">Game</th>
+                    <th contenteditable="true">Status</th>
+                    <th contenteditable="true">Phone Number</th>
+                    <th contenteditable="true">Withdraw</th>
+                    <th contenteditable="true">Keterangan</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>PG/PRAGMATIC</td>
-                    <td>DONE</td>
-                    <td>857-4716-6188</td>
-                    <td>800.000</td>
-                    <td><span class="badge claimed">CLAIMED</span></td>
+                    <td contenteditable="true">PG/PRAGMATIC</td>
+                    <td contenteditable="true">DONE</td>
+                    <td contenteditable="true">857-4716-6188</td>
+                    <td contenteditable="true">800.000</td>
+                    <td contenteditable="true"><span class="badge claimed">CLAIMED</span></td>
                 </tr>
                 <tr>
-                    <td>PG/PRAGMATIC</td>
-                    <td>PENDING</td>
-                    <td>-</td>
-                    <td>800.000</td>
-                    <td><span class="badge claim-now">CLAIM NOW</span></td>
-                </tr>
-                <tr>
-                    <td>PG/PRAGMATIC</td>
-                    <td>DONE</td>
-                    <td>858-9157-9941</td>
-                    <td>800.000</td>
-                    <td><span class="badge claimed">CLAIMED</span></td>
+                    <td contenteditable="true">PG/PRAGMATIC</td>
+                    <td contenteditable="true">PENDING</td>
+                    <td contenteditable="true">-</td>
+                    <td contenteditable="true">800.000</td>
+                    <td contenteditable="true"><span class="badge claim-now">CLAIM NOW</span></td>
                 </tr>
             </tbody>
         </table>
@@ -123,29 +116,33 @@ tbody tr:active { transform: scale(0.97); box-shadow: 0 6px 25px rgba(0,0,0,0.45
 <script>
 const table = document.getElementById("jackpotTable");
 const addRowBtn = document.getElementById("addRowBtn");
+const title = document.querySelector(".title");
 
 // Load saved data
 window.onload = function() {
-    const saved = localStorage.getItem("savedTableData");
-    if (saved) {
-        table.querySelector("tbody").innerHTML = saved;
-    }
+    const savedTable = localStorage.getItem("savedTableData");
+    const savedTitle = localStorage.getItem("savedTitle");
+
+    if (savedTable) table.querySelector("tbody").innerHTML = savedTable;
+    if (savedTitle) title.innerText = savedTitle;
+
     makeEditable();
 };
 
-// Function untuk bikin td editable
+// Function untuk bikin td & th editable
 function makeEditable() {
     const tds = table.querySelectorAll("tbody td");
-    tds.forEach(td => {
-        td.setAttribute("contenteditable", "true");
-        td.addEventListener("input", saveData);
-    });
+    const ths = table.querySelectorAll("thead th");
+
+    tds.forEach(td => td.addEventListener("input", saveData));
+    ths.forEach(th => th.addEventListener("input", saveData));
+    title.addEventListener("input", saveData);
 }
 
 // Simpan data otomatis
 function saveData() {
-    const data = table.querySelector("tbody").innerHTML;
-    localStorage.setItem("savedTableData", data);
+    localStorage.setItem("savedTableData", table.querySelector("tbody").innerHTML);
+    localStorage.setItem("savedTitle", title.innerText);
 }
 
 // Tambah baris baru
@@ -153,11 +150,11 @@ addRowBtn.addEventListener("click", () => {
     const tbody = table.querySelector("tbody");
     const newRow = document.createElement("tr");
     newRow.innerHTML = `
-        <td>New Game</td>
-        <td>Status</td>
-        <td>Phone</td>
-        <td>0</td>
-        <td><span class="badge claim-now">CLAIM NOW</span></td>
+        <td contenteditable="true">New Game</td>
+        <td contenteditable="true">Status</td>
+        <td contenteditable="true">Phone</td>
+        <td contenteditable="true">0</td>
+        <td contenteditable="true"><span class="badge claim-now">CLAIM NOW</span></td>
     `;
     tbody.appendChild(newRow);
     makeEditable();
