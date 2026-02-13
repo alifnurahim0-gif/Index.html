@@ -88,30 +88,30 @@ thead th {
     border-bottom: 2px solid rgba(255,255,255,0.25);
 }
 
-/* ===== HANYA BAGIAN BARIS TABLE – HD CLICKABLE ===== */
+/* ===== HANYA BAGIAN BARIS TABLE – LEBIH JELAS & MENCOLOK ===== */
 tbody tr {
     cursor: pointer;
-    transition: all 0.3s ease;
-    background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.05));
+    transition: all 0.25s ease;
+    background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.08));
     border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35); /* shadow lebih tegas */
 }
 
 tbody tr td {
     border: none;
     padding: 18px 22px;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
 }
 
 tbody tr:hover {
-    background: linear-gradient(90deg, rgba(255,255,255,0.07), rgba(255,255,255,0.12));
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+    background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.18)); /* hover lebih kontras */
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.45); /* shadow lebih mencolok */
 }
 
 tbody tr:active {
     transform: scale(0.97);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.35);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.45);
 }
 
 /* ===== BUTTON STATUS ===== */
