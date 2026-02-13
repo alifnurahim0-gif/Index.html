@@ -65,11 +65,12 @@ body {
     font-weight: bold;
 }
 
-/* ===== TABLE ===== */
+/* ===== TABLE WRAPPER ===== */
 .table-wrapper {
     background: linear-gradient(180deg, #1b2a8f, #111d63);
     padding: 20px;
     border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 table {
@@ -78,23 +79,38 @@ table {
 }
 
 th, td {
-    padding: 15px;
+    padding: 16px 15px;
     text-align: left;
-    border: 1px solid rgba(255,255,255,0.25); /* GARIS LEBIH JELAS */
 }
 
-th {
+/* Header line */
+thead th {
+    border-bottom: 2px solid rgba(255,255,255,0.25);
     font-size: 14px;
     opacity: 0.8;
 }
 
-/* ===== BUTTON STATUS ===== */
+/* Horizontal lines only */
+tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Hover effect modern */
+tbody tr:hover {
+    background: rgba(255,255,255,0.05);
+    transition: 0.2s ease;
+}
+
+/* ===== BADGE ===== */
 .badge {
     padding: 8px 18px;
     border-radius: 20px;
     font-size: 12px;
     font-weight: bold;
-    text-align: center;
     display: inline-block;
 }
 
@@ -146,7 +162,6 @@ th {
 
 <body>
 
-<!-- HEADER -->
 <div class="header">
     <div class="logo">
         👑 <span>PEJUANG KASINO</span>
@@ -159,7 +174,6 @@ th {
     </div>
 </div>
 
-<!-- CONTENT -->
 <div class="container">
     <div class="title">DATABASE JACKPOT PEJUANG KASINO</div>
 
@@ -228,7 +242,6 @@ th {
     </div>
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
     <div>© 2024 Pejuang Kasino, All rights reserved.</div>
     <div>Privacy Policy | Terms of Service</div>
@@ -237,8 +250,8 @@ th {
 <script>
 window.onload = function() {
     const table = document.getElementById("jackpotTable");
-
     const saved = localStorage.getItem("savedTableData");
+
     if (saved) {
         table.querySelector("tbody").innerHTML = saved;
     }
