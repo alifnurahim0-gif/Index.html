@@ -57,10 +57,10 @@ button:hover { opacity:0.9; }
 #addRow { background:#008800; color:white; }
 #saveTable { background:#005500; color:white; }
 
-/* MENU TITIK 3 & DELETE */
-.menu-dot { font-weight:bold; font-size:20px; cursor:pointer; user-select:none; margin-right:12px; color:#aaffaa; }
-.delete-row-btn { padding:6px 12px; font-size:12px; background:#cc0000; color:white; border:none; border-radius:8px; cursor:pointer; display:none; box-shadow:0 2px 10px rgba(0,0,0,0.5); margin-left:10px; }
+/* TOMBOL > DAN HAPUS */
 .menu-wrapper { display:flex; align-items:center; }
+.menu-btn { font-weight:bold; font-size:20px; cursor:pointer; user-select:none; margin-right:12px; background:none; border:none; color:#aaffaa; }
+.delete-row-btn { padding:6px 12px; font-size:12px; background:#cc0000; color:white; border:none; border-radius:8px; cursor:pointer; display:none; box-shadow:0 2px 10px rgba(0,0,0,0.5); margin-left:10px; }
 </style>
 </head>
 
@@ -94,7 +94,7 @@ button:hover { opacity:0.9; }
             <tbody>
                 <tr>
                     <td class="menu-wrapper">
-                        <span class="menu-dot">⋮</span>
+                        <button class="menu-btn">&gt;</button>
                         <button class="delete-row-btn">Hapus</button>
                     </td>
                     <td contenteditable="true">PG/PRAGMATIC</td>
@@ -105,7 +105,7 @@ button:hover { opacity:0.9; }
                 </tr>
                 <tr>
                     <td class="menu-wrapper">
-                        <span class="menu-dot">⋮</span>
+                        <button class="menu-btn">&gt;</button>
                         <button class="delete-row-btn">Hapus</button>
                     </td>
                     <td contenteditable="true">PG/PRAGMATIC</td>
@@ -167,7 +167,7 @@ addRowBtn.addEventListener("click", ()=>{
     const newRow = document.createElement("tr");
     newRow.innerHTML = `
         <td class="menu-wrapper">
-            <span class="menu-dot">⋮</span>
+            <button class="menu-btn">&gt;</button>
             <button class="delete-row-btn">Hapus</button>
         </td>
         <td contenteditable="true">New Game</td>
@@ -202,14 +202,14 @@ function setupBadgeToggle(){
     });
 }
 
-// Menu titik 3 delete
+// Menu tombol > delete
 function setupMenuDelete(){
-    const menuDots = table.querySelectorAll(".menu-dot");
-    menuDots.forEach(dot=>{
-        const btn = dot.nextElementSibling;
-        dot.onclick = ()=>{
-            if(btn.style.display==="inline-block") btn.style.display="none";
-            else btn.style.display="inline-block";
+    const menuBtns = table.querySelectorAll(".menu-btn");
+    menuBtns.forEach(btn=>{
+        const delBtn = btn.nextElementSibling;
+        btn.onclick = ()=>{
+            if(delBtn.style.display==="inline-block") delBtn.style.display="none";
+            else delBtn.style.display="inline-block";
         }
     });
     const delBtns = table.querySelectorAll(".delete-row-btn");
