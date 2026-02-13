@@ -13,60 +13,60 @@ body { background: linear-gradient(180deg, #0a0a0a, #001a00); color: #e0e0e0; }
 .header { 
     background: linear-gradient(90deg, #002200, #004400); 
     padding:15px 40px; display:flex; justify-content:space-between; align-items:center; 
-    box-shadow:0 6px 20px rgba(0,0,0,0.5);
+    box-shadow:0 6px 15px rgba(0,0,0,0.6);
 }
-.logo { display:flex; align-items:center; font-size:26px; font-weight:bold; color:#c0ffc0; }
+.logo { display:flex; align-items:center; font-size:26px; font-weight:bold; color:#b2ffb2; }
 .logo span { margin-left:10px; }
 .nav { display:flex; gap:25px; flex-wrap:wrap; }
 .nav a { color:#e0e0e0; text-decoration:none; font-size:14px; transition:0.3s; }
-.nav a:hover { color:#b0ffb0; }
+.nav a:hover { color:#a8ffb0; }
 
 /* TITLE */
 .container { padding:40px 20px; }
-.title { font-size:28px; margin-bottom:25px; font-weight:bold; cursor:text; color:#c0ffc0; }
+.title { font-size:28px; margin-bottom:25px; font-weight:bold; cursor:text; color:#b2ffb2; }
 
 /* TABLE WRAPPER FORMAL */
 .table-wrapper { 
     background: linear-gradient(180deg, #001100, #003300); 
     padding:25px; border-radius:18px; overflow-x:auto; 
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
 }
 
 /* TABLE FORMAL */
-table { width:100%; min-width:750px; border-collapse: separate; border-spacing:0 20px; }
-th, td { padding:20px 22px; text-align:left; white-space: nowrap; font-size:15px; }
-thead th { border-bottom: 2px solid rgba(200,255,192,0.7); cursor:text; color:#c0ffc0; }
+table { width:100%; min-width:750px; border-collapse: separate; border-spacing:0 16px; }
+th, td { padding:18px 22px; text-align:left; white-space: nowrap; font-size:15px; }
+thead th { border-bottom: 2px solid rgba(178,255,178,0.5); cursor:text; color:#b2ffb2; }
 
 /* ROWS FORMAL */
 tbody tr { 
-    cursor:pointer; transition: all 0.3s ease; 
-    background: linear-gradient(90deg, rgba(0,85,0,0.05), rgba(0,85,0,0.08)); 
-    border-radius:12px; box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    cursor:pointer; transition: all 0.25s ease; 
+    background: linear-gradient(90deg, rgba(0,85,0,0.04), rgba(0,85,0,0.07)); 
+    border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.45);
 }
-tbody tr td { border:none; padding:18px 22px; transition: all 0.25s ease; }
-tbody tr:hover { background: linear-gradient(90deg, rgba(0,85,0,0.1), rgba(0,120,0,0.15)); transform: scale(1.01); }
+tbody tr td { border:none; padding:18px 22px; transition: all 0.2s ease; }
+tbody tr:hover { background: linear-gradient(90deg, rgba(0,85,0,0.08), rgba(0,120,0,0.12)); }
 
 /* BADGE FORMAL */
 .badge { 
     padding:12px 24px; border-radius:20px; font-size:14px; font-weight:bold; 
     text-align:center; display:inline-block; cursor:pointer; user-select:none; 
-    transition: all 0.25s ease; box-shadow:0 4px 20px rgba(0,0,0,0.5);
+    transition: all 0.2s ease; box-shadow:0 3px 12px rgba(0,0,0,0.45);
 }
-.claimed { background: linear-gradient(90deg, #66ff88, #99ffaa); color:#001100; }
-.claim-now { background: linear-gradient(90deg, #339966, #66cc88); color:#001100; }
-.not-taken { background: linear-gradient(90deg, #cc4444, #ff7777); color:#ffffff; }
+.claimed { background: linear-gradient(90deg, #55cc77, #77ee99); color:#001100; }
+.claim-now { background: linear-gradient(90deg, #337755, #66aa88); color:#001100; }
+.not-taken { background: linear-gradient(90deg, #cc4444, #ee6666); color:#ffffff; }
 
 /* PAGINATION */
 .pagination { margin-top:20px; display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
-.page-btn { padding:10px 16px; background:#002200; border-radius:8px; cursor:pointer; box-shadow:0 4px 15px rgba(0,0,0,0.4);}
-.page-btn.active { background:#66ff88; color:#001100; }
+.page-btn { padding:10px 16px; background:#002200; border-radius:8px; cursor:pointer; box-shadow:0 3px 12px rgba(0,0,0,0.45);}
+.page-btn.active { background:#55cc77; color:#001100; }
 
 /* FOOTER */
 .footer { margin-top:40px; padding:20px 40px; font-size:12px; display:flex; justify-content:space-between; opacity:0.7; flex-wrap:wrap; }
 
 /* BUTTON TAMBAH, SAVE, HAPUS */
 .button-wrapper { margin-top:25px; display:flex; gap:15px; justify-content:flex-end; flex-wrap:wrap; }
-button { padding:12px 24px; font-size:14px; font-weight:bold; border:none; border-radius:10px; cursor:pointer; transition: all 0.25s ease; box-shadow:0 4px 15px rgba(0,0,0,0.4); }
+button { padding:12px 24px; font-size:14px; font-weight:bold; border:none; border-radius:10px; cursor:pointer; transition: all 0.2s ease; box-shadow:0 3px 12px rgba(0,0,0,0.45); }
 button:hover { opacity:0.9; }
 #addRow { background:#006600; color:white; }
 #saveTable { background:#003300; color:white; }
