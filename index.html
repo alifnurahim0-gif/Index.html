@@ -36,7 +36,7 @@ tbody tr:hover { background: linear-gradient(90deg, rgba(0,255,0,0.12), rgba(0,2
 tbody tr:active { transform: scale(0.97); box-shadow: 0 6px 25px rgba(0,0,0,0.45); }
 
 /* BADGE */
-.badge { padding: 8px 18px; border-radius: 20px; font-size: 12px; font-weight: bold; text-align: center; display: inline-block; }
+.badge { padding: 8px 18px; border-radius: 20px; font-size: 12px; font-weight: bold; text-align: center; display: inline-block; cursor: pointer; user-select: none; }
 .claimed { background: linear-gradient(90deg, #00ff44, #66ff66); color: #001a00; }
 .claim-now { background: linear-gradient(90deg, #009933, #00cc44); color: #001a00; }
 .not-taken { background: linear-gradient(90deg, #cc0000, #ff4d4f); color: #fff; }
@@ -87,7 +87,7 @@ button:hover { opacity: 0.9; }
                     <th contenteditable="true">Status</th>
                     <th contenteditable="true">Phone Number</th>
                     <th contenteditable="true">Withdraw</th>
-                    <th contenteditable="true">Keterangan</th>
+                    <th>Keterangan</th>
                 </tr>
             </thead>
             <tbody>
@@ -96,14 +96,14 @@ button:hover { opacity: 0.9; }
                     <td contenteditable="true">DONE</td>
                     <td contenteditable="true">857-4716-6188</td>
                     <td contenteditable="true">800.000</td>
-                    <td contenteditable="true"><span class="badge claimed">CLAIMED</span></td>
+                    <td><span class="badge claim-now">CLAIM NOW</span></td>
                 </tr>
                 <tr>
                     <td contenteditable="true">PG/PRAGMATIC</td>
                     <td contenteditable="true">PENDING</td>
                     <td contenteditable="true">-</td>
                     <td contenteditable="true">800.000</td>
-                    <td contenteditable="true"><span class="badge claim-now">CLAIM NOW</span></td>
+                    <td><span class="badge claim-now">CLAIM NOW</span></td>
                 </tr>
             </tbody>
         </table>
@@ -145,32 +145,16 @@ window.onload = function() {
     if (savedTitle) title.innerText = savedTitle;
 
     makeEditable();
+    setupBadgeToggle();
 };
 
-// Function untuk bikin td & th editable
+// Editable
 function makeEditable() {
-    const tds = table.querySelectorAll("tbody td");
+    const tds = table.querySelectorAll("tbody td[contenteditable=true]");
+    tds.forEach(td => td.addEventListener("input", () => {}));
     const ths = table.querySelectorAll("thead th");
-
-    tds.forEach(td => td.addEventListener("input", handleBadgeColor));
     ths.forEach(th => th.addEventListener("input", () => {}));
     title.addEventListener("input", () => {});
-}
-
-// Fungsi otomatis ubah warna badge berdasarkan teks
-function handleBadgeColor(e){
-    const cell = e.target;
-    const span = cell.querySelector(".badge");
-    if(span){
-        const text = span.innerText.trim().toUpperCase();
-        if(text === "CLAIMED"){
-            span.className = "badge claimed";
-        } else if(text === "NOT TAKEN"){
-            span.className = "badge not-taken";
-        } else if(text === "CLAIM NOW"){
-            span.className = "badge claim-now";
-        }
-    }
 }
 
 // Tambah baris baru
@@ -183,10 +167,11 @@ addRowBtn.addEventListener("click", () => {
         <td contenteditable="true">Status</td>
         <td contenteditable="true">-</td>
         <td contenteditable="true">0</td>
-        <td contenteditable="true"><span class="badge not-taken">NOT TAKEN</span></td>
+        <td><span class="badge claim-now">CLAIM NOW</span></td>
     `;
     tbody.appendChild(newRow);
     makeEditable();
+    setupBadgeToggle();
 });
 
 // Hapus baris terakhir
@@ -203,6 +188,26 @@ saveBtn.addEventListener("click", () => {
     localStorage.setItem("savedTitle", title.innerText);
     alert("Data berhasil disimpan!");
 });
+
+// Toggle badge warna di klik
+function setupBadgeToggle() {
+    const badges = table.querySelectorAll(".badge");
+    badges.forEach(span => {
+        span.onclick = () => {
+            const text = span.innerText.trim().toUpperCase();
+            if(text === "CLAIM NOW") {
+                span.innerText = "CLAIMED";
+                span.className = "badge claimed";
+            } else if(text === "CLAIMED") {
+                span.innerText = "NOT TAKEN";
+                span.className = "badge not-taken";
+            } else if(text === "NOT TAKEN") {
+                span.innerText = "CLAIM NOW";
+                span.className = "badge claim-now";
+            }
+        }
+    });
+}
 </script>
 
 </body>
