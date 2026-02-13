@@ -72,46 +72,46 @@ body {
     border-radius: 10px;
 }
 
-/* ===== TABLE STYLE MODERN / APP-LIKE ===== */
+/* ===== TABLE STYLE HD / APP-LIKE ===== */
 table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 12px; /* jarak antar baris */
+    border-spacing: 0 14px; /* jarak antar baris lebih HD */
 }
 
 th, td {
-    padding: 18px 15px;
+    padding: 20px 18px;
     text-align: left;
 }
 
 thead th {
-    border-bottom: 2px solid rgba(255,255,255,0.2);
+    border-bottom: 2px solid rgba(255,255,255,0.25);
 }
 
-/* ===== HANYA BAGIAN BARIS TABLE – JELAS CLICKABLE ===== */
+/* ===== HANYA BAGIAN BARIS TABLE – HD CLICKABLE ===== */
 tbody tr {
     cursor: pointer;
-    transition: all 0.2s ease;
-    background: #1c2b8f; /* sedikit lebih tegas */
-    border-radius: 12px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* shadow lebih jelas */
+    transition: all 0.3s ease;
+    background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.05));
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 tbody tr td {
     border: none;
-    padding: 16px 20px;
-    transition: all 0.2s ease;
+    padding: 18px 22px;
+    transition: all 0.3s ease;
 }
 
 tbody tr:hover {
-    background: #2b3aff; /* hover lebih terlihat */
-    transform: translateY(-3px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25); /* shadow lebih tegas */
+    background: linear-gradient(90deg, rgba(255,255,255,0.07), rgba(255,255,255,0.12));
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
 }
 
 tbody tr:active {
     transform: scale(0.97);
-    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.35);
 }
 
 /* ===== BUTTON STATUS ===== */
@@ -278,4 +278,4 @@ window.onload = function() {
 </script>
 
 </body>
-                    </html>
+</html>
