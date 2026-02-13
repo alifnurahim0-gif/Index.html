@@ -57,23 +57,10 @@ button:hover { opacity:0.9; }
 #addRow { background:#008800; color:white; }
 #saveTable { background:#005500; color:white; }
 
-/* Hapus baris kecil */
-.delete-row-btn {
-    position:absolute;
-    right:10px;
-    top:50%;
-    transform:translateY(-50%);
-    padding:6px 12px;
-    font-size:12px;
-    background:#cc0000;
-    color:white;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    display:none;
-    box-shadow:0 2px 10px rgba(0,0,0,0.5);
-    z-index:10;
-}
+/* MENU TITIK 3 & DELETE */
+.menu-dot { font-weight:bold; font-size:20px; cursor:pointer; user-select:none; margin-right:12px; color:#aaffaa; }
+.delete-row-btn { padding:6px 12px; font-size:12px; background:#cc0000; color:white; border:none; border-radius:8px; cursor:pointer; display:none; box-shadow:0 2px 10px rgba(0,0,0,0.5); margin-left:10px; }
+.menu-wrapper { display:flex; align-items:center; }
 </style>
 </head>
 
@@ -96,29 +83,36 @@ button:hover { opacity:0.9; }
         <table id="jackpotTable">
             <thead>
                 <tr>
+                    <th></th>
                     <th contenteditable="true">Game</th>
                     <th contenteditable="true">Status</th>
                     <th contenteditable="true">Phone Number</th>
                     <th contenteditable="true">Reward</th>
-                    <th>Keterangan</th> <!-- Tidak editable -->
+                    <th>Keterangan</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
+                    <td class="menu-wrapper">
+                        <span class="menu-dot">⋮</span>
+                        <button class="delete-row-btn">Hapus</button>
+                    </td>
                     <td contenteditable="true">PG/PRAGMATIC</td>
                     <td contenteditable="true">DONE</td>
                     <td contenteditable="true">857-4716-6188</td>
                     <td contenteditable="true">VIP</td>
                     <td><span class="badge claim-now">CLAIM NOW</span></td>
-                    <button class="delete-row-btn">Hapus Baris</button>
                 </tr>
                 <tr>
+                    <td class="menu-wrapper">
+                        <span class="menu-dot">⋮</span>
+                        <button class="delete-row-btn">Hapus</button>
+                    </td>
                     <td contenteditable="true">PG/PRAGMATIC</td>
                     <td contenteditable="true">PENDING</td>
                     <td contenteditable="true">-</td>
                     <td contenteditable="true">VIP</td>
                     <td><span class="badge claim-now">CLAIM NOW</span></td>
-                    <button class="delete-row-btn">Hapus Baris</button>
                 </tr>
             </tbody>
         </table>
@@ -147,17 +141,19 @@ const title = document.querySelector(".title");
 const addRowBtn = document.getElementById("addRow");
 const saveBtn = document.getElementById("saveTable");
 
+// Load saved data
 window.onload = function(){
     const savedTable = localStorage.getItem("savedTableData");
     const savedTitle = localStorage.getItem("savedTitle");
     if(savedTable) table.querySelector("tbody").innerHTML = savedTable;
     if(savedTitle) title.innerText = savedTitle;
-    makeEditable();
+    setupEditable();
     setupBadgeToggle();
-    setupDeleteLongPress();
+    setupMenuDelete();
 };
 
-function makeEditable(){
+// Editable
+function setupEditable(){
     const tds = table.querySelectorAll("tbody td[contenteditable=true]");
     tds.forEach(td => td.addEventListener("input", ()=>{}));
     const ths = table.querySelectorAll("thead th[contenteditable=true]");
@@ -170,17 +166,20 @@ addRowBtn.addEventListener("click", ()=>{
     const tbody = table.querySelector("tbody");
     const newRow = document.createElement("tr");
     newRow.innerHTML = `
+        <td class="menu-wrapper">
+            <span class="menu-dot">⋮</span>
+            <button class="delete-row-btn">Hapus</button>
+        </td>
         <td contenteditable="true">New Game</td>
         <td contenteditable="true">Status</td>
         <td contenteditable="true">-</td>
         <td contenteditable="true">VIP</td>
         <td><span class="badge claim-now">CLAIM NOW</span></td>
-        <button class="delete-row-btn">Hapus Baris</button>
     `;
     tbody.appendChild(newRow);
-    makeEditable();
+    setupEditable();
     setupBadgeToggle();
-    setupDeleteLongPress();
+    setupMenuDelete();
 });
 
 // Save data
@@ -190,7 +189,7 @@ saveBtn.addEventListener("click", ()=>{
     alert("Data berhasil disimpan!");
 });
 
-// Badge toggle click
+// Badge toggle
 function setupBadgeToggle(){
     const badges = table.querySelectorAll(".badge");
     badges.forEach(span=>{
@@ -203,33 +202,19 @@ function setupBadgeToggle(){
     });
 }
 
-// Hapus baris via long press 0.7 detik meski contenteditable aktif
-function setupDeleteLongPress(){
-    const rows = table.querySelectorAll("tbody tr");
-    rows.forEach(row=>{
-        let pressTimer;
-        const deleteBtn = row.querySelector(".delete-row-btn");
-        deleteBtn.style.display = "none";
-
-        // Start long press
-        const startPress = (e)=>{
-            if(e.target===deleteBtn) return;
-            pressTimer = setTimeout(()=>{ deleteBtn.style.display="inline-block"; }, 700);
-        };
-
-        const cancelPress = ()=>{
-            clearTimeout(pressTimer);
-        };
-
-        row.addEventListener("mousedown", startPress);
-        row.addEventListener("touchstart", startPress);
-        row.addEventListener("mouseup", cancelPress);
-        row.addEventListener("mouseleave", cancelPress);
-        row.addEventListener("touchend", cancelPress);
-
-        deleteBtn.onclick = ()=>{
-            row.remove();
-        };
+// Menu titik 3 delete
+function setupMenuDelete(){
+    const menuDots = table.querySelectorAll(".menu-dot");
+    menuDots.forEach(dot=>{
+        const btn = dot.nextElementSibling;
+        dot.onclick = ()=>{
+            if(btn.style.display==="inline-block") btn.style.display="none";
+            else btn.style.display="inline-block";
+        }
+    });
+    const delBtns = table.querySelectorAll(".delete-row-btn");
+    delBtns.forEach(btn=>{
+        btn.onclick = ()=>{ btn.closest("tr").remove(); };
     });
 }
 </script>
