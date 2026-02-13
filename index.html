@@ -12,8 +12,7 @@ body { background: linear-gradient(180deg, #000000, #001100); color: white; over
 /* HEADER */
 .header { 
     background: linear-gradient(90deg, #001100, #004400); 
-    padding:15px 40px; 
-    display:flex; justify-content:space-between; align-items:center; 
+    padding:15px 40px; display:flex; justify-content:space-between; align-items:center; 
     box-shadow:0 15px 40px rgba(0,255,136,0.6);
 }
 .logo { 
@@ -26,14 +25,11 @@ body { background: linear-gradient(180deg, #000000, #001100); color: white; over
     color:white; text-decoration:none; font-size:14px; opacity:0.9; 
     transition:0.3s; text-shadow:0 0 5px #00ff88; 
 }
-.nav a:hover { 
-    opacity:1; text-shadow:0 0 15px #00ff88, 0 0 30px #00ff88; 
-}
+.nav a:hover { opacity:1; text-shadow:0 0 15px #00ff88, 0 0 30px #00ff88; }
 
 /* TITLE */
 .container { padding:40px 20px; }
-.title { 
-    font-size:32px; margin-bottom:25px; font-weight:bold; cursor:text; 
+.title { font-size:32px; margin-bottom:25px; font-weight:bold; cursor:text; 
     text-shadow:0 0 10px #00ff88, 0 0 20px #00ff88, 0 0 40px #00ff88;
 }
 
@@ -49,12 +45,11 @@ table { width:100%; min-width:750px; border-collapse: separate; border-spacing:0
 th, td { padding:24px 22px; text-align:left; white-space: nowrap; font-size:15px; }
 thead th { border-bottom: 3px solid rgba(0,255,136,0.7); cursor:text; text-shadow:0 0 4px #00ff88; }
 
-/* ROWS 3D + GLOW + LIGHT STREAK */
+/* ROWS 3D + GLOW */
 tbody tr { 
     cursor:pointer; transition: all 0.3s ease; 
     background: linear-gradient(90deg, rgba(0,255,136,0.05), rgba(0,255,136,0.08)); 
     border-radius:18px; box-shadow: 0 12px 50px rgba(0,255,136,0.5), inset 0 0 15px rgba(0,255,136,0.2);
-    position:relative; overflow:hidden;
 }
 tbody tr td { border:none; padding:20px 25px; transition: all 0.3s ease; }
 tbody tr:hover { 
@@ -63,25 +58,11 @@ tbody tr:hover {
     box-shadow:0 20px 60px rgba(0,255,136,0.8), inset 0 0 25px rgba(0,255,136,0.25); 
 }
 
-/* LIGHT STREAK ANIMATION */
-tbody tr::before {
-    content:""; position:absolute; top:0; left:-200px; width:100px; height:100%; 
-    background: linear-gradient(120deg, rgba(255,255,255,0.2), rgba(255,255,255,0.0), rgba(255,255,255,0.2));
-    transform: skewX(-20deg);
-    animation: lightStreak 2.5s infinite linear;
-    pointer-events:none;
-    border-radius:18px;
-}
-@keyframes lightStreak {
-    0% { left:-200px; }
-    100% { left:100%; }
-}
-
-/* BADGE 3D + NEON */
+/* BADGE 3D + STATIC NEON */
 .badge { 
     padding:14px 28px; border-radius:30px; font-size:14px; font-weight:bold; 
     text-align:center; display:inline-block; cursor:pointer; user-select:none; 
-    transition: all 0.25s ease; box-shadow:0 8px 40px rgba(0,0,0,0.7), 0 0 15px rgba(0,255,136,0.6);
+    transition: all 0.25s ease; box-shadow:0 8px 40px rgba(0,0,0,0.7), 0 0 25px rgba(0,255,136,0.6);
 }
 .claimed { background: linear-gradient(90deg, #00ff44, #66ff66); color:#001100; text-shadow:0 0 15px #00ff44; }
 .claim-now { background: linear-gradient(90deg, #009933, #00cc44); color:#001100; text-shadow:0 0 12px #00cc44; }
