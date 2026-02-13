@@ -76,7 +76,7 @@ body {
 table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 10px; /* jarak antar baris */
+    border-spacing: 0 10px;
 }
 
 th, td {
@@ -91,8 +91,8 @@ thead th {
 tbody tr {
     background: rgba(255,255,255,0.03);
     border-radius: 10px;
-    transition: 0.2s ease;
-    cursor: pointer; /* efek bisa diklik */
+    transition: all 0.2s ease;
+    cursor: pointer; /* tanda bisa diklik */
 }
 
 tbody tr td {
@@ -102,12 +102,12 @@ tbody tr td {
 tbody tr:hover {
     background: rgba(255,255,255,0.08);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* efek halus ala card */
 }
 
 tbody tr:active {
-    transform: scale(0.99);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transform: scale(0.98);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* efek ditekan */
 }
 
 /* ===== BUTTON STATUS ===== */
