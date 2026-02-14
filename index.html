@@ -1,196 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Database Jackpot</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif;}
-
 body{
-background: linear-gradient(180deg,#000000,#001133,#003344,#009966);
-color:#e0e0e0;
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.header{
-background: linear-gradient(90deg,#000000,#0033cc,#009966);
-padding:15px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
+/* ================= PAGE 1 ================= */
+#page1{
+    display:block;
+    min-height:100vh;
+    background: linear-gradient(135deg,#005eff,#00ff88);
+    padding:20px;
+    color:white;
 }
 
-.logo{font-size:22px;font-weight:700;color:#66ccff;}
-
-.container{padding:40px 20px;}
-
-.title{font-size:22px;margin-bottom:20px;font-weight:700;}
-
-.table-wrapper{
-background: linear-gradient(180deg,#000000,#001133,#003344,#006644);
-padding:20px;
-border-radius:15px;
-overflow-x:auto;
+.header1{
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:20px;
 }
 
-table{width:100%;border-collapse:collapse;}
-th,td{padding:14px;text-align:left;}
-thead th{border-bottom:2px solid #66ccff;}
-tbody tr:hover{background:rgba(255,255,255,0.05);}
-
-.badge{
-padding:6px 14px;
-border-radius:20px;
-font-size:12px;
-font-weight:600;
+.table1{
+    background: rgba(0,0,0,0.8);
+    border-radius:12px;
+    padding:15px;
 }
 
-.claim-now{background:#3399ff;color:white;}
-.claimed{background:#2ecc71;color:white;}
+.row{
+    display:flex;
+    justify-content:space-between;
+    padding:10px;
+    border-bottom:1px solid rgba(255,255,255,0.2);
+}
+
+.row:last-child{
+    border-bottom:none;
+}
 
 .pagination{
-margin-top:20px;
-display:flex;
-gap:10px;
+    margin-top:20px;
+    text-align:center;
 }
 
 .page-btn{
-padding:8px 14px;
-background:#000;
-cursor:pointer;
-border-radius:6px;
+    background:black;
+    color:white;
+    padding:8px 12px;
+    border-radius:6px;
+    margin:5px;
+    cursor:pointer;
+    display:inline-block;
 }
 
-.page-btn.active{
-background:#33ccff;
-color:black;
+/* ================= PAGE 2 ================= */
+#page2{
+    display:none;
+    min-height:100vh;
+    background:#111;
+    padding:20px;
+    color:#00ffcc;
 }
 
-.page{display:none;}
-#page1{display:block;}
+.header2{
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.table2{
+    background:#1e1e1e;
+    border-radius:12px;
+    padding:15px;
+    border:2px solid #00ffcc;
+}
+
+.row2{
+    display:flex;
+    justify-content:space-between;
+    padding:10px;
+    border-bottom:1px solid #333;
+}
+
+.row2:last-child{
+    border-bottom:none;
+}
+
 </style>
 </head>
-
 <body>
 
-<div class="header">
-<div class="logo">PEJUANG KASINO</div>
-</div>
-
 <!-- ================= PAGE 1 ================= -->
-<div class="container page" id="page1">
-<div class="title">DATABASE JACKPOT PEJUANG</div>
+<div id="page1">
+    <div class="header1">DATABASE JACKPOT</div>
 
-<div class="table-wrapper">
-<table>
-<thead>
-<tr>
-<th>Game</th>
-<th>Status</th>
-<th>Phone</th>
-<th>Reward</th>
-<th>Keterangan</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>PG SOFT</td>
-<td>DONE</td>
-<td>857-xxxx</td>
-<td>VIP</td>
-<td><span class="badge claim-now">CLAIM NOW</span></td>
-</tr>
+    <div class="table1">
+        <div class="row">
+            <span>User A</span>
+            <span>Rp 10.000.000</span>
+        </div>
+        <div class="row">
+            <span>User B</span>
+            <span>Rp 25.000.000</span>
+        </div>
+        <div class="row">
+            <span>User C</span>
+            <span>Rp 50.000.000</span>
+        </div>
+    </div>
 
-<tr>
-<td>HABANERO</td>
-<td>DONE</td>
-<td>858-xxxx</td>
-<td>PREMIUM</td>
-<td><span class="badge claimed">CLAIMED</span></td>
-</tr>
-</tbody>
-</table>
+    <div class="pagination">
+        <span class="page-btn" onclick="showPage(1)">1</span>
+        <span class="page-btn" onclick="showPage(2)">2</span>
+        <span class="page-btn" onclick="showPage(2)">Next</span>
+    </div>
 </div>
-</div>
+
 
 <!-- ================= PAGE 2 ================= -->
-<div class="container page" id="page2">
-<div class="title">DATABASE JACKPOT TRANSAKSI</div>
+<div id="page2">
+    <div class="header2">DATABASE JACKPOT BARU</div>
 
-<div class="table-wrapper">
-<table>
-<thead>
-<tr>
-<th>Winrate</th>
-<th>User Name</th>
-<th>Jenis Bank</th>
-<th>Tipe</th>
-<th>Account Type</th>
-<th>Deposit</th>
-<th>Withdraw</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>98%</td>
-<td>maxwin99</td>
-<td>BCA</td>
-<td>PRIORITAS</td>
-<td>JACKPOT SENSASIONAL</td>
-<td>Rp.250.000</td>
-<td>Rp.3.540.000</td>
-<td><span class="badge claimed">SUCCESS</span></td>
-</tr>
+    <div class="table2">
+        <div class="row2">
+            <span>Member X</span>
+            <span>Rp 75.000.000</span>
+        </div>
+        <div class="row2">
+            <span>Member Y</span>
+            <span>Rp 120.000.000</span>
+        </div>
+        <div class="row2">
+            <span>Member Z</span>
+            <span>Rp 200.000.000</span>
+        </div>
+    </div>
 
-<tr>
-<td>98%</td>
-<td>dewapj99</td>
-<td>BRI</td>
-<td>PRIORITAS</td>
-<td>GET 350%</td>
-<td>Rp.50.000</td>
-<td>Rp.500.000</td>
-<td><span class="badge claimed">SUCCESS</span></td>
-</tr>
-
-<tr>
-<td>89%</td>
-<td>danang999</td>
-<td>BCA</td>
-<td>PRIORITAS</td>
-<td>PREMIUM USER</td>
-<td>Rp.150.000</td>
-<td>Rp.2.400.000</td>
-<td><span class="badge claimed">SUCCESS</span></td>
-</tr>
-</tbody>
-</table>
-</div>
+    <div class="pagination">
+        <span class="page-btn" onclick="showPage(1)">Back</span>
+    </div>
 </div>
 
-<!-- ================= PAGINATION ================= -->
-<div class="container">
-<div class="pagination">
-<div class="page-btn active" onclick="showPage(1)">1</div>
-<div class="page-btn" onclick="showPage(2)">2</div>
-</div>
-</div>
 
 <script>
-function showPage(num){
-document.querySelectorAll(".page").forEach(p=>{
-p.style.display="none";
-});
-document.getElementById("page"+num).style.display="block";
-
-document.querySelectorAll(".page-btn").forEach(b=>{
-b.classList.remove("active");
-});
-document.querySelectorAll(".page-btn")[num-1].classList.add("active");
+function showPage(page){
+    if(page === 1){
+        document.getElementById("page1").style.display = "block";
+        document.getElementById("page2").style.display = "none";
+    }else{
+        document.getElementById("page1").style.display = "none";
+        document.getElementById("page2").style.display = "block";
+    }
 }
 </script>
 
