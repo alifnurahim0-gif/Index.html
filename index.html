@@ -1,160 +1,174 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Database Jackpot</title>
+<title>Database Jackpot Pejuang Kasino</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-body{
-    margin:0;
-    font-family: Arial, Helvetica, sans-serif;
+/* ===== CSS LAMA TIDAK DIUBAH ===== */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Montserrat', 'Inter', sans-serif; }
+body { 
+    background: linear-gradient(180deg, #000000, #001133, #003344, #009966);
+    color: #e0e0e0; 
+    font-weight:400; letter-spacing:0.5px;
 }
 
-/* ================= PAGE 1 ================= */
-#page1{
-    display:block;
-    min-height:100vh;
-    background: linear-gradient(135deg,#005eff,#00ff88);
-    padding:20px;
-    color:white;
+/* SEMUA CSS LAMA TETAP... (tidak saya ubah) */
+.header { 
+    background: linear-gradient(90deg, #000000, #0033cc, #009966);
+    padding:15px 40px; display:flex; justify-content:space-between; align-items:center; 
+    box-shadow:0 8px 25px rgba(0,0,0,0.7);
+    border-bottom:2px solid rgba(255,255,255,0.05);
+    font-weight:600;
+}
+.logo { display:flex; align-items:center; font-size:28px; font-weight:700; color:#66ccff; text-shadow:0 0 6px rgba(0,255,200,0.5); }
+.logo span { margin-left:10px; }
+.nav { display:flex; gap:25px; flex-wrap:wrap; }
+.nav a { color:#e0e0e0; text-decoration:none; font-size:14px; font-weight:500; transition:0.3s; }
+.nav a:hover { color:#88ffff; }
+
+.container { padding:40px 20px; }
+.title { font-size:28px; margin-bottom:25px; font-weight:700; cursor:text; color:#66ccff; }
+
+.table-wrapper { 
+    background: linear-gradient(180deg, #000000, #001133, #003344, #006644);
+    padding:25px; border-radius:20px; overflow-x:auto; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
 }
 
-.header1{
-    font-size:22px;
-    font-weight:bold;
-    margin-bottom:20px;
-}
+table { width:100%; min-width:750px; border-collapse: separate; border-spacing:0 18px; }
+th, td { padding:18px 24px; text-align:left; white-space: nowrap; font-size:15px; font-weight:500; }
+thead th { border-bottom: 2px solid rgba(102,204,255,0.5); cursor:text; color:#66ccff; }
 
-.table1{
-    background: rgba(0,0,0,0.8);
-    border-radius:12px;
-    padding:15px;
+tbody tr { 
+    cursor:pointer; transition: all 0.25s ease; 
+    background: linear-gradient(90deg, rgba(0,0,0,0.05), rgba(0,51,102,0.05), rgba(0,153,102,0.08));
+    border-radius:14px; box-shadow: 0 6px 20px rgba(0,0,0,0.55);
 }
+tbody tr td { border:none; padding:18px 24px; }
 
-.row{
-    display:flex;
-    justify-content:space-between;
-    padding:10px;
-    border-bottom:1px solid rgba(255,255,255,0.2);
-}
+.badge { padding:12px 26px; border-radius:24px; font-size:14px; font-weight:600; }
+.claimed { background: linear-gradient(90deg, #33ccff, #66ffcc); color:#001100; }
+.claim-now { background: linear-gradient(90deg, #3399ff, #66cc88); color:#001100; }
+.not-taken { background: linear-gradient(90deg, #cc4444, #ff7777); color:#ffffff; }
 
-.row:last-child{
-    border-bottom:none;
-}
+.pagination { margin-top:20px; display:flex; justify-content:center; gap:10px; }
+.page-btn { padding:10px 16px; background:#000000; border-radius:10px; cursor:pointer; }
+.page-btn.active { background:#33ccff; color:#001100; }
 
-.pagination{
-    margin-top:20px;
-    text-align:center;
-}
+.footer { margin-top:40px; padding:20px 40px; font-size:12px; display:flex; justify-content:space-between; }
 
-.page-btn{
-    background:black;
-    color:white;
-    padding:8px 12px;
-    border-radius:6px;
-    margin:5px;
-    cursor:pointer;
-    display:inline-block;
-}
+.button-wrapper { margin-top:25px; display:flex; gap:15px; justify-content:flex-end; }
+button { padding:12px 26px; font-size:14px; font-weight:600; border:none; border-radius:12px; cursor:pointer; }
+#addRow { background:#3399ff; color:white; }
+#saveTable { background:#006644; color:white; }
+#deleteRow { background:#cc0000; color:white; }
 
-/* ================= PAGE 2 ================= */
-#page2{
+/* ===== CSS BARU KHUSUS PAGE 2 ===== */
+#page2Wrapper{
     display:none;
     min-height:100vh;
-    background:#111;
-    padding:20px;
-    color:#00ffcc;
+    background: linear-gradient(180deg,#000000,#0033cc,#00aa66);
+    padding:50px;
 }
-
-.header2{
-    font-size:22px;
-    font-weight:bold;
-    margin-bottom:20px;
+.page2-box{
+    background: linear-gradient(90deg,#000000,#0033cc,#00cc66);
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.7);
 }
-
-.table2{
-    background:#1e1e1e;
-    border-radius:12px;
-    padding:15px;
-    border:2px solid #00ffcc;
-}
-
-.row2{
-    display:flex;
-    justify-content:space-between;
-    padding:10px;
-    border-bottom:1px solid #333;
-}
-
-.row2:last-child{
-    border-bottom:none;
-}
-
 </style>
 </head>
+
 <body>
 
-<!-- ================= PAGE 1 ================= -->
-<div id="page1">
-    <div class="header1">DATABASE JACKPOT</div>
+<!-- ===== PAGE 1 (SEMUA KODE LAMA DIBUNGKUS, TIDAK DIUBAH ISINYA) ===== -->
+<div id="page1Wrapper">
 
-    <div class="table1">
-        <div class="row">
-            <span>User A</span>
-            <span>Rp 10.000.000</span>
-        </div>
-        <div class="row">
-            <span>User B</span>
-            <span>Rp 25.000.000</span>
-        </div>
-        <div class="row">
-            <span>User C</span>
-            <span>Rp 50.000.000</span>
-        </div>
-    </div>
+<!-- === ISI LAMA KAMU TETAP DI SINI (TIDAK DIUBAH) === -->
 
-    <div class="pagination">
-        <span class="page-btn" onclick="showPage(1)">1</span>
-        <span class="page-btn" onclick="showPage(2)">2</span>
-        <span class="page-btn" onclick="showPage(2)">Next</span>
+<div class="header">
+    <div class="logo">👑 <span>PEJUANG KASINO</span></div>
+    <div class="nav">
+        <a href="#">Home</a>
+        <a href="#">Games</a>
+        <a href="#">Promotions</a>
+        <a href="#"><b>Jackpot Database</b></a>
     </div>
 </div>
 
+<div class="container">
+    <div class="title" contenteditable="true">DATABASE JACKPOT PEJUANG KASINO</div>
 
-<!-- ================= PAGE 2 ================= -->
-<div id="page2">
-    <div class="header2">DATABASE JACKPOT BARU</div>
+    <div class="table-wrapper">
+        <table id="jackpotTable">
+            <thead>
+                <tr>
+                    <th contenteditable="true">Game</th>
+                    <th contenteditable="true">Status</th>
+                    <th contenteditable="true">Phone Number</th>
+                    <th contenteditable="true">Reward</th>
+                    <th>Keterangan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td contenteditable="true">PG/PRAGMATIC</td>
+                    <td contenteditable="true">DONE</td>
+                    <td contenteditable="true">857-4716-6188</td>
+                    <td contenteditable="true">VIP</td>
+                    <td><span class="badge claim-now">CLAIM NOW</span></td>
+                </tr>
+            </tbody>
+        </table>
 
-    <div class="table2">
-        <div class="row2">
-            <span>Member X</span>
-            <span>Rp 75.000.000</span>
+        <div class="pagination">
+            <div class="page-btn active" onclick="switchPage(1)">1</div>
+            <div class="page-btn" onclick="switchPage(2)">2</div>
         </div>
-        <div class="row2">
-            <span>Member Y</span>
-            <span>Rp 120.000.000</span>
-        </div>
-        <div class="row2">
-            <span>Member Z</span>
-            <span>Rp 200.000.000</span>
-        </div>
-    </div>
 
-    <div class="pagination">
-        <span class="page-btn" onclick="showPage(1)">Back</span>
+        <div class="button-wrapper">
+            <button id="addRow">Tambah Baris</button>
+            <button id="deleteRow">Hapus Baris</button>
+            <button id="saveTable">Save</button>
+        </div>
     </div>
 </div>
 
+<div class="footer">
+    <div>© 2024 Pejuang Kasino, All rights reserved.</div>
+    <div>Privacy Policy | Terms of Service</div>
+</div>
+
+</div>
+
+<!-- ===== PAGE 2 BARU ===== -->
+<div id="page2Wrapper">
+    <div class="page2-box">
+        <h1>DATABASE JACKPOT BARU</h1>
+        <p>Ini adalah tampilan berbeda khusus Page 2.</p>
+    </div>
+</div>
 
 <script>
-function showPage(page){
-    if(page === 1){
-        document.getElementById("page1").style.display = "block";
-        document.getElementById("page2").style.display = "none";
+function switchPage(page){
+    const p1 = document.getElementById("page1Wrapper");
+    const p2 = document.getElementById("page2Wrapper");
+    const buttons = document.querySelectorAll(".page-btn");
+
+    buttons.forEach(btn=>btn.classList.remove("active"));
+
+    if(page===1){
+        p1.style.display="block";
+        p2.style.display="none";
+        buttons[0].classList.add("active");
     }else{
-        document.getElementById("page1").style.display = "none";
-        document.getElementById("page2").style.display = "block";
+        p1.style.display="none";
+        p2.style.display="block";
+        buttons[1].classList.add("active");
     }
 }
 </script>
