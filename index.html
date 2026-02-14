@@ -3,219 +3,240 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Database Jackpot Pejuang Kasino</title>
+<title>Database Jackpot</title>
 
-<!-- Google Font Montserrat -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Montserrat', 'Inter', sans-serif; }
-body { 
-    background: linear-gradient(180deg, #000000, #001133, #003344, #009966); /* hitam → biru → hijau */
-    color: #e0e0e0; 
-    font-weight:400; letter-spacing:0.5px;
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Montserrat', sans-serif; }
+
+body{
+background: linear-gradient(180deg,#000000,#001133,#003344,#009966);
+color:#e0e0e0;
 }
 
-/* HEADER FORMAL 3D */
-.header { 
-    background: linear-gradient(90deg, #000000, #0033cc, #009966); /* hitam → biru → hijau */
-    padding:15px 40px; display:flex; justify-content:space-between; align-items:center; 
-    box-shadow:0 8px 25px rgba(0,0,0,0.7);
-    border-bottom:2px solid rgba(255,255,255,0.05);
-    font-weight:600;
-}
-.logo { display:flex; align-items:center; font-size:28px; font-weight:700; color:#66ccff; text-shadow:0 0 6px rgba(0,255,200,0.5); }
-.logo span { margin-left:10px; }
-.nav { display:flex; gap:25px; flex-wrap:wrap; }
-.nav a { color:#e0e0e0; text-decoration:none; font-size:14px; font-weight:500; transition:0.3s; }
-.nav a:hover { color:#88ffff; }
-
-/* TITLE */
-.container { padding:40px 20px; }
-.title { 
-    font-size:28px; margin-bottom:25px; font-weight:700; cursor:text; 
-    color:#66ccff; text-shadow:0 0 5px rgba(0,255,200,0.4); 
+/* HEADER */
+.header{
+background: linear-gradient(90deg,#000000,#0033cc,#009966);
+padding:15px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
-/* TABLE WRAPPER FORMAL 3D */
-.table-wrapper { 
-    background: linear-gradient(180deg, #000000, #001133, #003344, #006644); /* hitam → biru → hijau */
-    padding:25px; border-radius:20px; overflow-x:auto; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+.logo{font-size:24px;font-weight:700;color:#66ccff;}
+.nav a{color:white;text-decoration:none;margin-left:20px;font-size:14px;}
+
+.container{padding:40px 20px;}
+.title{font-size:24px;margin-bottom:20px;font-weight:700;}
+
+/* PAGE SYSTEM */
+.page{display:none;}
+#page1{display:block;}
+
+/* TABLE PAGE 1 */
+.table-wrapper{
+background: linear-gradient(180deg,#000000,#001133,#003344,#006644);
+padding:20px;
+border-radius:15px;
+overflow-x:auto;
 }
 
-/* TABLE FORMAL 3D */
-table { width:100%; min-width:750px; border-collapse: separate; border-spacing:0 18px; }
-th, td { padding:18px 24px; text-align:left; white-space: nowrap; font-size:15px; font-weight:500; }
-thead th { border-bottom: 2px solid rgba(102,204,255,0.5); cursor:text; color:#66ccff; font-weight:600; text-shadow:0 0 3px rgba(0,255,200,0.3); }
+table{width:100%;border-collapse:collapse;}
+th,td{padding:14px;text-align:left;}
+thead th{border-bottom:2px solid #66ccff;}
 
-/* ROWS FORMAL 3D */
-tbody tr { 
-    cursor:pointer; transition: all 0.25s ease; 
-    background: linear-gradient(90deg, rgba(0,0,0,0.05), rgba(0,51,102,0.05), rgba(0,153,102,0.08)); /* hitam + biru → hijau */
-    border-radius:14px; box-shadow: 0 6px 20px rgba(0,0,0,0.55);
-}
-tbody tr td { border:none; padding:18px 24px; transition: all 0.25s ease; }
-tbody tr:hover { background: linear-gradient(90deg, rgba(0,0,0,0.1), rgba(0,102,204,0.1), rgba(0,204,102,0.15)); transform: translateY(-1px); }
-tbody tr.selected { outline: 2px solid #66ffcc; outline-offset:-2px; }
+tbody tr:hover{background:rgba(255,255,255,0.05);}
 
-/* BADGE FORMAL 3D */
-.badge { 
-    padding:12px 26px; border-radius:24px; font-size:14px; font-weight:600; 
-    text-align:center; display:inline-block; cursor:pointer; user-select:none; 
-    transition: all 0.25s ease; box-shadow:0 4px 18px rgba(0,0,0,0.55);
+.badge{
+padding:6px 14px;
+border-radius:20px;
+font-size:12px;
+font-weight:600;
 }
-.claimed { background: linear-gradient(90deg, #33ccff, #66ffcc); color:#001100; box-shadow:0 0 8px rgba(0,255,200,0.5); }
-.claim-now { background: linear-gradient(90deg, #3399ff, #66cc88); color:#001100; box-shadow:0 0 6px rgba(0,255,200,0.4); }
-.not-taken { background: linear-gradient(90deg, #cc4444, #ff7777); color:#ffffff; box-shadow:0 0 6px rgba(255,0,0,0.4); }
+
+.claim-now{background:#3399ff;color:white;}
+.claimed{background:#2ecc71;color:white;}
+.not-taken{background:#e74c3c;color:white;}
 
 /* PAGINATION */
-.pagination { margin-top:20px; display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
-.page-btn { padding:10px 16px; background:#000000; border-radius:10px; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,0.55); font-weight:500; }
-.page-btn.active { background:#33ccff; color:#001100; }
+.pagination{
+margin-top:20px;
+display:flex;
+gap:10px;
+}
 
-/* FOOTER */
-.footer { margin-top:40px; padding:20px 40px; font-size:12px; display:flex; justify-content:space-between; opacity:0.7; flex-wrap:wrap; font-weight:400; }
+.page-btn{
+padding:8px 14px;
+background:#000;
+cursor:pointer;
+border-radius:6px;
+}
 
-/* BUTTON TAMBAH, SAVE, HAPUS */
-.button-wrapper { margin-top:25px; display:flex; gap:15px; justify-content:flex-end; flex-wrap:wrap; }
-button { padding:12px 26px; font-size:14px; font-weight:600; border:none; border-radius:12px; cursor:pointer; transition: all 0.25s ease; box-shadow:0 4px 18px rgba(0,0,0,0.55); }
-button:hover { opacity:0.9; }
-#addRow { background:#3399ff; color:white; }
-#saveTable { background:#006644; color:white; }
-#deleteRow { background:#cc0000; color:white; }
+.page-btn.active{
+background:#33ccff;
+color:black;
+}
 
-@media (max-width: 600px) { .title{font-size:22px;} .nav{gap:15px;} }
+/* ===== PAGE 2 STYLE ===== */
+.page2-style{
+background:#f8f9fb;
+color:#333;
+border-radius:15px;
+padding:20px;
+}
+
+.page2-style table{
+width:100%;
+border-collapse:collapse;
+}
+
+.page2-style th{
+background:#ffffff;
+color:#333;
+padding:14px;
+border-bottom:2px solid #e0e0e0;
+font-weight:600;
+}
+
+.page2-style td{
+padding:14px;
+border-bottom:1px solid #e6e6e6;
+font-size:14px;
+}
+
+.page2-style tbody tr:hover{
+background:#f1f4f9;
+}
+
+.type-badge{
+background:#1bc5bd;
+color:white;
+padding:6px 14px;
+border-radius:20px;
+font-size:12px;
+font-weight:600;
+}
+
+.success-badge{
+background:#2ecc71;
+color:white;
+padding:6px 14px;
+border-radius:20px;
+font-size:12px;
+font-weight:600;
+}
 </style>
 </head>
 
 <body>
 
 <div class="header">
-    <div class="logo">👑 <span>PEJUANG KASINO</span></div>
-    <div class="nav">
-        <a href="#">Home</a>
-        <a href="#">Games</a>
-        <a href="#">Promotions</a>
-        <a href="#"><b>Jackpot Database</b></a>
-    </div>
+<div class="logo">PEJUANG KASINO</div>
+<div class="nav">
+<a href="#">Home</a>
+<a href="#">Jackpot</a>
+</div>
 </div>
 
+<!-- PAGE 1 -->
+<div class="container page" id="page1">
+<div class="title">DATABASE JACKPOT PEJUANG</div>
+
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th>Game</th>
+<th>Status</th>
+<th>Phone</th>
+<th>Reward</th>
+<th>Keterangan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PG SOFT</td>
+<td>DONE</td>
+<td>857-xxxx</td>
+<td>VIP</td>
+<td><span class="badge claim-now">CLAIM NOW</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="container page" id="page2">
+<div class="title">DATABASE JACKPOT TRANSAKSI</div>
+
+<div class="table-wrapper page2-style">
+<table>
+<thead>
+<tr>
+<th>Winrate</th>
+<th>User Name</th>
+<th>Jenis Bank</th>
+<th>Tipe</th>
+<th>Account Type</th>
+<th>Deposit</th>
+<th>Withdraw</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>98%</td>
+<td>maxwin99</td>
+<td>BCA</td>
+<td><span class="type-badge">PRIORITAS</span></td>
+<td>JACKPOT SENSASIONAL</td>
+<td>Rp.250.000</td>
+<td>Rp.3.540.000</td>
+<td><span class="success-badge">SUCCESS</span></td>
+</tr>
+
+<tr>
+<td>98%</td>
+<td>dewapj99</td>
+<td>BRI</td>
+<td><span class="type-badge">PRIORITAS</span></td>
+<td>GET 350%</td>
+<td>Rp.50.000</td>
+<td>Rp.500.000</td>
+<td><span class="success-badge">SUCCESS</span></td>
+</tr>
+
+<tr>
+<td>89%</td>
+<td>danang999</td>
+<td>BCA</td>
+<td><span class="type-badge">PRIORITAS</span></td>
+<td>PREMIUM USER</td>
+<td>Rp.150.000</td>
+<td>Rp.2.400.000</td>
+<td><span class="success-badge">SUCCESS</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- PAGINATION -->
 <div class="container">
-    <div class="title" contenteditable="true">DATABASE JACKPOT PEJUANG KASINO</div>
-
-    <div class="table-wrapper">
-        <table id="jackpotTable">
-            <thead>
-                <tr>
-                    <th contenteditable="true">Game</th>
-                    <th contenteditable="true">Status</th>
-                    <th contenteditable="true">Phone Number</th>
-                    <th contenteditable="true">Reward</th>
-                    <th>Keterangan</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td contenteditable="true">PG/PRAGMATIC</td>
-                    <td contenteditable="true">DONE</td>
-                    <td contenteditable="true">857-4716-6188</td>
-                    <td contenteditable="true">VIP</td>
-                    <td><span class="badge claim-now">CLAIM NOW</span></td>
-                </tr>
-                <tr>
-                    <td contenteditable="true">PG/PRAGMATIC</td>
-                    <td contenteditable="true">PENDING</td>
-                    <td contenteditable="true">-</td>
-                    <td contenteditable="true">VIP</td>
-                    <td><span class="badge claim-now">CLAIM NOW</span></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="pagination">
-            <div class="page-btn active">1</div>
-            <div class="page-btn">2</div>
-            <div class="page-btn">Next</div>
-        </div>
-
-        <div class="button-wrapper">
-            <button id="addRow">Tambah Baris</button>
-            <button id="deleteRow">Hapus Baris</button>
-            <button id="saveTable">Save</button>
-        </div>
-    </div>
+<div class="pagination">
+<div class="page-btn active" onclick="showPage(1)">1</div>
+<div class="page-btn" onclick="showPage(2)">2</div>
 </div>
-
-<div class="footer">
-    <div>© 2024 Pejuang Kasino, All rights reserved.</div>
-    <div>Privacy Policy | Terms of Service</div>
 </div>
 
 <script>
-const table = document.getElementById("jackpotTable");
-const title = document.querySelector(".title");
-const addRowBtn = document.getElementById("addRow");
-const saveBtn = document.getElementById("saveTable");
-const deleteRowBtn = document.getElementById("deleteRow");
-
-window.onload = function(){
-    const savedTable = localStorage.getItem("savedTableData");
-    const savedTitle = localStorage.getItem("savedTitle");
-    if(savedTable) table.querySelector("tbody").innerHTML = savedTable;
-    if(savedTitle) title.innerText = savedTitle;
-    makeEditable();
-    setupBadgeToggle();
-};
-
-function makeEditable(){
-    const tds = table.querySelectorAll("tbody td[contenteditable=true]");
-    tds.forEach(td => td.addEventListener("input", ()=>{}));
-    const ths = table.querySelectorAll("thead th");
-    ths.forEach(th => th.addEventListener("input", ()=>{}));
-    title.addEventListener("input", ()=>{});
-}
-
-// Tambah baris
-addRowBtn.addEventListener("click", ()=>{
-    const tbody = table.querySelector("tbody");
-    const newRow = document.createElement("tr");
-    newRow.innerHTML = `
-        <td contenteditable="true">New Game</td>
-        <td contenteditable="true">Status</td>
-        <td contenteditable="true">-</td>
-        <td contenteditable="true">VIP</td>
-        <td><span class="badge claim-now">CLAIM NOW</span></td>
-    `;
-    tbody.appendChild(newRow);
-    makeEditable();
-    setupBadgeToggle();
-});
-
-// Hapus baris terakhir
-deleteRowBtn.addEventListener("click", ()=>{
-    const tbody = table.querySelector("tbody");
-    if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1);
-});
-
-// Save data
-saveBtn.addEventListener("click", ()=>{
-    localStorage.setItem("savedTableData", table.querySelector("tbody").innerHTML);
-    localStorage.setItem("savedTitle", title.innerText);
-    alert("Data berhasil disimpan!");
-});
-
-// Badge toggle click
-function setupBadgeToggle(){
-    const badges = table.querySelectorAll(".badge");
-    badges.forEach(span=>{
-        span.onclick = ()=>{
-            const txt = span.innerText.trim().toUpperCase();
-            if(txt==="CLAIM NOW"){span.innerText="CLAIMED"; span.className="badge claimed";}
-            else if(txt==="CLAIMED"){span.innerText="NOT TAKEN"; span.className="badge not-taken";}
-            else if(txt==="NOT TAKEN"){span.innerText="CLAIM NOW"; span.className="badge claim-now";}
-        }
-    });
+function showPage(num){
+document.querySelectorAll(".page").forEach(p=>p.style.display="none");
+document.querySelectorAll(".page-btn").forEach(b=>b.classList.remove("active"));
+document.getElementById("page"+num).style.display="block";
+document.querySelectorAll(".page-btn")[num-1].classList.add("active");
 }
 </script>
 
