@@ -9,6 +9,11 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat','Inter',sans-serif;}
 html,body{touch-action:manipulation;}
 [contenteditable="true"]{font-size:16px !important;-webkit-text-size-adjust:100%;}
+.badge{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:pointer;padding:6px 14px;border-radius:12px;font-size:11px;font-weight:600;transition:0.25s ease all;}
+.badge:active{transform:scale(0.92);}
+.claimed{background:#3e9b8a;color:#001a17;}
+.claim-now{background:#4a88ff;color:#00142b;}
+.not-taken{background:#b34a4a;color:white;}
 body{background:linear-gradient(180deg,#000000 0%,#000c1a 25%,#001a2e 50%,#002b38 75%,#004644 100%);color:#e5e5e5;letter-spacing:0.3px;}
 .header{background:linear-gradient(90deg,#000000,#001c3d,#004c3c);padding:14px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(255,255,255,0.15);}
 .logo{display:flex;align-items:center;font-size:24px;font-weight:700;color:#9fdcff;}
@@ -28,49 +33,42 @@ tbody td:last-child{border-right:none;}
 tbody tr{background:rgba(0,0,0,0.35);}
 tbody tr:hover{background:rgba(0,80,80,0.18);}
 .pagination{margin-top:20px;display:flex;justify-content:center;gap:8px;}
-.page-btn{padding:6px 12px;font-size:12px;background:#000000;border:2px solid rgba(255,255,255,0.12);border-radius:6px;cursor:pointer;transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease, background 0.15s ease;}
+.page-btn{padding:6px 12px;font-size:12px;background:#000000;border:2px solid rgba(255,255,255,0.12);border-radius:6px;cursor:pointer;transition:0.2s all;}
+.page-btn:active{transform:scale(0.94);}
 .page-btn.active{background:#2f7cff;color:white;}
-.page-btn:hover{transform:scale(1.05);}
-.page-btn:active{transform:scale(0.88) rotate(-2deg);box-shadow:0 8px 20px rgba(0,0,0,0.6);opacity:0.85;}
-.button-wrapper{margin-top:25px;display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;}
-button{padding:9px 18px;font-size:12px;font-weight:600;border-radius:6px;border:2px solid rgba(255,255,255,0.10);cursor:pointer;transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease, background 0.15s ease;}
+.button-wrapper{margin-top:25px;display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;}
+button{padding:9px 18px;font-size:12px;font-weight:600;border-radius:6px;border:2px solid rgba(255,255,255,0.10);cursor:pointer;transition:0.2s all;}
+button:active{transform:scale(0.92);}
 #addRow{background:#2e74ff;color:white;}
 #saveTable{background:#007c63;color:white;}
 #deleteRow{background:#b23d3d;color:white;}
 #deleteAll{background:#ff4a4a;color:white;}
-button:hover{transform:scale(1.05);}
-button:active{transform:scale(0.88) rotate(-2deg);box-shadow:0 8px 20px rgba(0,0,0,0.6);opacity:0.85;}
 .footer{margin-top:35px;padding:18px 40px;font-size:11px;display:flex;justify-content:space-between;flex-wrap:wrap;border-top:2px solid rgba(255,255,255,0.10);color:#bcbcbc;}
-.badge{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:pointer;padding:6px 14px;border-radius:12px;font-size:11px;font-weight:600;transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease, background 0.15s ease;}
-.claimed{background:#3e9b8a;color:#001a17;}
-.claim-now{background:#4a88ff;color:#00142b;}
-.not-taken{background:#b34a4a;color:white;}
-.badge:hover{transform:scale(1.1);}
-.badge:active{transform:scale(0.85) rotate(-3deg);box-shadow:0 6px 18px rgba(0,0,0,0.7);opacity:0.9;}
 .db-name{font-weight:600;font-size:13px;}
-.db-number{font-size:13px;margin-top:2px;cursor:pointer;color:#4a88ff;}
-/* NOTIFIKASI MODERN DALAM WEB */
-.web-notification{
+.db-number{font-size:13px;margin-top:2px;cursor:pointer;color:#4a88ff;transition:0.2s;}
+.db-number:active{transform:scale(0.92);}
+.web-notification-center{
     position:fixed;
-    bottom:25px;
-    right:25px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%) translateY(40px);
     background:linear-gradient(180deg,#001421,#00383a);
     color:#d9f4ff;
-    padding:14px 20px;
-    border-radius:10px;
+    padding:18px 26px;
+    border-radius:12px;
     border:2px solid rgba(255,255,255,0.12);
-    box-shadow:0 8px 24px rgba(0,0,0,0.6);
-    font-size:14px;
-    font-weight:600;
+    box-shadow:0 10px 28px rgba(0,0,0,0.6);
+    font-size:16px;
+    font-weight:700;
     opacity:0;
-    transform:translateY(40px);
     pointer-events:none;
     transition:all 0.35s ease;
-    z-index:9999;
+    z-index:10000;
+    text-align:center;
 }
-.web-notification.show{
+.web-notification-center.show{
     opacity:1;
-    transform:translateY(0px);
+    transform:translate(-50%, -50%) translateY(0px);
     pointer-events:auto;
 }
 </style>
@@ -88,6 +86,7 @@ button:active{transform:scale(0.88) rotate(-2deg);box-shadow:0 8px 20px rgba(0,0
 </div>
 
 <div class="container">
+
 <div class="title" contenteditable="true">
 DATABASE JACKPOT PEJUANG KASINO
 </div>
@@ -149,8 +148,8 @@ DATABASE JACKPOT PEJUANG KASINO
 <div>Privacy Policy | Terms of Service</div>
 </div>
 
-<!-- NOTIFIKASI DALAM WEB -->
-<div id="webNotification" class="web-notification"></div>
+<!-- Notifikasi tengah -->
+<div id="webNotificationCenter" class="web-notification-center"></div>
 
 <script>
 const table=document.getElementById("jackpotTable");
@@ -161,26 +160,28 @@ const deleteAllBtn=document.getElementById("deleteAll");
 const saveBtn=document.getElementById("saveTable");
 const importCSVBtn=document.getElementById("importCSV");
 const addMultipleBtn=document.getElementById("addMultiple");
-const notification=document.getElementById("webNotification");
+const notificationCenter = document.getElementById("webNotificationCenter");
 
-function showNotification(msg){
-    notification.innerText = msg;
-    notification.classList.add("show");
-    setTimeout(()=>{notification.classList.remove("show");},3000);
+function showNotificationCenter(msg){
+    notificationCenter.innerText = msg;
+    notificationCenter.classList.add("show");
+    setTimeout(()=>{
+        notificationCenter.classList.remove("show");
+    },2500);
 }
 
-// Fungsi memisahkan nama dan nomor otomatis
-function splitNameNumber(input){
-    const number = (input.match(/\d+/g) || []).join('');
-    const name = input.replace(/\d+/g,'').trim() || '-';
-    return {name, number};
-}
-
-function createDBCellFromRaw(raw){
-    const {name, number} = splitNameNumber(raw);
-    return `<div class="db-name" contenteditable="true">${name}</div>
-            <div class="db-number" onclick="window.open('https://wa.me/${number}','_blank')">${number || '-'}</div>`;
-}
+// Fungsi memisahkan nama dan nomor otomatis  
+function splitNameNumber(input){  
+    const number = (input.match(/\d+/g) || []).join('');  
+    const name = input.replace(/\d+/g,'').trim() || '-';  
+    return {name, number};  
+}  
+  
+function createDBCellFromRaw(raw){  
+    const {name, number} = splitNameNumber(raw);  
+    return `<div class="db-name" contenteditable="true">${name}</div>  
+            <div class="db-number" onclick="window.open('https://wa.me/${number}','_blank')">${number || '-'}</div>`;  
+}  
 
 // Tombol Tambah Baris
 addRowBtn.addEventListener("click", ()=>{
@@ -195,28 +196,25 @@ addRowBtn.addEventListener("click", ()=>{
     `;
     tbody.appendChild(newRow);
     setupBadgeToggle();
-    showNotification("Baris baru berhasil ditambahkan!");
 });
 
 // Tombol Hapus Baris
 deleteRowBtn.addEventListener("click", ()=>{
     const tbody=table.querySelector("tbody");
-    if(tbody.rows.length>0){tbody.deleteRow(tbody.rows.length-1); showNotification("Baris terakhir dihapus!");}
-    else showNotification("Tidak ada baris untuk dihapus!");
+    if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1);
 });
 
 // Tombol Hapus Semua
 deleteAllBtn.addEventListener("click", ()=>{
     const tbody=table.querySelector("tbody");
     tbody.innerHTML="";
-    showNotification("Semua baris berhasil dihapus!");
 });
 
 // Tombol Save
 saveBtn.addEventListener("click", ()=>{
     localStorage.setItem("savedTableData",table.querySelector("tbody").innerHTML);
     localStorage.setItem("savedTitle",title.innerText);
-    showNotification("Data berhasil disimpan!");
+    showNotificationCenter("Data berhasil disimpan!");
 });
 
 // Masukkan Banyak Nomor
@@ -237,7 +235,6 @@ addMultipleBtn.addEventListener("click", ()=>{
         tbody.appendChild(newRow);
     });
     setupBadgeToggle();
-    showNotification("Nomor berhasil ditambahkan!");
 });
 
 // Import CSV
@@ -262,7 +259,6 @@ importCSVBtn.addEventListener("click", ()=>{
                 tbody.appendChild(newRow);
             });
             setupBadgeToggle();
-            showNotification("CSV berhasil diimport!");
         };
         reader.readAsText(file);
     };
@@ -273,9 +269,19 @@ function setupBadgeToggle(){
     document.querySelectorAll(".badge").forEach(span=>{
         span.onclick=()=>{
             const txt=span.innerText.trim().toUpperCase();
-            if(txt==="CLAIM NOW"){showNotification("Pengguna belum deposit!"); span.innerText="CLAIMED"; span.className="badge claimed";}
-            else if(txt==="CLAIMED"){span.innerText="NOT TAKEN"; span.className="badge not-taken";}
-            else{span.innerText="CLAIM NOW"; span.className="badge claim-now";}
+            if(txt==="CLAIM NOW"){
+                showNotificationCenter("Maaf jackpot tidak dapat di claim karena pengguna belum melakukan deposit.");
+                span.innerText="CLAIMED";
+                span.className="badge claimed";
+            }
+            else if(txt==="CLAIMED"){
+                span.innerText="NOT TAKEN";
+                span.className="badge not-taken";
+            }
+            else{
+                span.innerText="CLAIM NOW";
+                span.className="badge claim-now";
+            }
         };
     });
 }
