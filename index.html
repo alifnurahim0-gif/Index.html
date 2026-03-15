@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <title>Database Jackpot Pejuang Kasino</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,9 +18,14 @@ box-sizing:border-box;
 font-family:'Montserrat','Inter',sans-serif;
 }
 
-/* BACKGROUND */
+html,body{
+touch-action:manipulation;
+}
+
+/* BACKGROUND FORMAL */
 
 body{
+
 background:linear-gradient(
 180deg,
 #000000 0%,
@@ -27,65 +34,86 @@ background:linear-gradient(
 #002b38 75%,
 #004644 100%
 );
+
 color:#e5e5e5;
 letter-spacing:0.3px;
+
 }
 
 /* HEADER */
 
 .header{
+
 background:linear-gradient(90deg,#000000,#001c3d,#004c3c);
+
 padding:14px 40px;
+
 display:flex;
 justify-content:space-between;
 align-items:center;
+
 border-bottom:2px solid rgba(255,255,255,0.15);
+
 }
 
 .logo{
+
 display:flex;
 align-items:center;
 font-size:24px;
 font-weight:700;
 color:#9fdcff;
+
 }
 
 .logo span{margin-left:10px;}
 
 .nav{
+
 display:flex;
 gap:24px;
 flex-wrap:wrap;
+
 }
 
 .nav a{
+
 color:#d4d4d4;
 text-decoration:none;
 font-size:13px;
 font-weight:500;
+
 }
 
 .nav a:hover{
+
 color:#ffffff;
+
 }
 
 /* CONTAINER */
 
 .container{
+
 padding:40px 20px;
+
 }
 
 .title{
+
 font-size:24px;
 margin-bottom:25px;
 font-weight:700;
 color:#9fdcff;
+
 cursor:text;
+
 }
 
-/* TABLE */
+/* TABLE WRAPPER */
 
 .table-wrapper{
+
 background:linear-gradient(
 180deg,
 #000000,
@@ -93,140 +121,230 @@ background:linear-gradient(
 #002430,
 #00383a
 );
+
 padding:25px;
+
 border-radius:8px;
+
 border:2px solid rgba(255,255,255,0.10);
+
 overflow-x:auto;
+
 }
+
+/* TABLE */
 
 table{
+
 width:100%;
 min-width:750px;
+
 border-collapse:collapse;
+
 border:2px solid rgba(255,255,255,0.15);
+
 }
 
+/* HEADER */
+
 thead{
+
 background:rgba(0,0,0,0.55);
+
 }
 
 thead th{
+
 padding:16px 20px;
+
 font-size:13px;
 font-weight:600;
+
 text-align:left;
+
 color:#aee4ff;
+
 border-bottom:2px solid rgba(255,255,255,0.18);
 border-right:2px solid rgba(255,255,255,0.15);
+
 }
 
+thead th:last-child{
+
+border-right:none;
+
+}
+
+/* BODY */
+
 tbody td{
+
 padding:16px 20px;
+
 font-size:13px;
+
 border-bottom:2px solid rgba(255,255,255,0.12);
 border-right:2px solid rgba(255,255,255,0.12);
+
+}
+
+tbody td:last-child{
+
+border-right:none;
+
 }
 
 tbody tr{
+
 background:rgba(0,0,0,0.35);
+
 }
 
 tbody tr:hover{
+
 background:rgba(0,80,80,0.18);
+
 }
 
 /* BADGE */
 
 .badge{
+
 padding:6px 14px;
+
 border-radius:12px;
+
 font-size:11px;
 font-weight:600;
+
 cursor:pointer;
+
 }
 
 .claimed{
+
 background:#3e9b8a;
 color:#001a17;
+
 }
 
 .claim-now{
+
 background:#4a88ff;
 color:#00142b;
+
 }
 
 .not-taken{
+
 background:#b34a4a;
 color:white;
+
 }
 
 /* PAGINATION */
 
 .pagination{
+
 margin-top:20px;
+
 display:flex;
 justify-content:center;
 gap:8px;
+
 }
 
 .page-btn{
+
 padding:6px 12px;
+
 font-size:12px;
+
 background:#000000;
+
 border:2px solid rgba(255,255,255,0.12);
+
 border-radius:6px;
+
 cursor:pointer;
+
 }
 
 .page-btn.active{
+
 background:#2f7cff;
+
 color:white;
+
 }
 
 /* BUTTONS */
 
 .button-wrapper{
+
 margin-top:25px;
+
 display:flex;
 gap:10px;
 justify-content:flex-end;
+
 }
 
 button{
+
 padding:9px 18px;
+
 font-size:12px;
+
 font-weight:600;
+
 border-radius:6px;
+
 border:2px solid rgba(255,255,255,0.10);
+
 cursor:pointer;
+
 }
 
 #addRow{
+
 background:#2e74ff;
 color:white;
+
 }
 
 #saveTable{
+
 background:#007c63;
 color:white;
+
 }
 
 #deleteRow{
+
 background:#b23d3d;
 color:white;
+
 }
 
 /* FOOTER */
 
 .footer{
+
 margin-top:35px;
+
 padding:18px 40px;
+
 font-size:11px;
+
 display:flex;
 justify-content:space-between;
 flex-wrap:wrap;
+
 border-top:2px solid rgba(255,255,255,0.10);
+
 color:#bcbcbc;
+
 }
 
 /* POPUP */
@@ -363,8 +481,6 @@ DATABASE JACKPOT PEJUANG KASINO
 <div>© 2024 Pejuang Kasino, All rights reserved.</div>
 <div>Privacy Policy | Terms of Service</div>
 </div>
-
-<!-- POPUP -->
 
 <div id="customPopup">
 
