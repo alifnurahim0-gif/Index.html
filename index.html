@@ -64,15 +64,17 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 .web-btn.cancel-btn{background:#b23d3d;color:white;}
 .web-btn:not(.cancel-btn){background:#2f7cff;color:white;}
 #webInputOverlay .buttonsWrapper{margin-top:12px;display:flex;gap:12px;justify-content:center;}
-
 /* ===== Animasi klik badge ===== */
 @keyframes badgeClick {
-  0% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); }
-  50% { transform: scale(1.2); box-shadow: 0 0 12px rgba(0,150,255,0.5); }
-  100% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); }
+0% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); }
+50% { transform: scale(1.2); box-shadow: 0 0 12px rgba(0,150,255,0.5); }
+100% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); }
 }
-.badge.animate-click { animation: badgeClick 0.2s ease-in-out; }
+.badge.animate-click {
+animation: badgeClick 0.2s ease-in-out;
+}
 </style>
+</head>
 <body>
 
 <div class="header">
@@ -121,7 +123,8 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
         </tr>
       </tbody>
     </table>
-    <div class="pagination">
+
+<div class="pagination">
   <div class="page-btn active">1</div>
   <div class="page-btn" onclick="switchPage(2)">2</div>
   <div class="page-btn">Next</div>
@@ -135,35 +138,6 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
   <button id="importCSV">Import CSV</button>
   <button id="addMultiple">Masukkan Nomor Banyak</button>
 </div>
-</div>
-</div>
-
-<div class="footer">
-  <div>© 2024 Pejuang Kasino, All rights reserved.</div>
-  <div>Privacy Policy | Terms of Service</div>
-</div>
-
-<div id="customPopup">
-  <div class="popupBox">
-    <button class="popupBtn" id="popupCloseX">×</button>
-    <div class="popupIcon">⚠</div>
-    <div class="popupText">Maaf jackpot tidak dapat di claim karna pengguna belum melakukan deposit.</div>
-    <button class="popupBtn" id="popupCloseBtn">Tutup</button>
-  </div>
-</div>
-
-<div id="webNotificationCenter"><div class="notifBox"></div></div>
-<div id="webInputOverlay">
-  <div>
-    <div style="margin-bottom:12px;">Masukkan nama dan nomor (pisahkan tiap baris):</div>
-    <textarea id="multiNumberInput"></textarea>
-    <div class="buttonsWrapper">
-      <button id="multiNumberSubmit" class="web-btn">Submit</button>
-      <button id="multiNumberCancel" class="web-btn cancel-btn">Batal</button>
-    </div>
-  </div>
-</div>
-
 <script>
 const table = document.getElementById("jackpotTable");
 const title = document.querySelector(".title");
@@ -180,11 +154,11 @@ const popup = document.getElementById("customPopup");
 const popupCloseBtn = document.getElementById("popupCloseBtn");
 const popupCloseX = document.getElementById("popupCloseX");
 
-// Fungsi popup
+// Popup show/hide
 function showPopup(){ popup.classList.add("show"); }
 function closePopup(){ popup.classList.remove("show"); }
 
-// Notifikasi
+// Notifikasi center
 function showNotificationCenter(msg){
   notifCenter.innerText = msg;
   document.getElementById("webNotificationCenter").classList.add("show");
@@ -205,13 +179,103 @@ function createDBCellFromRaw(raw){
           <div class="db-number" onclick="window.open('https://wa.me/${number}','_blank')">${number || '-'}</div>`;
 }
 
-// Tambah/hapus baris, import CSV, multi input tetap sama (tidak berubah)
+// Tambah baris
+addRowBtn.addEventListener("click", ()=>{
+  const tbody = table.querySelector("tbody");
+  const newRow = document.createElement("tr");
+  newRow.innerHTML = `
+    <td contenteditable="true">PG/PRAGMATIC</td>
+    <td contenteditable="true">Status</td>
+    <td>${createDBCellFromRaw("-")}</td>
+    <td contenteditable="true">VIP</td>
+    <td><span class="badge claim-now">CLAIM NOW</span></td>
+  `;
+  tbody.appendChild(newRow);
+  setupBadgeToggle();
+});
 
-// ===== Badge 3 mode dengan animasi klik =====
+// Hapus baris
+deleteRowBtn.addEventListener("click", ()=>{
+  const tbody = table.querySelector("tbody");
+  if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1);
+});
+
+// Hapus semua
+deleteAllBtn.addEventListener("click", ()=>{
+  table.querySelector("tbody").innerHTML = "";
+});
+
+// Save ke localStorage
+saveBtn.addEventListener("click", ()=>{
+  localStorage.setItem("savedTableData", table.querySelector("tbody").innerHTML);
+  localStorage.setItem("savedTitle", title.innerText);
+  showNotificationCenter("Data berhasil disimpan!");
+});
+
+// Import CSV
+importCSVBtn.addEventListener("click", ()=>{
+  const input = document.createElement("input"); input.type="file"; input.accept=".csv"; input.click();
+  input.onchange = ()=>{
+    const file = input.files[0];
+    const reader = new FileReader();
+    reader.onload = e=>{
+      e.target.result.split(/\r\n|\n/).forEach(line=>{
+        if(!line.trim()) return;
+        const tbody = table.querySelector("tbody");
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+          <td contenteditable="true">PG/PRAGMATIC</td>
+          <td contenteditable="true">PENDING</td>
+          <td>${createDBCellFromRaw(line.trim())}</td>
+          <td contenteditable="true">VIP</td>
+          <td><span class="badge claim-now">CLAIM NOW</span></td>
+        `;
+        tbody.appendChild(newRow);
+      });
+      setupBadgeToggle();
+      showNotificationCenter("CSV berhasil diimport!");
+    };
+    reader.readAsText(file);
+  };
+});
+
+// Overlay input nomor banyak
+addMultipleBtn.addEventListener("click", ()=>{
+  overlay.classList.add("show");
+  textarea.value = "";
+  textarea.focus();
+});
+
+document.getElementById("multiNumberSubmit").addEventListener("click", ()=>{
+  const input = textarea.value;
+  if(!input.trim()){ showNotificationCenter("Tidak ada nomor yang dimasukkan!"); return; }
+  input.split("\n").forEach(line=>{
+    if(!line.trim()) return;
+    const tbody = table.querySelector("tbody");
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
+      <td contenteditable="true">PG/PRAGMATIC</td>
+      <td contenteditable="true">PENDING</td>
+      <td>${createDBCellFromRaw(line.trim())}</td>
+      <td contenteditable="true">VIP</td>
+      <td><span class="badge claim-now">CLAIM NOW</span></td>
+    `;
+    tbody.appendChild(newRow);
+  });
+  overlay.classList.remove("show");
+  setupBadgeToggle();
+  showNotificationCenter("Nomor berhasil ditambahkan!");
+});
+
+document.getElementById("multiNumberCancel").addEventListener("click", ()=>{
+  overlay.classList.remove("show");
+});
+
+// Badge toggle dengan 3 mode: CLAIM NOW -> CLAIMED -> NOT TAKEN -> CLAIM NOW
 function setupBadgeToggle(){
   document.querySelectorAll(".badge").forEach(span=>{
     span.onclick = ()=>{
-      span.classList.add("animate-click");
+      span.classList.add("animate-click"); // animasi klik
       setTimeout(()=>{span.classList.remove("animate-click");},200);
 
       const txt = span.innerText.trim().toUpperCase();
@@ -220,31 +284,31 @@ function setupBadgeToggle(){
         span.dataset.pendingBadge="true";
       }
       else if(txt==="CLAIMED"){
-        span.innerText = "NOT TAKEN";
+        span.innerText="NOT TAKEN";
         span.className="badge not-taken";
       }
       else if(txt==="NOT TAKEN"){
-        span.innerText = "CLAIM NOW";
+        span.innerText="CLAIM NOW";
         span.className="badge claim-now";
       }
     };
   });
 }
 
-// Tombol X popup → ubah badge menjadi CLAIMED
+// Popup tombol Tutup hanya menutup popup
+popupCloseBtn.addEventListener("click", ()=>{ closePopup(); });
+
+// Tombol X ubah badge jadi NOT TAKEN & tutup popup
 popupCloseX.addEventListener("click", ()=>{
   closePopup();
   document.querySelectorAll(".badge").forEach(span=>{
     if(span.dataset.pendingBadge){
-      span.innerText = "CLAIMED";
-      span.className = "badge claimed";
+      span.innerText="NOT TAKEN";
+      span.className="badge not-taken";
       delete span.dataset.pendingBadge;
     }
   });
 });
-
-// Tombol Tutup popup
-popupCloseBtn.addEventListener("click", ()=>{ closePopup(); });
 
 // Inisialisasi
 window.onload = ()=>{
@@ -255,7 +319,7 @@ window.onload = ()=>{
   setupBadgeToggle();
 };
 
-// Switch page
+// Switch page (misal halaman 2)
 function switchPage(page){
   const header=document.querySelector(".header");
   const container=document.querySelector(".container");
@@ -266,4 +330,4 @@ function switchPage(page){
 }
 </script>
 </body>
-</html>
+  </html>
