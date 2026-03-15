@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Database Jackpot Pejuang Kasino</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link
+href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+rel="stylesheet"
+>
 
 <style>
 
-*{
+/* RESET */
+
+* {
+
 margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:'Montserrat','Inter',sans-serif;
+
 }
 
-/* BACKGROUND FORMAL */
+/* BACKGROUND */
 
-body{
+body {
 
 background:linear-gradient(
 180deg,
@@ -36,9 +47,14 @@ letter-spacing:0.3px;
 
 /* HEADER */
 
-.header{
+.header {
 
-background:linear-gradient(90deg,#000000,#001c3d,#004c3c);
+background:linear-gradient(
+90deg,
+#000000,
+#001c3d,
+#004c3c
+);
 
 padding:14px 40px;
 
@@ -50,7 +66,7 @@ border-bottom:2px solid rgba(255,255,255,0.15);
 
 }
 
-.logo{
+.logo {
 
 display:flex;
 align-items:center;
@@ -60,9 +76,13 @@ color:#9fdcff;
 
 }
 
-.logo span{margin-left:10px;}
+.logo span {
 
-.nav{
+margin-left:10px;
+
+}
+
+.nav {
 
 display:flex;
 gap:24px;
@@ -70,7 +90,7 @@ flex-wrap:wrap;
 
 }
 
-.nav a{
+.nav a {
 
 color:#d4d4d4;
 text-decoration:none;
@@ -79,7 +99,7 @@ font-weight:500;
 
 }
 
-.nav a:hover{
+.nav a:hover {
 
 color:#ffffff;
 
@@ -87,26 +107,24 @@ color:#ffffff;
 
 /* CONTAINER */
 
-.container{
+.container {
 
 padding:40px 20px;
 
 }
 
-.title{
+.title {
 
 font-size:24px;
 margin-bottom:25px;
 font-weight:700;
 color:#9fdcff;
 
-cursor:text;
-
 }
 
 /* TABLE WRAPPER */
 
-.table-wrapper{
+.table-wrapper {
 
 background:linear-gradient(
 180deg,
@@ -117,43 +135,34 @@ background:linear-gradient(
 );
 
 padding:25px;
-
 border-radius:8px;
-
 border:2px solid rgba(255,255,255,0.10);
-
 overflow-x:auto;
 
 }
 
 /* TABLE */
 
-table{
+table {
 
 width:100%;
 min-width:750px;
-
 border-collapse:collapse;
-
 border:2px solid rgba(255,255,255,0.15);
 
 }
 
-/* HEADER */
-
-thead{
+thead {
 
 background:rgba(0,0,0,0.55);
 
 }
 
-thead th{
+thead th {
 
 padding:16px 20px;
-
 font-size:13px;
 font-weight:600;
-
 text-align:left;
 
 color:#aee4ff;
@@ -163,18 +172,15 @@ border-right:2px solid rgba(255,255,255,0.15);
 
 }
 
-thead th:last-child{
+thead th:last-child {
 
 border-right:none;
 
 }
 
-/* BODY */
-
-tbody td{
+tbody td {
 
 padding:16px 20px;
-
 font-size:13px;
 
 border-bottom:2px solid rgba(255,255,255,0.12);
@@ -182,19 +188,19 @@ border-right:2px solid rgba(255,255,255,0.12);
 
 }
 
-tbody td:last-child{
+tbody td:last-child {
 
 border-right:none;
 
 }
 
-tbody tr{
+tbody tr {
 
 background:rgba(0,0,0,0.35);
 
 }
 
-tbody tr:hover{
+tbody tr:hover {
 
 background:rgba(0,80,80,0.18);
 
@@ -202,119 +208,76 @@ background:rgba(0,80,80,0.18);
 
 /* BADGE */
 
-.badge{
+.badge {
 
 padding:6px 14px;
-
 border-radius:12px;
-
 font-size:11px;
 font-weight:600;
-
 cursor:pointer;
 
 }
 
-.claimed{
+.claimed {
 
 background:#3e9b8a;
 color:#001a17;
 
 }
 
-.claim-now{
+.claim-now {
 
 background:#4a88ff;
 color:#00142b;
 
 }
 
-.not-taken{
+.not-taken {
 
 background:#b34a4a;
 color:white;
 
 }
 
-/* PAGINATION */
+/* BUTTON */
 
-.pagination{
-
-margin-top:20px;
-
-display:flex;
-justify-content:center;
-gap:8px;
-
-}
-
-.page-btn{
-
-padding:6px 12px;
-
-font-size:12px;
-
-background:#000000;
-
-border:2px solid rgba(255,255,255,0.12);
-
-border-radius:6px;
-
-cursor:pointer;
-
-}
-
-.page-btn.active{
-
-background:#2f7cff;
-
-color:white;
-
-}
-
-/* BUTTONS */
-
-.button-wrapper{
+.button-wrapper {
 
 margin-top:25px;
-
 display:flex;
 gap:10px;
 justify-content:flex-end;
 
 }
 
-button{
+button {
 
 padding:9px 18px;
-
 font-size:12px;
-
 font-weight:600;
 
 border-radius:6px;
-
 border:2px solid rgba(255,255,255,0.10);
 
 cursor:pointer;
 
 }
 
-#addRow{
+#addRow {
 
 background:#2e74ff;
 color:white;
 
 }
 
-#saveTable{
+#saveTable {
 
 background:#007c63;
 color:white;
 
 }
 
-#deleteRow{
+#deleteRow {
 
 background:#b23d3d;
 color:white;
@@ -323,10 +286,9 @@ color:white;
 
 /* FOOTER */
 
-.footer{
+.footer {
 
 margin-top:35px;
-
 padding:18px 40px;
 
 font-size:11px;
@@ -341,14 +303,95 @@ color:#bcbcbc;
 
 }
 
+/* POPUP WARNING */
+
+#depositPopup {
+
+position:fixed;
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.75);
+
+display:none;
+
+align-items:center;
+justify-content:center;
+
+z-index:9999;
+
+}
+
+.popup-box {
+
+background:linear-gradient(
+180deg,
+#000000,
+#001421,
+#002430,
+#00383a
+);
+
+padding:30px;
+
+border-radius:8px;
+
+border:2px solid rgba(255,255,255,0.15);
+
+text-align:center;
+
+max-width:420px;
+
+}
+
+.popup-icon {
+
+font-size:40px;
+margin-bottom:10px;
+
+}
+
+.popup-text {
+
+font-size:14px;
+color:#d9f4ff;
+
+margin-bottom:20px;
+
+}
+
+.popup-box button {
+
+padding:8px 20px;
+
+background:#2f7cff;
+
+border:none;
+
+border-radius:6px;
+
+color:white;
+
+font-weight:600;
+
+cursor:pointer;
+
+}
+
 </style>
+
 </head>
 
 <body>
 
 <div class="header">
 
-<div class="logo">👑 <span>PEJUANG KASINO</span></div>
+<div class="logo">
+👑 <span>PEJUANG KASINO</span>
+</div>
 
 <div class="nav">
 
@@ -363,7 +406,7 @@ color:#bcbcbc;
 
 <div class="container">
 
-<div class="title" contenteditable="true">
+<div class="title">
 DATABASE JACKPOT PEJUANG KASINO
 </div>
 
@@ -375,10 +418,10 @@ DATABASE JACKPOT PEJUANG KASINO
 
 <tr>
 
-<th contenteditable="true">Game</th>
-<th contenteditable="true">Status</th>
-<th contenteditable="true">Phone Number</th>
-<th contenteditable="true">Reward</th>
+<th>Game</th>
+<th>Status</th>
+<th>Phone Number</th>
+<th>Reward</th>
 <th>Keterangan</th>
 
 </tr>
@@ -389,10 +432,10 @@ DATABASE JACKPOT PEJUANG KASINO
 
 <tr>
 
-<td contenteditable="true">PG/PRAGMATIC</td>
-<td contenteditable="true">DONE</td>
-<td contenteditable="true">857-4716-6188</td>
-<td contenteditable="true">VIP</td>
+<td>PG/PRAGMATIC</td>
+<td>DONE</td>
+<td>857-4716-6188</td>
+<td>VIP</td>
 
 <td>
 <span class="badge claim-now">CLAIM NOW</span>
@@ -402,10 +445,10 @@ DATABASE JACKPOT PEJUANG KASINO
 
 <tr>
 
-<td contenteditable="true">PG/PRAGMATIC</td>
-<td contenteditable="true">PENDING</td>
-<td contenteditable="true">-</td>
-<td contenteditable="true">VIP</td>
+<td>PG/PRAGMATIC</td>
+<td>PENDING</td>
+<td>-</td>
+<td>VIP</td>
 
 <td>
 <span class="badge claim-now">CLAIM NOW</span>
@@ -416,14 +459,6 @@ DATABASE JACKPOT PEJUANG KASINO
 </tbody>
 
 </table>
-
-<div class="pagination">
-
-<div class="page-btn active">1</div>
-<div class="page-btn" onclick="switchPage(2)">2</div>
-<div class="page-btn">Next</div>
-
-</div>
 
 <div class="button-wrapper">
 
@@ -439,139 +474,88 @@ DATABASE JACKPOT PEJUANG KASINO
 
 <div class="footer">
 
-<div>© 2024 Pejuang Kasino, All rights reserved.</div>
+<div>© 2024 Pejuang Kasino</div>
 <div>Privacy Policy | Terms of Service</div>
+
+</div>
+
+<div id="depositPopup">
+
+<div class="popup-box">
+
+<div class="popup-icon">⚠️</div>
+
+<div class="popup-text">
+Maaf jackpot tidak dapat di claim karna pengguna belum melakukan deposit.
+</div>
+
+<button onclick="closePopup()">
+Tutup
+</button>
+
+</div>
 
 </div>
 
 <script>
 
-const table=document.getElementById("jackpotTable");
-const title=document.querySelector(".title");
-const addRowBtn=document.getElementById("addRow");
-const saveBtn=document.getElementById("saveTable");
-const deleteRowBtn=document.getElementById("deleteRow");
+const table = document.getElementById("jackpotTable")
 
-window.onload=function(){
+function showPopup(){
 
-const savedTable=localStorage.getItem("savedTableData");
-const savedTitle=localStorage.getItem("savedTitle");
+document.getElementById("depositPopup").style.display="flex"
 
-if(savedTable)
-table.querySelector("tbody").innerHTML=savedTable;
+}
 
-if(savedTitle)
-title.innerText=savedTitle;
+function closePopup(){
 
-setupBadgeToggle();
+document.getElementById("depositPopup").style.display="none"
 
-};
-
-addRowBtn.addEventListener("click",()=>{
-
-const tbody=table.querySelector("tbody");
-
-const newRow=document.createElement("tr");
-
-newRow.innerHTML=`
-<td contenteditable="true">New Game</td>
-<td contenteditable="true">Status</td>
-<td contenteditable="true">-</td>
-<td contenteditable="true">VIP</td>
-<td><span class="badge claim-now">CLAIM NOW</span></td>
-`;
-
-tbody.appendChild(newRow);
-
-setupBadgeToggle();
-
-});
-
-deleteRowBtn.addEventListener("click",()=>{
-
-const tbody=table.querySelector("tbody");
-
-if(tbody.rows.length>0)
-tbody.deleteRow(tbody.rows.length-1);
-
-});
-
-saveBtn.addEventListener("click",()=>{
-
-localStorage.setItem("savedTableData",table.querySelector("tbody").innerHTML);
-localStorage.setItem("savedTitle",title.innerText);
-
-alert("Data berhasil disimpan!");
-
-});
-
-/* FITUR NOTIF DITAMBAHKAN DI SINI */
+}
 
 function setupBadgeToggle(){
 
-const badges=table.querySelectorAll(".badge");
+const badges = document.querySelectorAll(".badge")
 
 badges.forEach(span=>{
 
 span.onclick=()=>{
 
-const txt=span.innerText.trim().toUpperCase();
+const txt = span.innerText.trim().toUpperCase()
 
 if(txt==="CLAIM NOW"){
 
-alert("Maaf jackpot tidak dapat di claim karna pengguna belum melakukan deposit.");
+showPopup()
 
-span.innerText="CLAIMED";
-span.className="badge claimed";
+span.innerText="CLAIMED"
+span.className="badge claimed"
 
 }
 
 else if(txt==="CLAIMED"){
 
-span.innerText="NOT TAKEN";
-span.className="badge not-taken";
+span.innerText="NOT TAKEN"
+span.className="badge not-taken"
 
 }
 
 else{
 
-span.innerText="CLAIM NOW";
-span.className="badge claim-now";
-
-}
-
-};
-
-});
-
-}
-
-function switchPage(page){
-
-const header=document.querySelector(".header");
-const container=document.querySelector(".container");
-const footer=document.querySelector(".footer");
-const page2=document.getElementById("page2");
-
-if(page===2){
-
-header.style.display="none";
-container.style.display="none";
-footer.style.display="none";
-page2.style.display="block";
-
-}else{
-
-header.style.display="flex";
-container.style.display="block";
-footer.style.display="flex";
-page2.style.display="none";
+span.innerText="CLAIM NOW"
+span.className="badge claim-now"
 
 }
 
 }
+
+})
+
+}
+
+setupBadgeToggle()
 
 </script>
 
 </body>
-</html>
+
+  </html>
