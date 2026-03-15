@@ -16,7 +16,7 @@ box-sizing:border-box;
 font-family:'Montserrat','Inter',sans-serif;
 }
 
-/* BACKGROUND SANGAT FORMAL */
+/* BACKGROUND FORMAL */
 
 body{
 
@@ -31,7 +31,6 @@ background:linear-gradient(
 
 color:#e5e5e5;
 letter-spacing:0.3px;
-font-weight:400;
 
 }
 
@@ -47,7 +46,7 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 
-border-bottom:2px solid rgba(255,255,255,0.08);
+border-bottom:2px solid rgba(255,255,255,0.15);
 
 }
 
@@ -55,10 +54,8 @@ border-bottom:2px solid rgba(255,255,255,0.08);
 
 display:flex;
 align-items:center;
-
 font-size:24px;
 font-weight:700;
-
 color:#9fdcff;
 
 }
@@ -107,7 +104,7 @@ cursor:text;
 
 }
 
-/* TABLE CARD */
+/* TABLE WRAPPER */
 
 .table-wrapper{
 
@@ -121,9 +118,9 @@ background:linear-gradient(
 
 padding:25px;
 
-border-radius:10px;
+border-radius:8px;
 
-border:1px solid rgba(255,255,255,0.08);
+border:2px solid rgba(255,255,255,0.10);
 
 overflow-x:auto;
 
@@ -138,24 +135,31 @@ min-width:750px;
 
 border-collapse:collapse;
 
+border:2px solid rgba(255,255,255,0.15);
+
 }
 
-/* HEADER TABLE */
+/* HEADER */
+
+thead{
+
+background:rgba(0,0,0,0.55);
+
+}
 
 thead th{
 
 padding:16px 20px;
 
-text-align:left;
-
 font-size:13px;
-
 font-weight:600;
+
+text-align:left;
 
 color:#aee4ff;
 
-border-bottom:2px solid rgba(255,255,255,0.12);
-border-right:1px solid rgba(255,255,255,0.08);
+border-bottom:2px solid rgba(255,255,255,0.18);
+border-right:2px solid rgba(255,255,255,0.15);
 
 }
 
@@ -165,7 +169,7 @@ border-right:none;
 
 }
 
-/* BODY TABLE */
+/* BODY */
 
 tbody td{
 
@@ -173,8 +177,8 @@ padding:16px 20px;
 
 font-size:13px;
 
-border-bottom:1px solid rgba(255,255,255,0.08);
-border-right:1px solid rgba(255,255,255,0.05);
+border-bottom:2px solid rgba(255,255,255,0.12);
+border-right:2px solid rgba(255,255,255,0.12);
 
 }
 
@@ -192,7 +196,7 @@ background:rgba(0,0,0,0.35);
 
 tbody tr:hover{
 
-background:rgba(0,80,80,0.20);
+background:rgba(0,80,80,0.18);
 
 }
 
@@ -202,10 +206,9 @@ background:rgba(0,80,80,0.20);
 
 padding:6px 14px;
 
-border-radius:14px;
+border-radius:12px;
 
 font-size:11px;
-
 font-weight:600;
 
 cursor:pointer;
@@ -253,7 +256,7 @@ font-size:12px;
 
 background:#000000;
 
-border:1px solid rgba(255,255,255,0.08);
+border:2px solid rgba(255,255,255,0.12);
 
 border-radius:6px;
 
@@ -269,7 +272,7 @@ color:white;
 
 }
 
-/* BUTTON */
+/* BUTTONS */
 
 .button-wrapper{
 
@@ -291,7 +294,7 @@ font-weight:600;
 
 border-radius:6px;
 
-border:1px solid rgba(255,255,255,0.08);
+border:2px solid rgba(255,255,255,0.10);
 
 cursor:pointer;
 
@@ -332,7 +335,7 @@ display:flex;
 justify-content:space-between;
 flex-wrap:wrap;
 
-border-top:1px solid rgba(255,255,255,0.08);
+border-top:2px solid rgba(255,255,255,0.10);
 
 color:#bcbcbc;
 
@@ -441,25 +444,9 @@ DATABASE JACKPOT PEJUANG KASINO
 
 </div>
 
-<!-- PAGE 2 -->
-
-<div id="page2" style="display:none;min-height:100vh;background:linear-gradient(180deg,#000000,#0033cc,#00aa66);padding:60px 40px;color:white;">
-
-<h1 style="font-size:32px;margin-bottom:20px;">DATABASE JACKPOT BARU</h1>
-
-<div style="background:linear-gradient(90deg,#000000,#0044cc,#00cc66);padding:40px;border-radius:20px;">
-<p>Ini adalah tampilan berbeda untuk halaman 2.</p>
-</div>
-
-<div style="margin-top:30px;">
-<button onclick="switchPage(1)">Kembali ke Page 1</button>
-</div>
-
-</div>
-
 <script>
 
-/* SCRIPT TIDAK DIUBAH */
+/* SCRIPT ASLI TIDAK DIUBAH */
 
 const table=document.getElementById("jackpotTable");
 const title=document.querySelector(".title");
