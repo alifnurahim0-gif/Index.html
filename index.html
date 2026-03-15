@@ -10,6 +10,7 @@
 html,body{touch-action:manipulation;}
 [contenteditable="true"]{font-size:16px !important;-webkit-text-size-adjust:100%;}
 .badge{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:pointer;padding:6px 14px;border-radius:12px;font-size:11px;font-weight:600;transition: all 0.15s ease;}
+.badge:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 .claimed{background:#3e9b8a;color:#001a17;}
 .claim-now{background:#4a88ff;color:#00142b;}
 .not-taken{background:#b34a4a;color:white;}
@@ -64,10 +65,17 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 .web-btn:not(.cancel-btn){background:#2f7cff;color:white;}
 #webInputOverlay .buttonsWrapper{margin-top:12px;display:flex;gap:12px;justify-content:center;}
 
-/* ===== Tambahan animasi untuk badge ===== */
-@keyframes badgeClick {0%{transform:scale(1);}50%{transform:scale(1.2);}100%{transform:scale(1);}}
-.badge.animate-click {animation: badgeClick 0.2s ease;}
+/* ===== Animasi klik badge ===== */
+@keyframes badgeClick {
+  0% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); }
+  50% { transform: scale(1.2); box-shadow: 0 0 12px rgba(0,150,255,0.5); }
+  100% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); }
+}
+.badge.animate-click {
+  animation: badgeClick 0.2s ease-in-out;
+}
 </style>
+</head>
 <body>
 
 <div class="header">
@@ -116,7 +124,6 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
         </tr>
       </tbody>
     </table>
-
     <div class="pagination">
       <div class="page-btn active">1</div>
       <div class="page-btn" onclick="switchPage(2)">2</div>
@@ -139,7 +146,7 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
   <div>Privacy Policy | Terms of Service</div>
 </div>
 
-<!-- Popup dan overlay input tetap utuh -->
+<!-- Notifikasi popup -->
 <div id="customPopup">
   <div class="popupBox">
     <button class="popupBtn" id="popupCloseX">×</button>
@@ -149,7 +156,10 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
   </div>
 </div>
 
+<!-- Web Notification Center -->
 <div id="webNotificationCenter"><div class="notifBox"></div></div>
+
+<!-- Overlay input nomor banyak -->
 <div id="webInputOverlay">
   <div>
     <div style="margin-bottom:12px;">Masukkan nama dan nomor (pisahkan tiap baris):</div>
@@ -159,8 +169,9 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
       <button id="multiNumberCancel" class="web-btn cancel-btn">Batal</button>
     </div>
   </div>
-              </div>
-              <script>
+</div>
+
+<script>
 const table = document.getElementById("jackpotTable");
 const title = document.querySelector(".title");
 const addRowBtn = document.getElementById("addRow");
@@ -177,12 +188,8 @@ const popupCloseBtn = document.getElementById("popupCloseBtn");
 const popupCloseX = document.getElementById("popupCloseX");
 
 // Popup show/hide
-function showPopup(){
-  popup.classList.add("show");
-}
-function closePopup(){
-  popup.classList.remove("show");
-}
+function showPopup(){ popup.classList.add("show"); }
+function closePopup(){ popup.classList.remove("show"); }
 
 // Notifikasi center
 function showNotificationCenter(msg){
@@ -228,8 +235,7 @@ deleteRowBtn.addEventListener("click", ()=>{
 
 // Hapus semua
 deleteAllBtn.addEventListener("click", ()=>{
-  const tbody = table.querySelector("tbody");
-  tbody.innerHTML = "";
+  table.querySelector("tbody").innerHTML = "";
 });
 
 // Save ke localStorage
@@ -299,35 +305,22 @@ document.getElementById("multiNumberCancel").addEventListener("click", ()=>{
   overlay.classList.remove("show");
 });
 
-// Badge toggle + animasi klik
+// Badge toggle dengan animasi
 function setupBadgeToggle(){
   document.querySelectorAll(".badge").forEach(span=>{
     span.onclick = ()=>{
-      // Animasi klik
-      span.classList.add("animate-click");
-      setTimeout(()=>{span.classList.remove("animate-click");},200);
-
+      span.classList.add("animate-click"); // animasi klik
+      setTimeout(()=>{span.classList.remove("animate-click");},200); // hapus class animasi setelah selesai
       const txt = span.innerText.trim().toUpperCase();
-      if(txt==="CLAIM NOW"){ 
-        showPopup(); 
-        span.dataset.pendingBadge="true"; 
-      }
-      else if(txt==="CLAIMED"){ 
-        span.innerText="NOT TAKEN"; 
-        span.className="badge not-taken animate-click"; // tambah animasi
-      }
-      else{ 
-        span.innerText="CLAIM NOW"; 
-        span.className="badge claim-now animate-click"; // tambah animasi
-      }
+      if(txt==="CLAIM NOW"){ showPopup(); span.dataset.pendingBadge="true"; }
+      else if(txt==="NOT TAKEN"){ span.innerText="CLAIM NOW"; span.className="badge claim-now"; }
+      else if(txt==="CLAIMED"){ /* tetap CLAIMED, tidak berubah */ }
     };
   });
 }
 
 // Popup tombol Tutup hanya menutup popup
-popupCloseBtn.addEventListener("click", ()=>{
-  closePopup();
-});
+popupCloseBtn.addEventListener("click", ()=>{ closePopup(); });
 
 // Tombol X ubah badge jadi NOT TAKEN & tutup popup
 popupCloseX.addEventListener("click", ()=>{
@@ -335,7 +328,7 @@ popupCloseX.addEventListener("click", ()=>{
   document.querySelectorAll(".badge").forEach(span=>{
     if(span.dataset.pendingBadge){
       span.innerText="NOT TAKEN";
-      span.className="badge not-taken animate-click";
+      span.className="badge not-taken";
       delete span.dataset.pendingBadge;
     }
   });
