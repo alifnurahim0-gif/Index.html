@@ -42,6 +42,7 @@ button{padding:9px 18px;font-size:12px;font-weight:600;border-radius:6px;border:
 #addRow{background:#2e74ff;color:white;}
 #saveTable{background:#007c63;color:white;}
 #deleteRow{background:#b23d3d;color:white;}
+#csvImport{background:#ffa500;color:#001; border:none; border-radius:6px; padding:8px 16px; cursor:pointer; font-weight:600;}
 .footer{margin-top:35px;padding:18px 40px;font-size:11px;display:flex;justify-content:space-between;flex-wrap:wrap;border-top:2px solid rgba(255,255,255,0.10);color:#bcbcbc;}
 #customPopup{position:fixed;top:0;left:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);z-index:9999;}
 .popupBox{background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);padding:30px 35px;border-radius:8px;border:2px solid rgba(255,255,255,0.12);max-width:420px;text-align:center;}
@@ -106,6 +107,7 @@ button{padding:9px 18px;font-size:12px;font-weight:600;border-radius:6px;border:
 <button id="addRow">Tambah Baris</button>
 <button id="deleteRow">Hapus Baris</button>
 <button id="saveTable">Save</button>
+<input type="file" id="csvInput" accept=".csv" />
 </div>
 
 </div>
@@ -130,92 +132,10 @@ const title=document.querySelector(".title");
 const addRowBtn=document.getElementById("addRow");
 const saveBtn=document.getElementById("saveTable");
 const deleteRowBtn=document.getElementById("deleteRow");
+const csvInput=document.getElementById("csvInput");
 
 function showPopup(){document.getElementById("customPopup").style.display="flex";}
 function closePopup(){document.getElementById("customPopup").style.display="none";}
-
-function lockBadge(){
-  document.querySelectorAll(".badge").forEach(btn=>{
-    btn.setAttribute("contenteditable","false");
-    btn.addEventListener("keydown",(e)=>{e.preventDefault();});
-    btn.addEventListener("dblclick",(e)=>{e.preventDefault();});
-  });
-}
-
-function setupBadgeToggle(){
-  const badges=table.querySelectorAll(".badge");
-  badges.forEach(span=>{
-    span.onclick=()=>{
-      const txt=span.innerText.trim().toUpperCase();
-      if(txt==="CLAIM NOW"){showPopup();span.innerText="CLAIMED";span.className="badge claimed";}
-      else if(txt==="CLAIMED"){span.innerText="NOT TAKEN";span.className="badge not-taken";}
-      else{span.innerText="CLAIM NOW";span.className="badge claim-now";}
-    };
-  });
-}
-
-// ====== TAMBAHAN FITUR ======
-
-// Klik nomor HP buka WhatsApp
-function setupPhoneClick(){
-  const tds = table.querySelectorAll("tbody tr td:nth-child(3)");
-  tds.forEach(td => {
-    td.style.cursor = "pointer";
-    td.onclick = () => {
-      const phone = td.innerText.replace(/\D/g,"");
-      if(phone && phone!=="") window.open(`https://wa.me/${phone}`,"_blank");
-    };
-  });
-}
-
-// Import CSV
-const csvInput=document.createElement("input");
-csvInput.type="file";
-csvInput.accept=".csv";
-csvInput.style.display="none";
-document.body.appendChild(csvInput);
-
-const importBtn=document.createElement("button");
-importBtn.innerText="Import CSV";
-importBtn.style.background="#2f7cff";
-importBtn.style.color="white";
-importBtn.style.padding="6px 12px";
-importBtn.style.borderRadius="6px";
-importBtn.style.border="none";
-importBtn.style.cursor="pointer";
-document.querySelector(".container").insertBefore(importBtn, document.querySelector(".table-wrapper"));
-
-importBtn.addEventListener("click",()=>csvInput.click());
-
-csvInput.addEventListener("change",()=>{
-  const file=csvInput.files[0];
-  if(!file) return alert("Pilih file CSV terlebih dahulu!");
-  const reader=new FileReader();
-  reader.onload=function(e){
-    const text=e.target.result;
-    const lines=text.split(/\r?\n/);
-    lines.forEach(line=>{
-      const cols=line.split(",");
-      if(cols.length>=4){
-        const tbody=table.querySelector("tbody");
-        const newRow=document.createElement("tr");
-        newRow.innerHTML=`
-          <td contenteditable="true">${cols[0]}</td>
-          <td contenteditable="true">${cols[1]}</td>
-          <td contenteditable="true">${cols[2]}</td>
-          <td contenteditable="true">${cols[3]}</td>
-          <td><span class="badge claim-now">CLAIM NOW</span></td>`;
-        tbody.appendChild(newRow);
-      }
-    });
-    setupBadgeToggle();
-    lockBadge();
-    setupPhoneClick();
-  };
-  reader.readAsText(file);
-});
-
-// ====== END TAMBAHAN ======
 
 window.onload=function(){
   const savedTable=localStorage.getItem("savedTableData");
@@ -224,8 +144,16 @@ window.onload=function(){
   if(savedTitle) title.innerText=savedTitle;
   setupBadgeToggle();
   lockBadge();
-  setupPhoneClick(); // <-- aktifkan klik HP
+  setupPhoneClick();
 };
+
+function lockBadge(){
+  document.querySelectorAll(".badge").forEach(btn=>{
+    btn.setAttribute("contenteditable","false");
+    btn.addEventListener("keydown",e=>{e.preventDefault();});
+    btn.addEventListener("dblclick",e=>{e.preventDefault();});
+  });
+}
 
 addRowBtn.addEventListener("click",()=>{
   const tbody=table.querySelector("tbody");
@@ -253,13 +181,73 @@ saveBtn.addEventListener("click",()=>{
   alert("Data berhasil disimpan!");
 });
 
+function setupBadgeToggle(){
+  const badges=table.querySelectorAll(".badge");
+  badges.forEach(span=>{
+    span.onclick=()=>{
+      const txt=span.innerText.trim().toUpperCase();
+      if(txt==="CLAIM NOW"){showPopup();span.innerText="CLAIMED";}
+      else if(txt==="CLAIMED"){span.innerText="NOT TAKEN";}
+      else{span.innerText="CLAIM NOW";}
+    };
+  });
+}
+
+function setupPhoneClick(){
+  const tds=table.querySelectorAll("tbody td:nth-child(3)");
+  tds.forEach(td=>{
+    td.style.cursor="pointer";
+    td.onclick=()=>{ 
+      if(td.innerText.trim()!=="-") window.open("https://wa.me/"+td.innerText.replace(/[^0-9]/g,""),"_blank");
+    };
+  });
+}
+
+// CSV Import Feature
+csvInput.addEventListener("change",()=>{
+  const file=csvInput.files[0];
+  if(!file) return alert("Pilih file CSV terlebih dahulu!");
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const text=e.target.result;
+    const lines=text.split(/\r?\n/);
+    lines.forEach(line=>{
+      const cols=line.split(",");
+      if(cols.length>=1){ 
+        const tbody=table.querySelector("tbody");
+        const newRow=document.createElement("tr");
+        newRow.innerHTML=`
+          <td contenteditable="true">${cols[0]||"New Game"}</td>
+          <td contenteditable="true">PENDING</td>
+          <td contenteditable="true">${cols[1]||"-"}</td>
+          <td contenteditable="true">${cols[2]||"VIP"}</td>
+          <td><span class="badge claim-now">CLAIM NOW</span></td>`;
+        tbody.appendChild(newRow);
+      }
+    });
+    setupBadgeToggle();
+    lockBadge();
+    setupPhoneClick();
+  };
+  reader.readAsText(file);
+});
+
 function switchPage(page){
   const header=document.querySelector(".header");
   const container=document.querySelector(".container");
   const footer=document.querySelector(".footer");
   const page2=document.getElementById("page2");
-  if(page===2){header.style.display="none";container.style.display="none";footer.style.display="none";page2.style.display="block";}
-  else{header.style.display="flex";container.style.display="block";footer.style.display="flex";page2.style.display="none";}
+  if(page===2){
+    header.style.display="none";
+    container.style.display="none";
+    footer.style.display="none";
+    page2.style.display="block";
+  }else{
+    header.style.display="flex";
+    container.style.display="block";
+    footer.style.display="flex";
+    page2.style.display="none";
+  }
 }
 </script>
 
