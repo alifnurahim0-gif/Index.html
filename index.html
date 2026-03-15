@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 <title>Database Jackpot Pejuang Kasino</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,6 +18,12 @@ font-family:'Montserrat','Inter',sans-serif;
 
 html,body{
 touch-action:manipulation;
+}
+
+/* FIX AGAR TIDAK ZOOM SAAT EDIT DI HP */
+[contenteditable="true"]{
+font-size:16px !important;
+-webkit-text-size-adjust:100%;
 }
 
 /* BACKGROUND FORMAL */
@@ -404,7 +408,6 @@ cursor:pointer;
 <body>
 
 <div class="header">
-
 <div class="logo">👑 <span>PEJUANG KASINO</span></div>
 
 <div class="nav">
@@ -413,7 +416,6 @@ cursor:pointer;
 <a href="#">Promotions</a>
 <a href="#"><b>Jackpot Database</b></a>
 </div>
-
 </div>
 
 <div class="container">
@@ -459,7 +461,6 @@ DATABASE JACKPOT PEJUANG KASINO
 </tr>
 
 </tbody>
-
 </table>
 
 <div class="pagination">
@@ -495,7 +496,6 @@ Maaf jackpot tidak dapat di claim karna pengguna belum melakukan deposit.
 <button class="popupBtn" onclick="closePopup()">Tutup</button>
 
 </div>
-
 </div>
 
 <script>
@@ -634,4 +634,4 @@ page2.style.display="none";
 </script>
 
 </body>
-</html>
+  </html>
