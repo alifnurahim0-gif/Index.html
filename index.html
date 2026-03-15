@@ -9,11 +9,13 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat','Inter',sans-serif;}
 html,body{touch-action:manipulation;}
 [contenteditable="true"]{font-size:16px !important;-webkit-text-size-adjust:100%;}
+
 .badge{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:pointer;padding:6px 14px;border-radius:12px;font-size:11px;font-weight:600;transition:0.25s ease all;}
 .badge:active{transform:scale(0.92);}
 .claimed{background:#3e9b8a;color:#001a17;}
 .claim-now{background:#4a88ff;color:#00142b;}
 .not-taken{background:#b34a4a;color:white;}
+
 body{background:linear-gradient(180deg,#000000 0%,#000c1a 25%,#001a2e 50%,#002b38 75%,#004644 100%);color:#e5e5e5;letter-spacing:0.3px;}
 .header{background:linear-gradient(90deg,#000000,#001c3d,#004c3c);padding:14px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(255,255,255,0.15);}
 .logo{display:flex;align-items:center;font-size:24px;font-weight:700;color:#9fdcff;}
@@ -47,6 +49,8 @@ button:active{transform:scale(0.92);}
 .db-name{font-weight:600;font-size:13px;}
 .db-number{font-size:13px;margin-top:2px;cursor:pointer;color:#4a88ff;transition:0.2s;}
 .db-number:active{transform:scale(0.92);}
+
+/* Notifikasi tengah universal */
 .web-notification-center{
     position:fixed;
     top:50%;
@@ -148,7 +152,7 @@ DATABASE JACKPOT PEJUANG KASINO
 <div>Privacy Policy | Terms of Service</div>
 </div>
 
-<!-- Notifikasi tengah -->
+<!-- Notifikasi tengah universal -->
 <div id="webNotificationCenter" class="web-notification-center"></div>
 
 <script>
@@ -183,7 +187,7 @@ function createDBCellFromRaw(raw){
             <div class="db-number" onclick="window.open('https://wa.me/${number}','_blank')">${number || '-'}</div>`;  
 }  
 
-// Tombol Tambah Baris
+// Tambah Baris
 addRowBtn.addEventListener("click", ()=>{
     const tbody=table.querySelector("tbody");
     const newRow=document.createElement("tr");
@@ -198,19 +202,19 @@ addRowBtn.addEventListener("click", ()=>{
     setupBadgeToggle();
 });
 
-// Tombol Hapus Baris
+// Hapus Baris
 deleteRowBtn.addEventListener("click", ()=>{
     const tbody=table.querySelector("tbody");
     if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1);
 });
 
-// Tombol Hapus Semua
+// Hapus Semua
 deleteAllBtn.addEventListener("click", ()=>{
     const tbody=table.querySelector("tbody");
     tbody.innerHTML="";
 });
 
-// Tombol Save
+// Save
 saveBtn.addEventListener("click", ()=>{
     localStorage.setItem("savedTableData",table.querySelector("tbody").innerHTML);
     localStorage.setItem("savedTitle",title.innerText);
@@ -234,6 +238,7 @@ addMultipleBtn.addEventListener("click", ()=>{
         `;
         tbody.appendChild(newRow);
     });
+    showNotificationCenter("Nomor berhasil ditambahkan!");
     setupBadgeToggle();
 });
 
@@ -259,6 +264,7 @@ importCSVBtn.addEventListener("click", ()=>{
                 tbody.appendChild(newRow);
             });
             setupBadgeToggle();
+            showNotificationCenter("CSV berhasil diimport!");
         };
         reader.readAsText(file);
     };
