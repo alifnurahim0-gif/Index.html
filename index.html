@@ -83,9 +83,9 @@ DATABASE JACKPOT PEJUANG KASINO
 <tr>
 <td contenteditable="true">PG/PRAGMATIC</td>
 <td contenteditable="true">DONE</td>
-<td contenteditable="true">
-<div class="db-name">Nama</div>
-<div class="db-number">85747166188</div>
+<td>
+<div class="db-name" contenteditable="true">Nama</div>
+<div class="db-number" onclick="window.open('https://wa.me/85747166188','_blank')">85747166188</div>
 </td>
 <td contenteditable="true">VIP</td>
 <td><span class="badge claim-now">CLAIM NOW</span></td>
@@ -93,9 +93,9 @@ DATABASE JACKPOT PEJUANG KASINO
 <tr>
 <td contenteditable="true">PG/PRAGMATIC</td>
 <td contenteditable="true">PENDING</td>
-<td contenteditable="true">
-<div class="db-name">Nama</div>
-<div class="db-number">-</div>
+<td>
+<div class="db-name" contenteditable="true">Nama</div>
+<div class="db-number" onclick="window.open('https://wa.me/-','_blank')">-</div>
 </td>
 <td contenteditable="true">VIP</td>
 <td><span class="badge claim-now">CLAIM NOW</span></td>
@@ -149,7 +149,8 @@ function showPopup(){document.getElementById("customPopup").style.display="flex"
 function closePopup(){document.getElementById("customPopup").style.display="none";}
 
 function createDBCell(name,number){
-  return `<div class="db-name">${name}</div><div class="db-number">${number}</div>`;
+  return `<div class="db-name" contenteditable="true">${name}</div>
+          <div class="db-number" onclick="window.open('https://wa.me/${number}','_blank')">${number}</div>`;
 }
 
 function setupBadgeToggle(){
@@ -159,17 +160,6 @@ function setupBadgeToggle(){
       if(txt==="CLAIM NOW"){showPopup();span.innerText="CLAIMED";span.className="badge claimed";}
       else if(txt==="CLAIMED"){span.innerText="NOT TAKEN";span.className="badge not-taken";}
       else{span.innerText="CLAIM NOW";span.className="badge claim-now";}
-    };
-  });
-}
-
-function setupNumberClick(){
-  document.querySelectorAll(".db-number").forEach(num=>{
-    num.onclick=()=>{
-      const rawNumber = num.innerText.replace(/\D/g,'');
-      if(rawNumber.length>0 && rawNumber!=='-'){
-        window.open(`https://wa.me/${rawNumber}`,'_blank');
-      }
     };
   });
 }
@@ -188,14 +178,13 @@ function addNewRow(name="-",number="-"){
   newRow.innerHTML=`
     <td contenteditable="true">PG/PRAGMATIC</td>
     <td contenteditable="true">PENDING</td>
-    <td contenteditable="true">${createDBCell(name,number)}</td>
+    <td>${createDBCell(name,number)}</td>
     <td contenteditable="true">VIP</td>
     <td><span class="badge claim-now">CLAIM NOW</span></td>
   `;
   tbody.appendChild(newRow);
   setupBadgeToggle();
   lockBadge();
-  setupNumberClick();
 }
 
 addRowBtn.addEventListener("click",()=>{addNewRow();});
@@ -240,7 +229,6 @@ window.onload=function(){
   if(savedTitle) title.innerText=savedTitle;
   setupBadgeToggle();
   lockBadge();
-  setupNumberClick();
 };
 function switchPage(page){
   const header=document.querySelector(".header");
