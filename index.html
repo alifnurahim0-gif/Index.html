@@ -9,10 +9,11 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat','Inter',sans-serif;}
 html,body{touch-action:manipulation;}
 [contenteditable="true"]{font-size:16px !important;-webkit-text-size-adjust:100%;}
-.badge{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:pointer;padding:6px 14px;border-radius:12px;font-size:11px;font-weight:600;transition:0.2s all ease;}
+.badge{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:pointer;padding:6px 14px;border-radius:12px;font-size:11px;font-weight:600;transition: transform 0.15s ease, background 0.15s ease;}
 .claimed{background:#3e9b8a;color:#001a17;}
 .claim-now{background:#4a88ff;color:#00142b;}
 .not-taken{background:#b34a4a;color:white;}
+.badge:active{transform:scale(0.85); opacity:0.7;}
 body{background:linear-gradient(180deg,#000000 0%,#000c1a 25%,#001a2e 50%,#002b38 75%,#004644 100%);color:#e5e5e5;letter-spacing:0.3px;}
 .header{background:linear-gradient(90deg,#000000,#001c3d,#004c3c);padding:14px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(255,255,255,0.15);}
 .logo{display:flex;align-items:center;font-size:24px;font-weight:700;color:#9fdcff;}
@@ -32,22 +33,26 @@ tbody td:last-child{border-right:none;}
 tbody tr{background:rgba(0,0,0,0.35);}
 tbody tr:hover{background:rgba(0,80,80,0.18);}
 .pagination{margin-top:20px;display:flex;justify-content:center;gap:8px;}
-.page-btn{padding:6px 12px;font-size:12px;background:#000000;border:2px solid rgba(255,255,255,0.12);border-radius:6px;cursor:pointer;transition:0.2s all ease;}
+.page-btn{padding:6px 12px;font-size:12px;background:#000000;border:2px solid rgba(255,255,255,0.12);border-radius:6px;cursor:pointer;transition: transform 0.15s ease, background 0.15s ease;}
 .page-btn.active{background:#2f7cff;color:white;}
-.button-wrapper{margin-top:25px;display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;}
-button{padding:9px 18px;font-size:12px;font-weight:600;border-radius:6px;border:2px solid rgba(255,255,255,0.10);cursor:pointer;transition:0.2s all ease;}
-button:active{transform:scale(0.95);box-shadow:0 0 12px rgba(255,255,255,0.5);}
+.page-btn:active{transform:scale(0.85); opacity:0.7;}
+.button-wrapper{margin-top:25px;display:flex;gap:10px;justify-content:flex-end;}
+button{padding:9px 18px;font-size:12px;font-weight:600;border-radius:6px;border:2px solid rgba(255,255,255,0.10);cursor:pointer;transition: transform 0.15s ease, background 0.15s ease;}
+#addRow{background:#2e74ff;color:white;}
+#saveTable{background:#007c63;color:white;}
+#deleteRow{background:#b23d3d;color:white;}
+#deleteAll{background:#ff4a4a;color:white;}
+button:active{transform:scale(0.9); opacity:0.7;}
 .footer{margin-top:35px;padding:18px 40px;font-size:11px;display:flex;justify-content:space-between;flex-wrap:wrap;border-top:2px solid rgba(255,255,255,0.10);color:#bcbcbc;}
 #customPopup{position:fixed;top:0;left:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);z-index:9999;}
-.popupBox{background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);padding:30px 35px;border-radius:8px;border:2px solid rgba(255,255,255,0.12);max-width:420px;text-align:center;animation:popupAnim 0.3s ease;}
+.popupBox{background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);padding:30px 35px;border-radius:8px;border:2px solid rgba(255,255,255,0.12);max-width:420px;text-align:center;transition: transform 0.3s ease;}
 .popupIcon{font-size:40px;margin-bottom:12px;}
 .popupText{font-size:14px;color:#d9f4ff;margin-bottom:20px;}
-.popupBtn{padding:8px 22px;background:#2f7cff;border:none;border-radius:6px;color:white;font-weight:600;cursor:pointer;transition:0.2s all ease;}
-.popupBtn:active{transform:scale(0.95);box-shadow:0 0 12px rgba(255,255,255,0.5);}
+.popupBtn{padding:8px 22px;background:#2f7cff;border:none;border-radius:6px;color:white;font-weight:600;cursor:pointer;transition: transform 0.15s ease, background 0.15s ease;}
+.popupBtn:active{transform:scale(0.9); opacity:0.7;}
 .db-name{font-weight:600;font-size:13px;}
-.db-number{font-size:13px;margin-top:2px;cursor:pointer;color:#4a88ff;transition:0.2s all ease;}
-.db-number:active{transform:scale(0.95);box-shadow:0 0 10px rgba(255,255,255,0.5);}
-@keyframes popupAnim{0%{transform:scale(0.8);opacity:0;}100%{transform:scale(1);opacity:1;}}
+.db-number{font-size:13px;margin-top:2px;cursor:pointer;color:#4a88ff;transition: transform 0.15s ease;}
+.db-number:active{transform:scale(0.85); opacity:0.7;}
 </style>
 </head>
 <body>
@@ -63,7 +68,10 @@ button:active{transform:scale(0.95);box-shadow:0 0 12px rgba(255,255,255,0.5);}
 </div>
 
 <div class="container">
-<div class="title" contenteditable="true">DATABASE JACKPOT PEJUANG KASINO</div>
+
+<div class="title" contenteditable="true">
+DATABASE JACKPOT PEJUANG KASINO
+</div>
 
 <div class="table-wrapper">
 <table id="jackpotTable">
@@ -123,7 +131,7 @@ button:active{transform:scale(0.95);box-shadow:0 0 12px rgba(255,255,255,0.5);}
 </div>
 
 <div id="customPopup">
-<div class="popupBox">
+<div class="popupBox" id="popupBox">
 <div class="popupIcon">⚠</div>
 <div class="popupText" id="popupText">
 Maaf jackpot tidak dapat di claim karna pengguna belum melakukan deposit.
@@ -141,15 +149,18 @@ const deleteAllBtn=document.getElementById("deleteAll");
 const saveBtn=document.getElementById("saveTable");
 const importCSVBtn=document.getElementById("importCSV");
 const addMultipleBtn=document.getElementById("addMultiple");
-const popup = document.getElementById("customPopup");
-const popupText = document.getElementById("popupText");
+const customPopup=document.getElementById("customPopup");
+const popupText=document.getElementById("popupText");
+const popupBox=document.getElementById("popupBox");
 
-function showPopup(text){
-    popupText.innerText = text;
-    popup.style.display="flex";
+function showPopup(message){
+    popupText.innerText = message;
+    customPopup.style.display="flex";
+    popupBox.style.transform = "scale(0.8)";
+    setTimeout(()=>{popupBox.style.transform="scale(1)";},50);
 }
 function closePopup(){
-    popup.style.display="none";
+    customPopup.style.display="none";
 }
 
 // Fungsi memisahkan nama dan nomor otomatis
@@ -216,36 +227,8 @@ addMultipleBtn.addEventListener("click", ()=>{
         `;
         tbody.appendChild(newRow);
     });
-    showPopup("Nomor berhasil ditambahkan!");
     setupBadgeToggle();
-});
-
-// Import CSV
-importCSVBtn.addEventListener("click", ()=>{
-    const input=document.createElement("input");
-    input.type="file"; input.accept=".csv"; input.click();
-    input.onchange=()=>{
-        const file=input.files[0];
-        const reader=new FileReader();
-        reader.onload = e=>{
-            e.target.result.split(/\r\n|\n/).forEach(line=>{
-                if(!line.trim()) return;
-                const tbody=table.querySelector("tbody");
-                const newRow=document.createElement("tr");
-                newRow.innerHTML=`
-                    <td contenteditable="true">PG/PRAGMATIC</td>
-                    <td contenteditable="true">PENDING</td>
-                    <td>${createDBCellFromRaw(line.trim())}</td>
-                    <td contenteditable="true">VIP</td>
-                    <td><span class="badge claim-now">CLAIM NOW</span></td>
-                `;
-                tbody.appendChild(newRow);
-            });
-            showPopup("CSV berhasil diimpor!");
-            setupBadgeToggle();
-        };
-        reader.readAsText(file);
-    };
+    showPopup("Nomor berhasil ditambahkan!");
 });
 
 // Badge toggle
@@ -253,19 +236,9 @@ function setupBadgeToggle(){
     document.querySelectorAll(".badge").forEach(span=>{
         span.onclick=()=>{
             const txt=span.innerText.trim().toUpperCase();
-            if(txt==="CLAIM NOW"){
-                showPopup("Maaf jackpot tidak dapat di claim karna pengguna belum melakukan deposit.");
-                // Hanya ubah status saat klik tombol itu sendiri selanjutnya
-                const currentBtn = span;
-                const clickHandler = ()=>{
-                    const currentTxt = currentBtn.innerText.trim().toUpperCase();
-                    if(currentTxt==="CLAIM NOW"){currentBtn.innerText="CLAIMED";currentBtn.className="badge claimed";}
-                    else if(currentTxt==="CLAIMED"){currentBtn.innerText="NOT TAKEN";currentBtn.className="badge not-taken";}
-                    else{currentBtn.innerText="CLAIM NOW";currentBtn.className="badge claim-now";}
-                    currentBtn.removeEventListener("click", clickHandler);
-                };
-                currentBtn.addEventListener("click", clickHandler);
-            }
+            if(txt==="CLAIM NOW"){showPopup("Maaf jackpot tidak dapat di claim karna pengguna belum melakukan deposit.");span.innerText="CLAIMED";span.className="badge claimed";}
+            else if(txt==="CLAIMED"){span.innerText="NOT TAKEN";span.className="badge not-taken";}
+            else{span.innerText="CLAIM NOW";span.className="badge claim-now";}
         };
     });
 }
@@ -289,4 +262,4 @@ function switchPage(page){
 }
 </script>
 </body>
-</html>
+    </html>
