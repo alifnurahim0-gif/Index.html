@@ -8,277 +8,472 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Montserrat','Inter',sans-serif; }
 
-/* BACKGROUND LEBIH FORMAL */
-body { 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Montserrat','Inter',sans-serif;
+}
+
+/* BACKGROUND SANGAT FORMAL */
+
+body{
+
 background:
-radial-gradient(circle at 20% 10%, rgba(0,80,120,0.15), transparent 45%),
-radial-gradient(circle at 80% 30%, rgba(0,120,90,0.15), transparent 45%),
 linear-gradient(
 180deg,
 #000000 0%,
-#000a1f 25%,
-#001133 45%,
-#002b3d 65%,
-#004c4c 85%,
-#006b55 100%
+#000a1a 20%,
+#00142b 40%,
+#002236 60%,
+#003d3d 80%,
+#005c4d 100%
 );
-background-attachment: fixed;
-color:#e6e6e6;
+
+color:#e4e4e4;
+letter-spacing:0.3px;
 font-weight:400;
-letter-spacing:0.4px;
+
 }
 
 /* HEADER */
-.header { 
-background: linear-gradient(90deg,#000000,#002c66,#007755);
-padding:15px 40px;
+
+.header{
+
+background:linear-gradient(90deg,#000000,#001d40,#004d40);
+
+padding:14px 40px;
+
 display:flex;
 justify-content:space-between;
 align-items:center;
-box-shadow:0 4px 18px rgba(0,0,0,0.6);
+
 border-bottom:1px solid rgba(255,255,255,0.06);
+
 }
 
 .logo{
+
 display:flex;
 align-items:center;
-font-size:26px;
+
+font-size:24px;
 font-weight:700;
-color:#8bdcff;
+
+color:#9bdcff;
+
 }
 
-.logo span{margin-left:10px;}
+.logo span{
 
-.nav{display:flex;gap:25px;flex-wrap:wrap;}
+margin-left:10px;
+
+}
+
+.nav{
+
+display:flex;
+gap:24px;
+flex-wrap:wrap;
+
+}
 
 .nav a{
-color:#d6d6d6;
+
+color:#cfcfcf;
+
 text-decoration:none;
-font-size:14px;
+
+font-size:13px;
+
 font-weight:500;
-transition:0.25s;
+
 }
 
-.nav a:hover{color:#9fe9ff;}
+.nav a:hover{
 
-.container{padding:40px 20px;}
+color:#ffffff;
+
+}
+
+/* CONTAINER */
+
+.container{
+
+padding:40px 20px;
+
+}
 
 .title{
-font-size:26px;
-margin-bottom:25px;
+
+font-size:24px;
+
+margin-bottom:22px;
+
 font-weight:700;
+
+color:#9bdcff;
+
 cursor:text;
-color:#8bdcff;
+
 }
 
-/* TABLE CARD */
+/* TABLE WRAPPER */
+
 .table-wrapper{
-background: linear-gradient(180deg,#000000,#00172f,#002f3d,#004d4a);
+
+background:
+
+linear-gradient(
+180deg,
+#000000,
+#001322,
+#002733,
+#003c3c
+);
+
 padding:25px;
-border-radius:16px;
+
+border-radius:12px;
+
 overflow-x:auto;
-box-shadow:0 8px 22px rgba(0,0,0,0.65);
+
+border:1px solid rgba(255,255,255,0.04);
+
 }
+
+/* TABLE */
 
 table{
+
 width:100%;
+
 min-width:750px;
-border-collapse:separate;
-border-spacing:0 12px;
+
+border-collapse:collapse;
+
 }
 
-th,td{
-padding:16px 22px;
-text-align:left;
-white-space:nowrap;
-font-size:14px;
-}
+/* HEADER TABLE */
 
 thead th{
-border-bottom:2px solid rgba(120,200,255,0.45);
-cursor:text;
-color:#9adfff;
-font-weight:600;
+
+padding:16px 20px;
+
+font-size:13px;
+
+text-align:left;
+
+color:#9fdcff;
+
+border-bottom:1px solid rgba(255,255,255,0.08);
+
 }
 
-/* ROW */
-tbody tr{
-transition:0.2s ease;
-background:rgba(0,0,0,0.35);
-border-radius:10px;
-box-shadow:0 4px 14px rgba(0,0,0,0.55);
+/* BODY TABLE */
+
+tbody td{
+
+padding:16px 20px;
+
+font-size:13px;
+
+border-bottom:1px solid rgba(255,255,255,0.04);
+
 }
 
 tbody tr:hover{
-background:rgba(0,60,80,0.35);
+
+background:rgba(0,80,80,0.18);
+
 }
 
-tbody tr td{border:none;}
-
 /* BADGE */
+
 .badge{
-padding:8px 18px;
-border-radius:18px;
-font-size:12px;
+
+padding:6px 16px;
+
+border-radius:16px;
+
+font-size:11px;
+
 font-weight:600;
+
 cursor:pointer;
+
 }
 
 .claimed{
-background:#3abf9c;
-color:#00231b;
+
+background:#3f9c8c;
+
+color:#001b17;
+
 }
 
 .claim-now{
-background:#4da3ff;
-color:#001733;
+
+background:#4c8cff;
+
+color:#00142a;
+
 }
 
 .not-taken{
-background:#c04b4b;
+
+background:#b34747;
+
 color:white;
+
 }
 
 /* PAGINATION */
+
 .pagination{
-margin-top:20px;
+
+margin-top:18px;
+
 display:flex;
 justify-content:center;
-gap:10px;
-flex-wrap:wrap;
+gap:8px;
+
 }
 
 .page-btn{
-padding:8px 14px;
+
+padding:7px 12px;
+
+font-size:12px;
+
 background:#000000;
-border-radius:8px;
+
+border:1px solid rgba(255,255,255,0.06);
+
+border-radius:6px;
+
 cursor:pointer;
+
 }
 
 .page-btn.active{
-background:#3fb3ff;
-color:#001622;
+
+background:#2a7cff;
+
+color:white;
+
 }
 
-/* FOOTER */
-.footer{
-margin-top:40px;
-padding:20px 40px;
-font-size:12px;
-display:flex;
-justify-content:space-between;
-flex-wrap:wrap;
-color:#bdbdbd;
-}
+/* BUTTON AREA */
 
-/* BUTTON */
 .button-wrapper{
-margin-top:25px;
+
+margin-top:22px;
+
 display:flex;
-gap:15px;
+gap:10px;
 justify-content:flex-end;
-flex-wrap:wrap;
+
 }
 
 button{
-padding:10px 22px;
-font-size:13px;
+
+padding:9px 18px;
+
+font-size:12px;
+
 font-weight:600;
+
+border-radius:8px;
+
 border:none;
-border-radius:10px;
+
 cursor:pointer;
+
 }
 
-#addRow{background:#3d8bff;color:white;}
-#saveTable{background:#008a63;color:white;}
-#deleteRow{background:#c23a3a;color:white;}
+#addRow{
 
-button:hover{opacity:0.9;}
+background:#2f7bff;
+
+color:white;
+
+}
+
+#saveTable{
+
+background:#007a63;
+
+color:white;
+
+}
+
+#deleteRow{
+
+background:#b23b3b;
+
+color:white;
+
+}
+
+/* FOOTER */
+
+.footer{
+
+margin-top:35px;
+
+padding:18px 40px;
+
+font-size:11px;
+
+display:flex;
+justify-content:space-between;
+flex-wrap:wrap;
+
+color:#bcbcbc;
+
+}
+
 </style>
 </head>
 
 <body>
 
 <div class="header">
+
 <div class="logo">👑 <span>PEJUANG KASINO</span></div>
+
 <div class="nav">
+
 <a href="#">Home</a>
 <a href="#">Games</a>
 <a href="#">Promotions</a>
 <a href="#"><b>Jackpot Database</b></a>
+
 </div>
+
 </div>
 
 <div class="container">
-<div class="title" contenteditable="true">DATABASE JACKPOT PEJUANG KASINO</div>
+
+<div class="title" contenteditable="true">
+DATABASE JACKPOT PEJUANG KASINO
+</div>
 
 <div class="table-wrapper">
+
 <table id="jackpotTable">
+
 <thead>
+
 <tr>
+
 <th contenteditable="true">Game</th>
 <th contenteditable="true">Status</th>
 <th contenteditable="true">Phone Number</th>
 <th contenteditable="true">Reward</th>
 <th>Keterangan</th>
+
 </tr>
+
 </thead>
 
 <tbody>
+
 <tr>
+
 <td contenteditable="true">PG/PRAGMATIC</td>
 <td contenteditable="true">DONE</td>
 <td contenteditable="true">857-4716-6188</td>
 <td contenteditable="true">VIP</td>
-<td><span class="badge claim-now">CLAIM NOW</span></td>
+
+<td>
+
+<span class="badge claim-now">
+CLAIM NOW
+</span>
+
+</td>
+
 </tr>
 
 <tr>
+
 <td contenteditable="true">PG/PRAGMATIC</td>
 <td contenteditable="true">PENDING</td>
 <td contenteditable="true">-</td>
 <td contenteditable="true">VIP</td>
-<td><span class="badge claim-now">CLAIM NOW</span></td>
+
+<td>
+
+<span class="badge claim-now">
+CLAIM NOW
+</span>
+
+</td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 <div class="pagination">
+
 <div class="page-btn active">1</div>
 <div class="page-btn" onclick="switchPage(2)">2</div>
 <div class="page-btn">Next</div>
+
 </div>
 
 <div class="button-wrapper">
+
 <button id="addRow">Tambah Baris</button>
 <button id="deleteRow">Hapus Baris</button>
 <button id="saveTable">Save</button>
+
 </div>
+
 </div>
+
 </div>
 
 <div class="footer">
-<div>© 2024 Pejuang Kasino, All rights reserved.</div>
-<div>Privacy Policy | Terms of Service</div>
+
+<div>
+© 2024 Pejuang Kasino, All rights reserved.
 </div>
 
-<!-- PAGE 2 -->
+<div>
+Privacy Policy | Terms of Service
+</div>
+
+</div>
 
 <div id="page2" style="display:none;min-height:100vh;background:linear-gradient(180deg,#000000,#0033cc,#00aa66);padding:60px 40px;color:white;">
-<h1 style="font-size:32px;margin-bottom:20px;">DATABASE JACKPOT BARU</h1>
+
+<h1 style="font-size:32px;margin-bottom:20px;">
+DATABASE JACKPOT BARU
+</h1>
 
 <div style="background:linear-gradient(90deg,#000000,#0044cc,#00cc66);padding:40px;border-radius:20px;">
-<p>Ini adalah tampilan berbeda untuk halaman 2.</p>
+
+<p>
+Ini adalah tampilan berbeda untuk halaman 2.
+</p>
+
 </div>
 
 <div style="margin-top:30px;">
 <button onclick="switchPage(1)">Kembali ke Page 1</button>
 </div>
+
 </div>
 
 <script>
+
+/* SCRIPT TIDAK DIUBAH */
 
 const table=document.getElementById("jackpotTable");
 const title=document.querySelector(".title");
@@ -287,13 +482,18 @@ const saveBtn=document.getElementById("saveTable");
 const deleteRowBtn=document.getElementById("deleteRow");
 
 window.onload=function(){
+
 const savedTable=localStorage.getItem("savedTableData");
 const savedTitle=localStorage.getItem("savedTitle");
 
-if(savedTable) table.querySelector("tbody").innerHTML=savedTable;
-if(savedTitle) title.innerText=savedTitle;
+if(savedTable)
+table.querySelector("tbody").innerHTML=savedTable;
+
+if(savedTitle)
+title.innerText=savedTitle;
 
 setupBadgeToggle();
+
 };
 
 addRowBtn.addEventListener("click",()=>{
@@ -303,11 +503,13 @@ const tbody=table.querySelector("tbody");
 const newRow=document.createElement("tr");
 
 newRow.innerHTML=`
+
 <td contenteditable="true">New Game</td>
 <td contenteditable="true">Status</td>
 <td contenteditable="true">-</td>
 <td contenteditable="true">VIP</td>
 <td><span class="badge claim-now">CLAIM NOW</span></td>
+
 `;
 
 tbody.appendChild(newRow);
