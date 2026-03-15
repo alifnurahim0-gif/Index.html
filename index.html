@@ -34,13 +34,35 @@ tbody tr:hover{background:rgba(0,80,80,0.18);}
 .pagination{margin-top:20px;display:flex;justify-content:center;gap:8px;}
 .page-btn{padding:6px 12px;font-size:12px;background:#000000;border:2px solid rgba(255,255,255,0.12);border-radius:6px;cursor:pointer;}
 .page-btn.active{background:#2f7cff;color:white;}
-.button-wrapper{margin-top:25px; display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end;}
-.button-wrapper button{flex:1 1 auto; min-width:130px; text-align:center;}
-button{padding:9px 18px;font-size:12px;font-weight:600;border-radius:6px;border:2px solid rgba(255,255,255,0.10);cursor:pointer;}
+.button-wrapper{
+  margin-top:25px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  justify-content:flex-end;
+}
+.button-wrapper button{
+  flex:1 1 140px;
+  text-align:center;
+  padding:10px 18px;
+  font-size:13px;
+  font-weight:600;
+  border-radius:8px;
+  border:2px solid rgba(255,255,255,0.12);
+  cursor:pointer;
+  transition: all 0.15s ease-in-out;
+}
+.button-wrapper button:active{
+  transform: scale(0.95);
+  box-shadow:0 4px 12px rgba(0,0,0,0.4);
+  opacity:0.9;
+}
 #addRow{background:#2e74ff;color:white;}
 #saveTable{background:#007c63;color:white;}
 #deleteRow{background:#b23d3d;color:white;}
 #deleteAll{background:#ff4a4a;color:white;}
+#importCSV{background:#ffaa00;color:#00142b;}
+#addMultiple{background:#8e44ad;color:white;}
 .footer{margin-top:35px;padding:18px 40px;font-size:11px;display:flex;justify-content:space-between;flex-wrap:wrap;border-top:2px solid rgba(255,255,255,0.10);color:#bcbcbc;}
 #customPopup{position:fixed;top:0;left:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);z-index:9999;}
 .popupBox{background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);padding:30px 35px;border-radius:8px;border:2px solid rgba(255,255,255,0.12);max-width:420px;text-align:center;}
@@ -54,86 +76,86 @@ button{padding:9px 18px;font-size:12px;font-weight:600;border-radius:6px;border:
 <body>
 
 <div class="header">
-  <div class="logo">👑 <span>PEJUANG KASINO</span></div>
-  <div class="nav">
-    <a href="#">Home</a>
-    <a href="#">Games</a>
-    <a href="#">Promotions</a>
-    <a href="#"><b>Jackpot Database</b></a>
-  </div>
+<div class="logo">👑 <span>PEJUANG KASINO</span></div>
+<div class="nav">
+<a href="#">Home</a>
+<a href="#">Games</a>
+<a href="#">Promotions</a>
+<a href="#"><b>Jackpot Database</b></a>
+</div>
 </div>
 
 <div class="container">
 
-  <div class="title" contenteditable="true">
-    DATABASE JACKPOT PEJUANG KASINO
-  </div>
+<div class="title" contenteditable="true">
+DATABASE JACKPOT PEJUANG KASINO
+</div>
 
-  <div class="table-wrapper">
-    <table id="jackpotTable">
-      <thead>
-        <tr>
-          <th contenteditable="true">Game</th>
-          <th contenteditable="true">Status</th>
-          <th contenteditable="true">DATABASE</th>
-          <th contenteditable="true">Reward</th>
-          <th>Keterangan</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td contenteditable="true">PG/PRAGMATIC</td>
-          <td contenteditable="true">DONE</td>
-          <td>
-            <div class="db-name" contenteditable="true">Nama</div>
-            <div class="db-number" onclick="window.open('https://wa.me/85747166188','_blank')">85747166188</div>
-          </td>
-          <td contenteditable="true">VIP</td>
-          <td><span class="badge claim-now">CLAIM NOW</span></td>
-        </tr>
-        <tr>
-          <td contenteditable="true">PG/PRAGMATIC</td>
-          <td contenteditable="true">PENDING</td>
-          <td>
-            <div class="db-name" contenteditable="true">Nama</div>
-            <div class="db-number" onclick="window.open('https://wa.me/-','_blank')">-</div>
-          </td>
-          <td contenteditable="true">VIP</td>
-          <td><span class="badge claim-now">CLAIM NOW</span></td>
-        </tr>
-      </tbody>
-    </table>
+<div class="table-wrapper">
+<table id="jackpotTable">
+<thead>
+<tr>
+<th contenteditable="true">Game</th>
+<th contenteditable="true">Status</th>
+<th contenteditable="true">DATABASE</th>
+<th contenteditable="true">Reward</th>
+<th>Keterangan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td contenteditable="true">PG/PRAGMATIC</td>
+<td contenteditable="true">DONE</td>
+<td>
+<div class="db-name" contenteditable="true">Nama</div>
+<div class="db-number" onclick="window.open('https://wa.me/85747166188','_blank')">85747166188</div>
+</td>
+<td contenteditable="true">VIP</td>
+<td><span class="badge claim-now">CLAIM NOW</span></td>
+</tr>
+<tr>
+<td contenteditable="true">PG/PRAGMATIC</td>
+<td contenteditable="true">PENDING</td>
+<td>
+<div class="db-name" contenteditable="true">Nama</div>
+<div class="db-number" onclick="window.open('https://wa.me/-','_blank')">-</div>
+</td>
+<td contenteditable="true">VIP</td>
+<td><span class="badge claim-now">CLAIM NOW</span></td>
+</tr>
+</tbody>
+</table>
 
-    <div class="pagination">
-      <div class="page-btn active">1</div>
-      <div class="page-btn" onclick="switchPage(2)">2</div>
-      <div class="page-btn">Next</div>
-    </div>
+<div class="pagination">
+<div class="page-btn active">1</div>
+<div class="page-btn" onclick="switchPage(2)">2</div>
+<div class="page-btn">Next</div>
+</div>
 
-    <div class="button-wrapper">
-      <button id="addRow">Tambah Baris</button>
-      <button id="deleteRow">Hapus Baris</button>
-      <button id="deleteAll">Hapus Semua</button>
-      <button id="saveTable">Save</button>
-      <button id="importCSV">Import CSV</button>
-      <button id="addMultiple">Masukkan Nomor Banyak</button>
-    </div>
-  </div>
+<div class="button-wrapper">
+<button id="addRow">Tambah Baris</button>
+<button id="deleteRow">Hapus Baris</button>
+<button id="deleteAll">Hapus Semua</button>
+<button id="saveTable">Save</button>
+<button id="importCSV">Import CSV</button>
+<button id="addMultiple">Masukkan Nomor Banyak</button>
+</div>
+</div>
 </div>
 
 <div class="footer">
-  <div>© 2024 Pejuang Kasino, All rights reserved.</div>
-  <div>Privacy Policy | Terms of Service</div>
+<div>© 2024 Pejuang Kasino, All rights reserved.</div>
+<div>Privacy Policy | Terms of Service</div>
 </div>
 
 <div id="customPopup">
-  <div class="popupBox">
-    <div class="popupIcon">⚠</div>
-    <div class="popupText">
-      Maaf jackpot tidak dapat di claim karna pengguna belum melakukan deposit.
-    </div>
-    <button class="popupBtn" onclick="closePopup()">Tutup</button>
-  </div>
+<div class="popupBox">
+<div class="popupIcon">⚠</div>
+<div class="popupText">
+Maaf jackpot tidak dapat di claim karna pengguna belum melakukan deposit.
+</div>
+<button class="popupBtn" onclick="closePopup()">Tutup</button>
+</div>
 </div>
 
 <script>
@@ -149,7 +171,6 @@ const addMultipleBtn=document.getElementById("addMultiple");
 function showPopup(){document.getElementById("customPopup").style.display="flex";}
 function closePopup(){document.getElementById("customPopup").style.display="none";}
 
-// Fungsi memisahkan nama dan nomor otomatis
 function splitNameNumber(input){
     const number = (input.match(/\d+/g) || []).join('');
     const name = input.replace(/\d+/g,'').trim() || '-';
@@ -162,7 +183,6 @@ function createDBCellFromRaw(raw){
             <div class="db-number" onclick="window.open('https://wa.me/${number}','_blank')">${number || '-'}</div>`;
 }
 
-// Tombol Tambah Baris
 addRowBtn.addEventListener("click", ()=>{
     const tbody=table.querySelector("tbody");
     const newRow=document.createElement("tr");
@@ -177,26 +197,22 @@ addRowBtn.addEventListener("click", ()=>{
     setupBadgeToggle();
 });
 
-// Tombol Hapus Baris
 deleteRowBtn.addEventListener("click", ()=>{
     const tbody=table.querySelector("tbody");
     if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1);
 });
 
-// Tombol Hapus Semua
 deleteAllBtn.addEventListener("click", ()=>{
     const tbody=table.querySelector("tbody");
     tbody.innerHTML="";
 });
 
-// Tombol Save
 saveBtn.addEventListener("click", ()=>{
     localStorage.setItem("savedTableData",table.querySelector("tbody").innerHTML);
     localStorage.setItem("savedTitle",title.innerText);
     alert("Data berhasil disimpan!");
 });
 
-// Masukkan Banyak Nomor
 addMultipleBtn.addEventListener("click", ()=>{
     const input = prompt("Masukkan nama dan nomor (web otomatis memisahkan):","");
     if(!input) return;
@@ -216,7 +232,6 @@ addMultipleBtn.addEventListener("click", ()=>{
     setupBadgeToggle();
 });
 
-// Import CSV
 importCSVBtn.addEventListener("click", ()=>{
     const input=document.createElement("input");
     input.type="file"; input.accept=".csv"; input.click();
@@ -243,7 +258,6 @@ importCSVBtn.addEventListener("click", ()=>{
     };
 });
 
-// Badge toggle
 function setupBadgeToggle(){
     document.querySelectorAll(".badge").forEach(span=>{
         span.onclick=()=>{
@@ -255,7 +269,6 @@ function setupBadgeToggle(){
     });
 }
 
-// Inisialisasi
 window.onload = ()=>{
     const savedTable = localStorage.getItem("savedTableData");
     const savedTitle = localStorage.getItem("savedTitle");
@@ -273,6 +286,5 @@ function switchPage(page){
   else{header.style.display="flex";container.style.display="block";footer.style.display="flex";page2.style.display="none";}
 }
 </script>
-
 </body>
 </html>
