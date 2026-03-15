@@ -9,17 +9,8 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat','Inter',sans-serif;}
 html,body{touch-action:manipulation;}
 [contenteditable="true"]{font-size:16px !important;-webkit-text-size-adjust:100%;}
-.badge{
-  user-select:none;
-  -webkit-user-select:none;
-  -webkit-touch-callout:none;
-  cursor:pointer;
-  padding:6px 14px;
-  border-radius:12px;
-  font-size:11px;
-  font-weight:600;
-  pointer-events: auto; /* supaya bisa diklik */
-}
+.badge{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:pointer;padding:6px 14px;border-radius:12px;font-size:11px;font-weight:600;pointer-events:auto;}
+button{pointer-events:auto;}
 .claimed{background:#3e9b8a;color:#001a17;}
 .claim-now{background:#4a88ff;color:#00142b;}
 .not-taken{background:#b34a4a;color:white;}
@@ -73,7 +64,6 @@ button{padding:9px 18px;font-size:12px;font-weight:600;border-radius:6px;border:
 </div>
 
 <div class="container">
-
 <div class="title" contenteditable="true">
 DATABASE JACKPOT PEJUANG KASINO
 </div>
@@ -170,9 +160,8 @@ lockBadge();
 function lockBadge(){
 document.querySelectorAll(".badge").forEach(btn=>{
 btn.setAttribute("contenteditable","false");
-btn.style.userSelect = "none"; /* pastikan tidak bisa diedit */
-btn.addEventListener("keydown",(e)=>{e.preventDefault();});
-btn.addEventListener("dblclick",(e)=>{e.preventDefault();});
+btn.style.userSelect = "none";
+btn.style.pointerEvents = "auto";
 });
 }
 
@@ -293,4 +282,4 @@ else{header.style.display="flex";container.style.display="block";footer.style.di
 </script>
 
 </body>
-    </html>
+</html>
