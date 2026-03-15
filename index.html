@@ -446,8 +446,6 @@ DATABASE JACKPOT PEJUANG KASINO
 
 <script>
 
-/* SCRIPT ASLI TIDAK DIUBAH */
-
 const table=document.getElementById("jackpotTable");
 const title=document.querySelector(".title");
 const addRowBtn=document.getElementById("addRow");
@@ -507,6 +505,8 @@ alert("Data berhasil disimpan!");
 
 });
 
+/* FITUR NOTIF DITAMBAHKAN DI SINI */
+
 function setupBadgeToggle(){
 
 const badges=table.querySelectorAll(".badge");
@@ -518,18 +518,26 @@ span.onclick=()=>{
 const txt=span.innerText.trim().toUpperCase();
 
 if(txt==="CLAIM NOW"){
+
+alert("Maaf jackpot tidak dapat di claim karna pengguna belum melakukan deposit.");
+
 span.innerText="CLAIMED";
 span.className="badge claimed";
+
 }
 
 else if(txt==="CLAIMED"){
+
 span.innerText="NOT TAKEN";
 span.className="badge not-taken";
+
 }
 
 else{
+
 span.innerText="CLAIM NOW";
 span.className="badge claim-now";
+
 }
 
 };
