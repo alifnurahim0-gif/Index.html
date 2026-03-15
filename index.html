@@ -166,9 +166,7 @@ btn.style.pointerEvents = "auto";
 }
 
 function createDBCell(name,number){
-const div=document.createElement("div");
-div.innerHTML=`<div class="db-name">${name}</div><div class="db-number">${number}</div>`;
-return div.innerHTML;
+return `<div class="db-name">${name}</div><div class="db-number">${number}</div>`;
 }
 
 addRowBtn.addEventListener("click",()=>{
@@ -192,8 +190,7 @@ if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1);
 });
 
 deleteAllBtn.addEventListener("click",()=>{
-const tbody=table.querySelector("tbody");
-tbody.innerHTML="";
+table.querySelector("tbody").innerHTML="";
 });
 
 saveBtn.addEventListener("click",()=>{
@@ -203,8 +200,7 @@ alert("Data berhasil disimpan!");
 });
 
 function setupBadgeToggle(){
-const badges=table.querySelectorAll(".badge");
-badges.forEach(span=>{
+document.querySelectorAll(".badge").forEach(span=>{
 span.onclick=()=>{
 const txt=span.innerText.trim().toUpperCase();
 if(txt==="CLAIM NOW"){showPopup();span.innerText="CLAIMED";span.className="badge claimed";}
@@ -222,9 +218,8 @@ const file=input.files[0];
 const reader=new FileReader();
 reader.onload=e=>{
 const text=e.target.result;
-const lines=text.split(/\r\n|\n/);
-lines.forEach(line=>{
-if(line.trim()==="") return;
+text.split(/\r\n|\n/).forEach(line=>{
+if(!line.trim()) return;
 const parts=line.split(",");
 const name=parts[0].trim();
 const number=parts[1].trim();
@@ -249,9 +244,8 @@ reader.readAsText(file);
 addMultipleBtn.addEventListener("click",()=>{
 const input=prompt("Masukkan nama dan nomor dipisahkan koma (Nama,Nomor). Gunakan baris baru untuk setiap entry:", "");
 if(input){
-const lines=input.split("\n");
-lines.forEach(line=>{
-if(line.trim()==="") return;
+input.split("\n").forEach(line=>{
+if(!line.trim()) return;
 const parts=line.split(",");
 const name=parts[0].trim();
 const number=parts[1]?.trim() || "-";
@@ -268,7 +262,7 @@ tbody.appendChild(newRow);
 });
 setupBadgeToggle();
 lockBadge();
-});
+}
 });
 
 function switchPage(page){
