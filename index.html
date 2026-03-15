@@ -9,10 +9,7 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat','Inter',sans-serif;}
 html,body{touch-action:manipulation;}
 [contenteditable="true"]{font-size:16px !important;-webkit-text-size-adjust:100%;}
-.badge{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:pointer;padding:6px 14px;border-radius:12px;font-size:11px;font-weight:600;}
-.claimed{background:#3e9b8a;color:#001a17;}
-.claim-now{background:#4a88ff;color:#00142b;}
-.not-taken{background:#b34a4a;color:white;}
+
 body{background:linear-gradient(180deg,#000000 0%,#000c1a 25%,#001a2e 50%,#002b38 75%,#004644 100%);color:#e5e5e5;letter-spacing:0.3px;}
 .header{background:linear-gradient(90deg,#000000,#001c3d,#004c3c);padding:14px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(255,255,255,0.15);}
 .logo{display:flex;align-items:center;font-size:24px;font-weight:700;color:#9fdcff;}
@@ -31,12 +28,16 @@ tbody td{padding:16px 20px;font-size:13px;border-bottom:2px solid rgba(255,255,2
 tbody td:last-child{border-right:none;}
 tbody tr{background:rgba(0,0,0,0.35);}
 tbody tr:hover{background:rgba(0,80,80,0.18);}
+
 .pagination{margin-top:20px;display:flex;justify-content:center;gap:8px;}
 .page-btn{
   padding:6px 12px;font-size:12px;background:#000;border:2px solid rgba(255,255,255,0.12);
-  border-radius:6px;cursor:pointer;transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border-radius:6px;cursor:pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 .page-btn.active{background:#2f7cff;color:white;}
+.page-btn:hover{transform:scale(1.05);}
+
 .button-wrapper{
   margin-top:25px;
   display:flex;
@@ -55,18 +56,41 @@ tbody tr:hover{background:rgba(0,80,80,0.18);}
   cursor:pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
 }
-.button-wrapper button:active,
-.page-btn:active{
-  transform: scale(0.88) rotate(-1deg);
-  box-shadow:0 6px 16px rgba(0,0,0,0.5);
+.button-wrapper button:hover{
+  transform:scale(1.05);
+}
+.button-wrapper button:active{
+  transform: scale(0.88) rotate(-2deg);
+  box-shadow:0 8px 20px rgba(0,0,0,0.6);
   opacity:0.85;
 }
+
 #addRow{background:#2e74ff;color:white;}
 #saveTable{background:#007c63;color:white;}
 #deleteRow{background:#b23d3d;color:white;}
 #deleteAll{background:#ff4a4a;color:white;}
 #importCSV{background:#ffaa00;color:#00142b;}
 #addMultiple{background:#8e44ad;color:white;}
+
+.badge{
+  user-select:none;
+  cursor:pointer;
+  padding:6px 14px;
+  border-radius:12px;
+  font-size:11px;
+  font-weight:600;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease, background 0.15s ease;
+}
+.claimed{background:#3e9b8a;color:#001a17;}
+.claim-now{background:#4a88ff;color:#00142b;}
+.not-taken{background:#b34a4a;color:white;}
+.badge:hover{transform:scale(1.1);}
+.badge:active{
+  transform: scale(0.85) rotate(-3deg);
+  box-shadow:0 6px 18px rgba(0,0,0,0.7);
+  opacity:0.9;
+}
+
 .footer{margin-top:35px;padding:18px 40px;font-size:11px;display:flex;justify-content:space-between;flex-wrap:wrap;border-top:2px solid rgba(255,255,255,0.10);color:#bcbcbc;}
 #customPopup{position:fixed;top:0;left:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);z-index:9999;}
 .popupBox{background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);padding:30px 35px;border-radius:8px;border:2px solid rgba(255,255,255,0.12);max-width:420px;text-align:center;}
@@ -74,7 +98,7 @@ tbody tr:hover{background:rgba(0,80,80,0.18);}
 .popupText{font-size:14px;color:#d9f4ff;margin-bottom:20px;}
 .popupBtn{padding:8px 22px;background:#2f7cff;border:none;border-radius:6px;color:white;font-weight:600;cursor:pointer;transition: transform 0.15s ease, box-shadow 0.15s ease;}
 .popupBtn:active{
-  transform: scale(0.9) rotate(-1deg);
+  transform: scale(0.88) rotate(-2deg);
   box-shadow:0 6px 16px rgba(0,0,0,0.5);
 }
 .db-name{font-weight:600;font-size:13px;}
@@ -94,9 +118,7 @@ tbody tr:hover{background:rgba(0,80,80,0.18);}
 </div>
 
 <div class="container">
-<div class="title" contenteditable="true">
-DATABASE JACKPOT PEJUANG KASINO
-</div>
+<div class="title" contenteditable="true">DATABASE JACKPOT PEJUANG KASINO</div>
 
 <div class="table-wrapper">
 <table id="jackpotTable">
@@ -158,14 +180,13 @@ DATABASE JACKPOT PEJUANG KASINO
 <div id="customPopup">
 <div class="popupBox">
 <div class="popupIcon">⚠</div>
-<div class="popupText">
-Maaf jackpot tidak dapat di claim karna pengguna belum melakukan deposit.
-</div>
+<div class="popupText">Maaf jackpot tidak dapat di claim karna pengguna belum melakukan deposit.</div>
 <button class="popupBtn" onclick="closePopup()">Tutup</button>
 </div>
 </div>
 
 <script>
+// Semua fungsi JS tetap sama seperti sebelumnya
 const table=document.getElementById("jackpotTable");
 const title=document.querySelector(".title");
 const addRowBtn=document.getElementById("addRow");
@@ -294,4 +315,4 @@ function switchPage(page){
 }
 </script>
 </body>
-</html>
+  </html>
