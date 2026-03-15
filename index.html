@@ -11,7 +11,7 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat','Inter',sans-serif;}
 html,body{touch-action:manipulation;}
 [contenteditable="true"]{font-size:16px !important;-webkit-text-size-adjust:100%;}
-.badge{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:pointer;}
+.badge{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:pointer;padding:6px 14px;border-radius:12px;font-size:11px;font-weight:600;}
 body{background:linear-gradient(180deg,#000000 0%,#000c1a 25%,#001a2e 50%,#002b38 75%,#004644 100%);color:#e5e5e5;letter-spacing:0.3px;}
 .header{background:linear-gradient(90deg,#000000,#001c3d,#004c3c);padding:14px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(255,255,255,0.15);}
 .logo{display:flex;align-items:center;font-size:24px;font-weight:700;color:#9fdcff;}
@@ -30,7 +30,6 @@ tbody td{padding:16px 20px;font-size:13px;border-bottom:2px solid rgba(255,255,2
 tbody td:last-child{border-right:none;}
 tbody tr{background:rgba(0,0,0,0.35);}
 tbody tr:hover{background:rgba(0,80,80,0.18);}
-.badge{padding:6px 14px;border-radius:12px;font-size:11px;font-weight:600;}
 .claimed{background:#3e9b8a;color:#001a17;}
 .claim-now{background:#4a88ff;color:#00142b;}
 .not-taken{background:#b34a4a;color:white;}
@@ -42,7 +41,6 @@ button{padding:9px 18px;font-size:12px;font-weight:600;border-radius:6px;border:
 #addRow{background:#2e74ff;color:white;}
 #saveTable{background:#007c63;color:white;}
 #deleteRow{background:#b23d3d;color:white;}
-#csvImport{background:#ffa500;color:#001; border:none; border-radius:6px; padding:8px 16px; cursor:pointer; font-weight:600;}
 .footer{margin-top:35px;padding:18px 40px;font-size:11px;display:flex;justify-content:space-between;flex-wrap:wrap;border-top:2px solid rgba(255,255,255,0.10);color:#bcbcbc;}
 #customPopup{position:fixed;top:0;left:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);z-index:9999;}
 .popupBox{background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);padding:30px 35px;border-radius:8px;border:2px solid rgba(255,255,255,0.12);max-width:420px;text-align:center;}
@@ -51,6 +49,7 @@ button{padding:9px 18px;font-size:12px;font-weight:600;border-radius:6px;border:
 .popupBtn{padding:8px 22px;background:#2f7cff;border:none;border-radius:6px;color:white;font-weight:600;cursor:pointer;}
 </style>
 </head>
+
 <body>
 
 <div class="header">
@@ -64,11 +63,11 @@ button{padding:9px 18px;font-size:12px;font-weight:600;border-radius:6px;border:
 </div>
 
 <div class="container">
-
 <div class="title" contenteditable="true">DATABASE JACKPOT PEJUANG KASINO</div>
 
-<div class="table-wrapper">
+<input type="file" id="csvInput" accept=".csv" style="margin-bottom:15px;">
 
+<div class="table-wrapper">
 <table id="jackpotTable">
 <thead>
 <tr>
@@ -107,7 +106,6 @@ button{padding:9px 18px;font-size:12px;font-weight:600;border-radius:6px;border:
 <button id="addRow">Tambah Baris</button>
 <button id="deleteRow">Hapus Baris</button>
 <button id="saveTable">Save</button>
-<input type="file" id="csvInput" accept=".csv" />
 </div>
 
 </div>
@@ -121,7 +119,9 @@ button{padding:9px 18px;font-size:12px;font-weight:600;border-radius:6px;border:
 <div id="customPopup">
 <div class="popupBox">
 <div class="popupIcon">⚠</div>
-<div class="popupText">Maaf jackpot tidak dapat di claim karna pengguna belum melakukan deposit.</div>
+<div class="popupText">
+Maaf jackpot tidak dapat di claim karna pengguna belum melakukan deposit.
+</div>
 <button class="popupBtn" onclick="closePopup()">Tutup</button>
 </div>
 </div>
@@ -150,8 +150,29 @@ window.onload=function(){
 function lockBadge(){
   document.querySelectorAll(".badge").forEach(btn=>{
     btn.setAttribute("contenteditable","false");
-    btn.addEventListener("keydown",e=>{e.preventDefault();});
-    btn.addEventListener("dblclick",e=>{e.preventDefault();});
+    btn.addEventListener("keydown",(e)=>{e.preventDefault();});
+    btn.addEventListener("dblclick",(e)=>{e.preventDefault();});
+  });
+}
+
+function setupBadgeToggle(){
+  const badges=table.querySelectorAll(".badge");
+  badges.forEach(span=>{
+    span.onclick=()=>{
+      const txt=span.innerText.trim().toUpperCase();
+      if(txt==="CLAIM NOW"){showPopup();span.innerText="CLAIMED";span.className="badge claimed";}
+      else if(txt==="CLAIMED"){span.innerText="NOT TAKEN";span.className="badge not-taken";}
+      else{span.innerText="CLAIM NOW";span.className="badge claim-now";}
+    };
+  });
+}
+
+function setupPhoneClick(){
+  table.querySelectorAll("tbody td:nth-child(3)").forEach(td=>{
+    td.style.cursor="pointer";
+    td.onclick=()=>{ 
+      if(td.innerText!=="-") window.open("https://wa.me/"+td.innerText.replace(/[^0-9]/g,'')); 
+    };
   });
 }
 
@@ -181,29 +202,7 @@ saveBtn.addEventListener("click",()=>{
   alert("Data berhasil disimpan!");
 });
 
-function setupBadgeToggle(){
-  const badges=table.querySelectorAll(".badge");
-  badges.forEach(span=>{
-    span.onclick=()=>{
-      const txt=span.innerText.trim().toUpperCase();
-      if(txt==="CLAIM NOW"){showPopup();span.innerText="CLAIMED";}
-      else if(txt==="CLAIMED"){span.innerText="NOT TAKEN";}
-      else{span.innerText="CLAIM NOW";}
-    };
-  });
-}
-
-function setupPhoneClick(){
-  const tds=table.querySelectorAll("tbody td:nth-child(3)");
-  tds.forEach(td=>{
-    td.style.cursor="pointer";
-    td.onclick=()=>{ 
-      if(td.innerText.trim()!=="-") window.open("https://wa.me/"+td.innerText.replace(/[^0-9]/g,""),"_blank");
-    };
-  });
-}
-
-// CSV Import Feature
+// CSV Import
 csvInput.addEventListener("change",()=>{
   const file=csvInput.files[0];
   if(!file) return alert("Pilih file CSV terlebih dahulu!");
@@ -214,13 +213,16 @@ csvInput.addEventListener("change",()=>{
     lines.forEach(line=>{
       const cols=line.split(",");
       if(cols.length>=1){ 
+        const phone=cols[0] || "-";
+        const game=cols[1] || "New Game";
+        const reward=cols[2] || "VIP";
         const tbody=table.querySelector("tbody");
         const newRow=document.createElement("tr");
         newRow.innerHTML=`
-          <td contenteditable="true">${cols[0]||"New Game"}</td>
+          <td contenteditable="true">${game}</td>
           <td contenteditable="true">PENDING</td>
-          <td contenteditable="true">${cols[1]||"-"}</td>
-          <td contenteditable="true">${cols[2]||"VIP"}</td>
+          <td contenteditable="true">${phone}</td>
+          <td contenteditable="true">${reward}</td>
           <td><span class="badge claim-now">CLAIM NOW</span></td>`;
         tbody.appendChild(newRow);
       }
@@ -242,7 +244,7 @@ function switchPage(page){
     container.style.display="none";
     footer.style.display="none";
     page2.style.display="block";
-  }else{
+  } else {
     header.style.display="flex";
     container.style.display="block";
     footer.style.display="flex";
@@ -250,6 +252,5 @@ function switchPage(page){
   }
 }
 </script>
-
 </body>
-</html>
+  </html>
