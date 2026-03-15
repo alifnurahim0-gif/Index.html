@@ -41,21 +41,38 @@ button{padding:9px 18px;font-size:12px;font-weight:600;border-radius:6px;border:
 button:hover{transform:scale(1.05);}
 button:active{transform:scale(0.88) rotate(-2deg);box-shadow:0 8px 20px rgba(0,0,0,0.6);opacity:0.85;}
 .footer{margin-top:35px;padding:18px 40px;font-size:11px;display:flex;justify-content:space-between;flex-wrap:wrap;border-top:2px solid rgba(255,255,255,0.10);color:#bcbcbc;}
-#customPopup{position:fixed;top:0;left:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);z-index:9999;}
-.popupBox{background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);padding:30px 35px;border-radius:8px;border:2px solid rgba(255,255,255,0.12);max-width:420px;text-align:center;}
-.popupIcon{font-size:40px;margin-bottom:12px;}
-.popupText{font-size:14px;color:#d9f4ff;margin-bottom:20px;}
-.popupBtn{padding:8px 22px;background:#2f7cff;border:none;border-radius:6px;color:white;font-weight:600;cursor:pointer;transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;}
-.popupBtn:hover{transform:scale(1.05);}
-.popupBtn:active{transform:scale(0.88) rotate(-2deg);box-shadow:0 8px 20px rgba(0,0,0,0.6);opacity:0.85;}
-.db-name{font-weight:600;font-size:13px;}
-.db-number{font-size:13px;margin-top:2px;cursor:pointer;color:#4a88ff;}
 .badge{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:pointer;padding:6px 14px;border-radius:12px;font-size:11px;font-weight:600;transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease, background 0.15s ease;}
 .claimed{background:#3e9b8a;color:#001a17;}
 .claim-now{background:#4a88ff;color:#00142b;}
 .not-taken{background:#b34a4a;color:white;}
 .badge:hover{transform:scale(1.1);}
 .badge:active{transform:scale(0.85) rotate(-3deg);box-shadow:0 6px 18px rgba(0,0,0,0.7);opacity:0.9;}
+.db-name{font-weight:600;font-size:13px;}
+.db-number{font-size:13px;margin-top:2px;cursor:pointer;color:#4a88ff;}
+/* NOTIFIKASI MODERN DALAM WEB */
+.web-notification{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:linear-gradient(180deg,#001421,#00383a);
+    color:#d9f4ff;
+    padding:14px 20px;
+    border-radius:10px;
+    border:2px solid rgba(255,255,255,0.12);
+    box-shadow:0 8px 24px rgba(0,0,0,0.6);
+    font-size:14px;
+    font-weight:600;
+    opacity:0;
+    transform:translateY(40px);
+    pointer-events:none;
+    transition:all 0.35s ease;
+    z-index:9999;
+}
+.web-notification.show{
+    opacity:1;
+    transform:translateY(0px);
+    pointer-events:auto;
+}
 </style>
 </head>
 <body>
@@ -132,15 +149,8 @@ DATABASE JACKPOT PEJUANG KASINO
 <div>Privacy Policy | Terms of Service</div>
 </div>
 
-<div id="customPopup">
-<div class="popupBox">
-<div class="popupIcon">⚠</div>
-<div class="popupText">
-Maaf jackpot tidak dapat di claim karna pengguna belum melakukan deposit.
-</div>
-<button class="popupBtn" onclick="closePopup()">Tutup</button>
-</div>
-</div>
+<!-- NOTIFIKASI DALAM WEB -->
+<div id="webNotification" class="web-notification"></div>
 
 <script>
 const table=document.getElementById("jackpotTable");
@@ -151,9 +161,13 @@ const deleteAllBtn=document.getElementById("deleteAll");
 const saveBtn=document.getElementById("saveTable");
 const importCSVBtn=document.getElementById("importCSV");
 const addMultipleBtn=document.getElementById("addMultiple");
+const notification=document.getElementById("webNotification");
 
-function showPopup(){document.getElementById("customPopup").style.display="flex";}
-function closePopup(){document.getElementById("customPopup").style.display="none";}
+function showNotification(msg){
+    notification.innerText = msg;
+    notification.classList.add("show");
+    setTimeout(()=>{notification.classList.remove("show");},3000);
+}
 
 // Fungsi memisahkan nama dan nomor otomatis
 function splitNameNumber(input){
@@ -181,25 +195,28 @@ addRowBtn.addEventListener("click", ()=>{
     `;
     tbody.appendChild(newRow);
     setupBadgeToggle();
+    showNotification("Baris baru berhasil ditambahkan!");
 });
 
 // Tombol Hapus Baris
 deleteRowBtn.addEventListener("click", ()=>{
     const tbody=table.querySelector("tbody");
-    if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1);
+    if(tbody.rows.length>0){tbody.deleteRow(tbody.rows.length-1); showNotification("Baris terakhir dihapus!");}
+    else showNotification("Tidak ada baris untuk dihapus!");
 });
 
 // Tombol Hapus Semua
 deleteAllBtn.addEventListener("click", ()=>{
     const tbody=table.querySelector("tbody");
     tbody.innerHTML="";
+    showNotification("Semua baris berhasil dihapus!");
 });
 
 // Tombol Save
 saveBtn.addEventListener("click", ()=>{
     localStorage.setItem("savedTableData",table.querySelector("tbody").innerHTML);
     localStorage.setItem("savedTitle",title.innerText);
-    alert("Data berhasil disimpan!");
+    showNotification("Data berhasil disimpan!");
 });
 
 // Masukkan Banyak Nomor
@@ -220,6 +237,7 @@ addMultipleBtn.addEventListener("click", ()=>{
         tbody.appendChild(newRow);
     });
     setupBadgeToggle();
+    showNotification("Nomor berhasil ditambahkan!");
 });
 
 // Import CSV
@@ -244,6 +262,7 @@ importCSVBtn.addEventListener("click", ()=>{
                 tbody.appendChild(newRow);
             });
             setupBadgeToggle();
+            showNotification("CSV berhasil diimport!");
         };
         reader.readAsText(file);
     };
@@ -254,9 +273,9 @@ function setupBadgeToggle(){
     document.querySelectorAll(".badge").forEach(span=>{
         span.onclick=()=>{
             const txt=span.innerText.trim().toUpperCase();
-            if(txt==="CLAIM NOW"){showPopup();span.innerText="CLAIMED";span.className="badge claimed";}
-            else if(txt==="CLAIMED"){span.innerText="NOT TAKEN";span.className="badge not-taken";}
-            else{span.innerText="CLAIM NOW";span.className="badge claim-now";}
+            if(txt==="CLAIM NOW"){showNotification("Pengguna belum deposit!"); span.innerText="CLAIMED"; span.className="badge claimed";}
+            else if(txt==="CLAIMED"){span.innerText="NOT TAKEN"; span.className="badge not-taken";}
+            else{span.innerText="CLAIM NOW"; span.className="badge claim-now";}
         };
     });
 }
