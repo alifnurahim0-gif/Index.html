@@ -226,7 +226,7 @@ importCSVBtn.addEventListener("click",()=>{
         if(!line.trim()) return;
         const parts=line.split(",");
         const name=parts[0].trim();
-        const number=parts[1].trim();
+        const number=parts[1]?.trim() || "-";
         const tbody=table.querySelector("tbody");
         const newRow=document.createElement("tr");
         newRow.innerHTML=`
@@ -259,7 +259,10 @@ addMultipleBtn.addEventListener("click",()=>{
       newRow.innerHTML=`
         <td contenteditable="true">PG/PRAGMATIC</td>
         <td contenteditable="true">PENDING</td>
-        <td contenteditable="true">${createDBCell(name,number)}</td>
+        <td contenteditable="true">
+          <div class="db-name">${name}</div>
+          <div class="db-number">${number}</div>
+        </td>
         <td contenteditable="true">VIP</td>
         <td><span class="badge claim-now">CLAIM NOW</span></td>
       `;
