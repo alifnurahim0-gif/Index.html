@@ -182,13 +182,13 @@ function lockBadge(){
   });
 }
 
-addRowBtn.addEventListener("click",()=>{
+function addNewRow(name="-",number="-"){
   const tbody=table.querySelector("tbody");
   const newRow=document.createElement("tr");
   newRow.innerHTML=`
     <td contenteditable="true">PG/PRAGMATIC</td>
-    <td contenteditable="true">Status</td>
-    <td contenteditable="true">${createDBCell("Nama","-")}</td>
+    <td contenteditable="true">PENDING</td>
+    <td contenteditable="true">${createDBCell(name,number)}</td>
     <td contenteditable="true">VIP</td>
     <td><span class="badge claim-now">CLAIM NOW</span></td>
   `;
@@ -196,24 +196,19 @@ addRowBtn.addEventListener("click",()=>{
   setupBadgeToggle();
   lockBadge();
   setupNumberClick();
-});
+}
 
+addRowBtn.addEventListener("click",()=>{addNewRow();});
 deleteRowBtn.addEventListener("click",()=>{
   const tbody=table.querySelector("tbody");
   if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1);
 });
-
-deleteAllBtn.addEventListener("click",()=>{
-  const tbody=table.querySelector("tbody");
-  tbody.innerHTML="";
-});
-
+deleteAllBtn.addEventListener("click",()=>{table.querySelector("tbody").innerHTML="";});
 saveBtn.addEventListener("click",()=>{
   localStorage.setItem("savedTableData",table.querySelector("tbody").innerHTML);
   localStorage.setItem("savedTitle",title.innerText);
   alert("Data berhasil disimpan!");
 });
-
 importCSVBtn.addEventListener("click",()=>{
   const input=document.createElement("input");
   input.type="file"; input.accept=".csv"; input.click();
@@ -221,59 +216,23 @@ importCSVBtn.addEventListener("click",()=>{
     const file=input.files[0];
     const reader=new FileReader();
     reader.onload=e=>{
-      const lines=e.target.result.split(/\r\n|\n/);
-      lines.forEach(line=>{
+      e.target.result.split(/\r\n|\n/).forEach(line=>{
         if(!line.trim()) return;
         const parts=line.split(",");
-        const name=parts[0].trim();
-        const number=parts[1]?.trim() || "-";
-        const tbody=table.querySelector("tbody");
-        const newRow=document.createElement("tr");
-        newRow.innerHTML=`
-          <td contenteditable="true">PG/PRAGMATIC</td>
-          <td contenteditable="true">PENDING</td>
-          <td contenteditable="true">${createDBCell(name,number)}</td>
-          <td contenteditable="true">VIP</td>
-          <td><span class="badge claim-now">CLAIM NOW</span></td>
-        `;
-        tbody.appendChild(newRow);
+        addNewRow(parts[0].trim(),parts[1]?.trim() || "-");
       });
-      setupBadgeToggle();
-      lockBadge();
-      setupNumberClick();
     };
     reader.readAsText(file);
   };
 });
-
 addMultipleBtn.addEventListener("click",()=>{
   const input=prompt("Masukkan nama dan nomor dipisahkan koma (Nama,Nomor). Gunakan baris baru untuk setiap entry:", "");
-  if(input){
-    input.split("\n").forEach(line=>{
-      if(!line.trim()) return;
-      const parts=line.split(",");
-      const name=parts[0].trim();
-      const number=parts[1]?.trim() || "-";
-      const tbody=table.querySelector("tbody");
-      const newRow=document.createElement("tr");
-      newRow.innerHTML=`
-        <td contenteditable="true">PG/PRAGMATIC</td>
-        <td contenteditable="true">PENDING</td>
-        <td contenteditable="true">
-          <div class="db-name">${name}</div>
-          <div class="db-number">${number}</div>
-        </td>
-        <td contenteditable="true">VIP</td>
-        <td><span class="badge claim-now">CLAIM NOW</span></td>
-      `;
-      tbody.appendChild(newRow);
-    });
-    setupBadgeToggle();
-    lockBadge();
-    setupNumberClick();
-  }
+  if(input) input.split("\n").forEach(line=>{
+    if(!line.trim()) return;
+    const parts=line.split(",");
+    addNewRow(parts[0].trim(),parts[1]?.trim() || "-");
+  });
 });
-
 window.onload=function(){
   const savedTable=localStorage.getItem("savedTableData");
   const savedTitle=localStorage.getItem("savedTitle");
@@ -283,7 +242,6 @@ window.onload=function(){
   lockBadge();
   setupNumberClick();
 };
-
 function switchPage(page){
   const header=document.querySelector(".header");
   const container=document.querySelector(".container");
@@ -293,6 +251,5 @@ function switchPage(page){
   else{header.style.display="flex";container.style.display="block";footer.style.display="flex";page2.style.display="none";}
 }
 </script>
-
 </body>
 </html>
