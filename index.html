@@ -1,3 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Database Jackpot Pejuang Kasino</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat','Inter',sans-serif;}
+html,body{touch-action:manipulation;}
+[contenteditable="true"]{font-size:16px !important;-webkit-text-size-adjust:100%;}
+.badge{
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
+  cursor:pointer;
+  padding:6px 14px;
+  border-radius:12px;
+  font-size:11px;
+  font-weight:600;
+  pointer-events: auto; /* supaya bisa diklik */
+}
+.claimed{background:#3e9b8a;color:#001a17;}
+.claim-now{background:#4a88ff;color:#00142b;}
+.not-taken{background:#b34a4a;color:white;}
+body{background:linear-gradient(180deg,#000000 0%,#000c1a 25%,#001a2e 50%,#002b38 75%,#004644 100%);color:#e5e5e5;letter-spacing:0.3px;}
+.header{background:linear-gradient(90deg,#000000,#001c3d,#004c3c);padding:14px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(255,255,255,0.15);}
+.logo{display:flex;align-items:center;font-size:24px;font-weight:700;color:#9fdcff;}
+.logo span{margin-left:10px;}
+.nav{display:flex;gap:24px;flex-wrap:wrap;}
+.nav a{color:#d4d4d4;text-decoration:none;font-size:13px;font-weight:500;}
+.nav a:hover{color:#ffffff;}
+.container{padding:40px 20px;}
+.title{font-size:24px;margin-bottom:25px;font-weight:700;color:#9fdcff;cursor:text;}
+.table-wrapper{background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);padding:25px;border-radius:8px;border:2px solid rgba(255,255,255,0.10);overflow-x:auto;}
+table{width:100%;min-width:750px;border-collapse:collapse;border:2px solid rgba(255,255,255,0.15);}
+thead{background:rgba(0,0,0,0.55);}
+thead th{padding:16px 20px;font-size:13px;font-weight:600;text-align:left;color:#aee4ff;border-bottom:2px solid rgba(255,255,255,0.18);border-right:2px solid rgba(255,255,255,0.15);}
+thead th:last-child{border-right:none;}
+tbody td{padding:16px 20px;font-size:13px;border-bottom:2px solid rgba(255,255,255,0.12);border-right:2px solid rgba(255,255,255,0.12);}
+tbody td:last-child{border-right:none;}
+tbody tr{background:rgba(0,0,0,0.35);}
+tbody tr:hover{background:rgba(0,80,80,0.18);}
+.pagination{margin-top:20px;display:flex;justify-content:center;gap:8px;}
+.page-btn{padding:6px 12px;font-size:12px;background:#000000;border:2px solid rgba(255,255,255,0.12);border-radius:6px;cursor:pointer;}
+.page-btn.active{background:#2f7cff;color:white;}
+.button-wrapper{margin-top:25px;display:flex;gap:10px;justify-content:flex-end;}
+button{padding:9px 18px;font-size:12px;font-weight:600;border-radius:6px;border:2px solid rgba(255,255,255,0.10);cursor:pointer;}
+#addRow{background:#2e74ff;color:white;}
+#saveTable{background:#007c63;color:white;}
+#deleteRow{background:#b23d3d;color:white;}
+#deleteAll{background:#ff4a4a;color:white;}
+.footer{margin-top:35px;padding:18px 40px;font-size:11px;display:flex;justify-content:space-between;flex-wrap:wrap;border-top:2px solid rgba(255,255,255,0.10);color:#bcbcbc;}
+#customPopup{position:fixed;top:0;left:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);z-index:9999;}
+.popupBox{background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);padding:30px 35px;border-radius:8px;border:2px solid rgba(255,255,255,0.12);max-width:420px;text-align:center;}
+.popupIcon{font-size:40px;margin-bottom:12px;}
+.popupText{font-size:14px;color:#d9f4ff;margin-bottom:20px;}
+.popupBtn{padding:8px 22px;background:#2f7cff;border:none;border-radius:6px;color:white;font-weight:600;cursor:pointer;}
+.db-name{font-weight:600;font-size:13px;}
+.db-number{font-size:13px;margin-top:2px;}
+</style>
+</head>
+<body>
+
+<div class="header">
+<div class="logo">👑 <span>PEJUANG KASINO</span></div>
+<div class="nav">
+<a href="#">Home</a>
+<a href="#">Games</a>
+<a href="#">Promotions</a>
+<a href="#"><b>Jackpot Database</b></a>
+</div>
+</div>
+
+<div class="container">
+
+<div class="title" contenteditable="true">
+DATABASE JACKPOT PEJUANG KASINO
+</div>
+
+<div class="table-wrapper">
+<table id="jackpotTable">
+<thead>
+<tr>
+<th contenteditable="true">Game</th>
+<th contenteditable="true">Status</th>
+<th contenteditable="true">DATABASE</th>
+<th contenteditable="true">Reward</th>
+<th>Keterangan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td contenteditable="true">PG/PRAGMATIC</td>
+<td contenteditable="true">DONE</td>
+<td contenteditable="true">
+<div class="db-name">Nama</div>
+<div class="db-number">857-4716-6188</div>
+</td>
+<td contenteditable="true">VIP</td>
+<td><span class="badge claim-now">CLAIM NOW</span></td>
+</tr>
+<tr>
+<td contenteditable="true">PG/PRAGMATIC</td>
+<td contenteditable="true">PENDING</td>
+<td contenteditable="true">
+<div class="db-name">Nama</div>
+<div class="db-number">-</div>
+</td>
+<td contenteditable="true">VIP</td>
+<td><span class="badge claim-now">CLAIM NOW</span></td>
+</tr>
+</tbody>
+</table>
+
+<div class="pagination">
+<div class="page-btn active">1</div>
+<div class="page-btn" onclick="switchPage(2)">2</div>
+<div class="page-btn">Next</div>
+</div>
+
+<div class="button-wrapper">
+<button id="addRow">Tambah Baris</button>
+<button id="deleteRow">Hapus Baris</button>
+<button id="deleteAll">Hapus Semua</button>
+<button id="saveTable">Save</button>
+<button id="importCSV">Import CSV</button>
+<button id="addMultiple">Masukkan Nomor Banyak</button>
+</div>
+</div>
+</div>
+
+<div class="footer">
+<div>© 2024 Pejuang Kasino, All rights reserved.</div>
+<div>Privacy Policy | Terms of Service</div>
+</div>
+
+<div id="customPopup">
+<div class="popupBox">
+<div class="popupIcon">⚠</div>
+<div class="popupText">
+Maaf jackpot tidak dapat di claim karna pengguna belum melakukan deposit.
+</div>
+<button class="popupBtn" onclick="closePopup()">Tutup</button>
+</div>
+</div>
+
 <script>
 const table=document.getElementById("jackpotTable");
 const title=document.querySelector(".title");
@@ -12,151 +159,138 @@ function showPopup(){document.getElementById("customPopup").style.display="flex"
 function closePopup(){document.getElementById("customPopup").style.display="none";}
 
 window.onload=function(){
-    const savedTable=localStorage.getItem("savedTableData");
-    const savedTitle=localStorage.getItem("savedTitle");
-    if(savedTable) table.querySelector("tbody").innerHTML=savedTable;
-    if(savedTitle) title.innerText=savedTitle;
-    setupBadgeToggle();
-    lockBadge();
+const savedTable=localStorage.getItem("savedTableData");
+const savedTitle=localStorage.getItem("savedTitle");
+if(savedTable) table.querySelector("tbody").innerHTML=savedTable;
+if(savedTitle) title.innerText=savedTitle;
+setupBadgeToggle();
+lockBadge();
 };
 
 function lockBadge(){
-    document.querySelectorAll(".badge").forEach(btn=>{
-        btn.setAttribute("contenteditable","false");
-        btn.addEventListener("keydown",(e)=>{e.preventDefault();});
-        btn.addEventListener("dblclick",(e)=>{e.preventDefault();});
-    });
+document.querySelectorAll(".badge").forEach(btn=>{
+btn.setAttribute("contenteditable","false");
+btn.style.userSelect = "none"; /* pastikan tidak bisa diedit */
+btn.addEventListener("keydown",(e)=>{e.preventDefault();});
+btn.addEventListener("dblclick",(e)=>{e.preventDefault();});
+});
 }
 
 function createDBCell(name,number){
-    return `<div class="db-name">${name}</div><div class="db-number">${number}</div>`;
+const div=document.createElement("div");
+div.innerHTML=`<div class="db-name">${name}</div><div class="db-number">${number}</div>`;
+return div.innerHTML;
 }
 
-// Tambah Baris
 addRowBtn.addEventListener("click",()=>{
-    const tbody=table.querySelector("tbody");
-    const newRow=document.createElement("tr");
-    newRow.innerHTML=`
-    <td contenteditable="true">PG/PRAGMATIC</td>
-    <td contenteditable="true">Status</td>
-    <td contenteditable="true">${createDBCell("Nama","-")}</td>
-    <td contenteditable="true">VIP</td>
-    <td><span class="badge claim-now">CLAIM NOW</span></td>
-    `;
-    tbody.appendChild(newRow);
-    setupBadgeToggle();
-    lockBadge();
+const tbody=table.querySelector("tbody");
+const newRow=document.createElement("tr");
+newRow.innerHTML=`
+<td contenteditable="true">PG/PRAGMATIC</td>
+<td contenteditable="true">Status</td>
+<td contenteditable="true">${createDBCell("Nama","-")}</td>
+<td contenteditable="true">VIP</td>
+<td><span class="badge claim-now">CLAIM NOW</span></td>
+`;
+tbody.appendChild(newRow);
+setupBadgeToggle();
+lockBadge();
 });
 
-// Hapus Baris
 deleteRowBtn.addEventListener("click",()=>{
-    const tbody=table.querySelector("tbody");
-    if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1);
+const tbody=table.querySelector("tbody");
+if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1);
 });
 
-// Hapus Semua Baris
 deleteAllBtn.addEventListener("click",()=>{
-    const tbody=table.querySelector("tbody");
-    tbody.innerHTML="";
+const tbody=table.querySelector("tbody");
+tbody.innerHTML="";
 });
 
-// Save Table
 saveBtn.addEventListener("click",()=>{
-    localStorage.setItem("savedTableData",table.querySelector("tbody").innerHTML);
-    localStorage.setItem("savedTitle",title.innerText);
-    alert("Data berhasil disimpan!");
+localStorage.setItem("savedTableData",table.querySelector("tbody").innerHTML);
+localStorage.setItem("savedTitle",title.innerText);
+alert("Data berhasil disimpan!");
 });
 
-// Toggle Badge
 function setupBadgeToggle(){
-    const badges=table.querySelectorAll(".badge");
-    badges.forEach(span=>{
-        span.onclick=()=>{
-            const txt=span.innerText.trim().toUpperCase();
-            if(txt==="CLAIM NOW"){showPopup();span.innerText="CLAIMED";span.className="badge claimed";}
-            else if(txt==="CLAIMED"){span.innerText="NOT TAKEN";span.className="badge not-taken";}
-            else{span.innerText="CLAIM NOW";span.className="badge claim-now";}
-        };
-    });
+const badges=table.querySelectorAll(".badge");
+badges.forEach(span=>{
+span.onclick=()=>{
+const txt=span.innerText.trim().toUpperCase();
+if(txt==="CLAIM NOW"){showPopup();span.innerText="CLAIMED";span.className="badge claimed";}
+else if(txt==="CLAIMED"){span.innerText="NOT TAKEN";span.className="badge not-taken";}
+else{span.innerText="CLAIM NOW";span.className="badge claim-now";}
+};
+});
 }
 
-// Import CSV
 importCSVBtn.addEventListener("click",()=>{
-    const input=document.createElement("input");
-    input.type="file"; input.accept=".csv"; input.click();
-    input.onchange=()=>{
-        const file=input.files[0];
-        const reader=new FileReader();
-        reader.onload=e=>{
-            const text=e.target.result;
-            const lines=text.split(/\r\n|\n/);
-            lines.forEach(line=>{
-                if(line.trim()==="") return;
-                const parts=line.split(",");
-                const name=parts[0]?.trim()||"Nama";
-                const number=parts[1]?.trim()||"-";
-                const tbody=table.querySelector("tbody");
-                const newRow=document.createElement("tr");
-                newRow.innerHTML=`
-                <td contenteditable="true">PG/PRAGMATIC</td>
-                <td contenteditable="true">PENDING</td>
-                <td contenteditable="true">${createDBCell(name,number)}</td>
-                <td contenteditable="true">VIP</td>
-                <td><span class="badge claim-now">CLAIM NOW</span></td>
-                `;
-                tbody.appendChild(newRow);
-            });
-            setupBadgeToggle();
-            lockBadge();
-        };
-        reader.readAsText(file);
-    };
+const input=document.createElement("input");
+input.type="file"; input.accept=".csv"; input.click();
+input.onchange=()=>{
+const file=input.files[0];
+const reader=new FileReader();
+reader.onload=e=>{
+const text=e.target.result;
+const lines=text.split(/\r\n|\n/);
+lines.forEach(line=>{
+if(line.trim()==="") return;
+const parts=line.split(",");
+const name=parts[0].trim();
+const number=parts[1].trim();
+const tbody=table.querySelector("tbody");
+const newRow=document.createElement("tr");
+newRow.innerHTML=`
+<td contenteditable="true">PG/PRAGMATIC</td>
+<td contenteditable="true">PENDING</td>
+<td contenteditable="true">${createDBCell(name,number)}</td>
+<td contenteditable="true">VIP</td>
+<td><span class="badge claim-now">CLAIM NOW</span></td>
+`;
+tbody.appendChild(newRow);
+});
+setupBadgeToggle();
+lockBadge();
+};
+reader.readAsText(file);
+};
 });
 
-// Masukkan Nomor Banyak
 addMultipleBtn.addEventListener("click",()=>{
-    const input=prompt("Masukkan nama dan nomor dipisahkan koma (Nama,Nomor). Gunakan baris baru untuk setiap entry:", "");
-    if(input){
-        const lines=input.split("\n");
-        lines.forEach(line=>{
-            if(line.trim()==="") return;
-            const parts=line.split(",");
-            const name=parts[0]?.trim()||"Nama";
-            const number=parts[1]?.trim()||"-";
-            const tbody=table.querySelector("tbody");
-            const newRow=document.createElement("tr");
-            newRow.innerHTML=`
-            <td contenteditable="true">PG/PRAGMATIC</td>
-            <td contenteditable="true">PENDING</td>
-            <td contenteditable="true">${createDBCell(name,number)}</td>
-            <td contenteditable="true">VIP</td>
-            <td><span class="badge claim-now">CLAIM NOW</span></td>
-            `;
-            tbody.appendChild(newRow);
-        });
-        setupBadgeToggle();
-        lockBadge();
-    }
+const input=prompt("Masukkan nama dan nomor dipisahkan koma (Nama,Nomor). Gunakan baris baru untuk setiap entry:", "");
+if(input){
+const lines=input.split("\n");
+lines.forEach(line=>{
+if(line.trim()==="") return;
+const parts=line.split(",");
+const name=parts[0].trim();
+const number=parts[1]?.trim() || "-";
+const tbody=table.querySelector("tbody");
+const newRow=document.createElement("tr");
+newRow.innerHTML=`
+<td contenteditable="true">PG/PRAGMATIC</td>
+<td contenteditable="true">PENDING</td>
+<td contenteditable="true">${createDBCell(name,number)}</td>
+<td contenteditable="true">VIP</td>
+<td><span class="badge claim-now">CLAIM NOW</span></td>
+`;
+tbody.appendChild(newRow);
+});
+setupBadgeToggle();
+lockBadge();
+});
 });
 
-// Klik DATABASE buka WA
-table.addEventListener("click",(e)=>{
-    if(e.target.tagName==="TD" && e.target.cellIndex===2){
-        let text=e.target.innerText.replace(/\n/g," ").trim();
-        if(text && text!=="-"){
-            let number=text.split(" ").pop();
-            window.open(`https://wa.me/${number}`,"_blank");
-        }
-    }
-});
-
-// Switch Page
 function switchPage(page){
-    const header=document.querySelector(".header");
-    const container=document.querySelector(".container");
-    const footer=document.querySelector(".footer");
-    const page2=document.getElementById("page2");
-    if(page===2){header.style.display="none";container.style.display="none";footer.style.display="none";page2.style.display="block";}
-    else{header.style.display="flex";container.style.display="block";footer.style.display="flex";page2.style.display="none";}
+const header=document.querySelector(".header");
+const container=document.querySelector(".container");
+const footer=document.querySelector(".footer");
+const page2=document.getElementById("page2");
+if(page===2){header.style.display="none";container.style.display="none";footer.style.display="none";page2.style.display="block";}
+else{header.style.display="flex";container.style.display="block";footer.style.display="flex";page2.style.display="none";}
 }
-        </script>
+</script>
+
+</body>
+    </html>
