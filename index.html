@@ -32,7 +32,10 @@ tbody td:last-child{border-right:none;}
 tbody tr{background:rgba(0,0,0,0.35);}
 tbody tr:hover{background:rgba(0,80,80,0.18);}
 .pagination{margin-top:20px;display:flex;justify-content:center;gap:8px;}
-.page-btn{padding:6px 12px;font-size:12px;background:#000000;border:2px solid rgba(255,255,255,0.12);border-radius:6px;cursor:pointer;}
+.page-btn{
+  padding:6px 12px;font-size:12px;background:#000;border:2px solid rgba(255,255,255,0.12);
+  border-radius:6px;cursor:pointer;transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
 .page-btn.active{background:#2f7cff;color:white;}
 .button-wrapper{
   margin-top:25px;
@@ -50,12 +53,13 @@ tbody tr:hover{background:rgba(0,80,80,0.18);}
   border-radius:8px;
   border:2px solid rgba(255,255,255,0.12);
   cursor:pointer;
-  transition: all 0.15s ease-in-out;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
 }
-.button-wrapper button:active{
-  transform: scale(0.95);
-  box-shadow:0 4px 12px rgba(0,0,0,0.4);
-  opacity:0.9;
+.button-wrapper button:active,
+.page-btn:active{
+  transform: scale(0.88) rotate(-1deg);
+  box-shadow:0 6px 16px rgba(0,0,0,0.5);
+  opacity:0.85;
 }
 #addRow{background:#2e74ff;color:white;}
 #saveTable{background:#007c63;color:white;}
@@ -68,7 +72,11 @@ tbody tr:hover{background:rgba(0,80,80,0.18);}
 .popupBox{background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);padding:30px 35px;border-radius:8px;border:2px solid rgba(255,255,255,0.12);max-width:420px;text-align:center;}
 .popupIcon{font-size:40px;margin-bottom:12px;}
 .popupText{font-size:14px;color:#d9f4ff;margin-bottom:20px;}
-.popupBtn{padding:8px 22px;background:#2f7cff;border:none;border-radius:6px;color:white;font-weight:600;cursor:pointer;}
+.popupBtn{padding:8px 22px;background:#2f7cff;border:none;border-radius:6px;color:white;font-weight:600;cursor:pointer;transition: transform 0.15s ease, box-shadow 0.15s ease;}
+.popupBtn:active{
+  transform: scale(0.9) rotate(-1deg);
+  box-shadow:0 6px 16px rgba(0,0,0,0.5);
+}
 .db-name{font-weight:600;font-size:13px;}
 .db-number{font-size:13px;margin-top:2px;cursor:pointer;color:#4a88ff;}
 </style>
@@ -86,7 +94,6 @@ tbody tr:hover{background:rgba(0,80,80,0.18);}
 </div>
 
 <div class="container">
-
 <div class="title" contenteditable="true">
 DATABASE JACKPOT PEJUANG KASINO
 </div>
