@@ -9,10 +9,27 @@
 
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Montserrat', 'Inter', sans-serif; }
+
+/* ===== GRADASI DIPERBAIKI TANPA MENGUBAH WARNA ===== */
 body { 
-    background: linear-gradient(180deg, #000000, #001133, #003344, #009966);
+    background:
+    radial-gradient(circle at 20% 20%, rgba(0,150,120,0.25), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(0,80,200,0.25), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(0,255,170,0.15), transparent 50%),
+    linear-gradient(
+        180deg,
+        #000000 0%,
+        #000814 15%,
+        #001133 35%,
+        #002244 55%,
+        #003344 70%,
+        #006655 85%,
+        #009966 100%
+    );
+    background-attachment: fixed;
     color: #e0e0e0; 
-    font-weight:400; letter-spacing:0.5px;
+    font-weight:400; 
+    letter-spacing:0.5px;
 }
 
 .header { 
@@ -130,8 +147,6 @@ button { padding:12px 26px; font-size:14px; font-weight:600; border:none; border
     <div>Privacy Policy | Terms of Service</div>
 </div>
 
-<!-- ================= PAGE 2 TAMBAHAN ================= -->
-
 <div id="page2" style="display:none; min-height:100vh; background:linear-gradient(180deg,#000000,#0033cc,#00aa66); padding:60px 40px; color:white;">
     <h1 style="font-size:32px;margin-bottom:20px;">DATABASE JACKPOT BARU</h1>
     <div style="background:linear-gradient(90deg,#000000,#0044cc,#00cc66); padding:40px; border-radius:20px;">
@@ -160,10 +175,7 @@ window.onload = function(){
 
 function makeEditable(){
     const tds = table.querySelectorAll("tbody td[contenteditable=true]");
-    tds.forEach(td => td.addEventListener("input", ()=>{}));
     const ths = table.querySelectorAll("thead th");
-    ths.forEach(th => th.addEventListener("input", ()=>{}));
-    title.addEventListener("input", ()=>{});
 }
 
 addRowBtn.addEventListener("click", ()=>{
@@ -177,7 +189,6 @@ addRowBtn.addEventListener("click", ()=>{
         <td><span class="badge claim-now">CLAIM NOW</span></td>
     `;
     tbody.appendChild(newRow);
-    makeEditable();
     setupBadgeToggle();
 });
 
@@ -225,4 +236,4 @@ function switchPage(page){
 </script>
 
 </body>
-</html>
+    </html>
