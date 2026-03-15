@@ -66,17 +66,14 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 #webInputOverlay .buttonsWrapper{margin-top:12px;display:flex;gap:12px;justify-content:center;}
 /* ===== Animasi klik badge ===== */
 @keyframes badgeClick {
-0% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); }
-50% { transform: scale(1.2); box-shadow: 0 0 12px rgba(0,150,255,0.5); }
-100% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); }
+  0% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); }
+  50% { transform: scale(1.2); box-shadow: 0 0 12px rgba(0,150,255,0.5); }
+  100% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); }
 }
-.badge.animate-click {
-animation: badgeClick 0.2s ease-in-out;
-}
+.badge.animate-click { animation: badgeClick 0.2s ease-in-out; }
 </style>
 </head>
 <body>
-
 <div class="header">
   <div class="logo">👑 <span>PEJUANG KASINO</span></div>
   <div class="nav">
@@ -86,7 +83,6 @@ animation: badgeClick 0.2s ease-in-out;
     <a href="#"><b>Jackpot Database</b></a>
   </div>
 </div>
-
 <div class="container">
   <div class="title" contenteditable="true">DATABASE JACKPOT PEJUANG KASINO</div>
   <div class="table-wrapper">
@@ -123,20 +119,49 @@ animation: badgeClick 0.2s ease-in-out;
         </tr>
       </tbody>
     </table>
-
-<div class="pagination">
-  <div class="page-btn active">1</div>
-  <div class="page-btn" onclick="switchPage(2)">2</div>
-  <div class="page-btn">Next</div>
+    <div class="pagination">
+      <div class="page-btn active">1</div>
+      <div class="page-btn" onclick="switchPage(2)">2</div>
+      <div class="page-btn">Next</div>
+    </div>
+    <div class="button-wrapper">
+      <button id="addRow">Tambah Baris</button>
+      <button id="deleteRow">Hapus Baris</button>
+      <button id="deleteAll">Hapus Semua</button>
+      <button id="saveTable">Save</button>
+      <button id="importCSV">Import CSV</button>
+      <button id="addMultiple">Masukkan Nomor Banyak</button>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <div>© 2024 Pejuang Kasino, All rights reserved.</div>
+  <div>Privacy Policy | Terms of Service</div>
 </div>
 
-<div class="button-wrapper">
-  <button id="addRow">Tambah Baris</button>
-  <button id="deleteRow">Hapus Baris</button>
-  <button id="deleteAll">Hapus Semua</button>
-  <button id="saveTable">Save</button>
-  <button id="importCSV">Import CSV</button>
-  <button id="addMultiple">Masukkan Nomor Banyak</button>
+<!-- Notifikasi popup -->
+<div id="customPopup">
+  <div class="popupBox">
+    <button class="popupBtn" id="popupCloseX">×</button>
+    <div class="popupIcon">⚠</div>
+    <div class="popupText">Maaf jackpot tidak dapat di claim karna pengguna belum melakukan deposit.</div>
+    <button class="popupBtn" id="popupCloseBtn">Tutup</button>
+  </div>
+</div>
+
+<!-- Web Notification Center -->
+<div id="webNotificationCenter"><div class="notifBox"></div></div>
+
+<!-- Overlay input nomor banyak -->
+<div id="webInputOverlay">
+  <div>
+    <div style="margin-bottom:12px;">Masukkan nama dan nomor (pisahkan tiap baris):</div>
+    <textarea id="multiNumberInput"></textarea>
+    <div class="buttonsWrapper">
+      <button id="multiNumberSubmit" class="web-btn">Submit</button>
+      <button id="multiNumberCancel" class="web-btn cancel-btn">Batal</button>
+    </div>
+  </div>
 </div>
 <script>
 const table = document.getElementById("jackpotTable");
@@ -214,7 +239,8 @@ saveBtn.addEventListener("click", ()=>{
 
 // Import CSV
 importCSVBtn.addEventListener("click", ()=>{
-  const input = document.createElement("input"); input.type="file"; input.accept=".csv"; input.click();
+  const input = document.createElement("input");
+  input.type = "file"; input.accept = ".csv"; input.click();
   input.onchange = ()=>{
     const file = input.files[0];
     const reader = new FileReader();
@@ -245,7 +271,6 @@ addMultipleBtn.addEventListener("click", ()=>{
   textarea.value = "";
   textarea.focus();
 });
-
 document.getElementById("multiNumberSubmit").addEventListener("click", ()=>{
   const input = textarea.value;
   if(!input.trim()){ showNotificationCenter("Tidak ada nomor yang dimasukkan!"); return; }
@@ -266,30 +291,27 @@ document.getElementById("multiNumberSubmit").addEventListener("click", ()=>{
   setupBadgeToggle();
   showNotificationCenter("Nomor berhasil ditambahkan!");
 });
-
 document.getElementById("multiNumberCancel").addEventListener("click", ()=>{
   overlay.classList.remove("show");
 });
 
-// Badge toggle dengan 3 mode: CLAIM NOW -> CLAIMED -> NOT TAKEN -> CLAIM NOW
+// Badge toggle dengan animasi + looping status (CLAIM NOW → CLAIMED → NOT TAKEN → CLAIM NOW)
 function setupBadgeToggle(){
   document.querySelectorAll(".badge").forEach(span=>{
     span.onclick = ()=>{
-      span.classList.add("animate-click"); // animasi klik
+      span.classList.add("animate-click");
       setTimeout(()=>{span.classList.remove("animate-click");},200);
 
-      const txt = span.innerText.trim().toUpperCase();
-      if(txt==="CLAIM NOW"){
-        showPopup();
-        span.dataset.pendingBadge="true";
-      }
-      else if(txt==="CLAIMED"){
-        span.innerText="NOT TAKEN";
-        span.className="badge not-taken";
-      }
-      else if(txt==="NOT TAKEN"){
-        span.innerText="CLAIM NOW";
-        span.className="badge claim-now";
+      const current = span.innerText.trim().toUpperCase();
+      if(current === "CLAIM NOW"){
+        span.innerText = "CLAIMED";
+        span.className = "badge claimed";
+      } else if(current === "CLAIMED"){
+        span.innerText = "NOT TAKEN";
+        span.className = "badge not-taken";
+      } else if(current === "NOT TAKEN"){
+        span.innerText = "CLAIM NOW";
+        span.className = "badge claim-now";
       }
     };
   });
