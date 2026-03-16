@@ -20,24 +20,24 @@ html,body{touch-action:manipulation;}
 
 /* ===== BODY & FIX BACKGROUND ===== */
 body{
-background:linear-gradient(180deg,#000000 0%,#000c1a 25%,#001a2e 50%,#002b38 75%,#004644 100%);
-color:#e5e5e5;
-letter-spacing:0.3px;
+  background:linear-gradient(180deg,#000000 0%,#000c1a 25%,#001a2e 50%,#002b38 75%,#004644 100%);
+  color:#e5e5e5;
+  letter-spacing:0.3px;
 }
 
 /* ===== HEADER ===== */
 .header{
-background: linear-gradient(90deg,#000000,#001c3d,#004c3c);
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-padding: 14px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-border-bottom:2px solid rgba(255,255,255,0.15);
-z-index: 1000;
+  background: linear-gradient(90deg,#000000,#001c3d,#004c3c);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 14px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:2px solid rgba(255,255,255,0.15);
+  z-index: 1000;
 }
 .logo{display:flex;align-items:center;font-size:24px;font-weight:700;color:#9fdcff;}
 .logo span{margin-left:10px;}
@@ -47,55 +47,50 @@ z-index: 1000;
 
 /* ===== CONTAINER ===== */
 .container{
-padding: 100px 20px 40px 20px;
+  padding: 100px 20px 40px 20px;
 }
 .title{font-size:24px;margin-bottom:25px;font-weight:700;color:#9fdcff;cursor:text;}
 
 /* ===== TABLE ===== */
 .table-wrapper{
-background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);
-padding:25px;
-border-radius:8px;
-border:2px solid rgba(255,255,255,0.10);
-overflow-x:auto;
-position:relative;
+  background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);
+  padding:25px;
+  border-radius:8px;
+  border:2px solid rgba(255,255,255,0.10);
+  overflow-x:auto;
+  overflow-y:auto;       /* tambah scroll vertikal */
+  max-height:500px;      /* scrollable tinggi sesuai kebutuhan */
+  position:relative;
 }
-
-/* ===== TAMBAHAN FIX SCROLL HEADER ===== */
-.table-wrapper {
-    max-height: calc(100vh - 160px); /* tinggi otomatis sesuai layar */
-    overflow-y: auto;
-}
-thead{
-position: sticky;
-top: 0;
-z-index: 2;
-background: linear-gradient(90deg,#001a2e,#004644);
-}
-
 table{
-width:100%;
-min-width:750px;
-border-collapse:collapse;
-border:2px solid rgba(255,255,255,0.15);
+  width:100%;
+  min-width:750px;
+  border-collapse:collapse;
+  border:2px solid rgba(255,255,255,0.15);
 }
 
 /* ===== THEAD FIX ===== */
+thead{
+  background:linear-gradient(90deg,#001a2e,#004644);
+  position: sticky;
+  top: 0;
+  z-index: 1;       /* cukup rendah agar td dan tombol bisa diklik */
+}
 thead th{
-padding:16px 20px;
-font-size:13px;
-font-weight:600;
-text-align:left;
-color:#aee4ff;
-border-bottom:2px solid rgba(255,255,255,0.18);
-border-right:2px solid rgba(255,255,255,0.15);
+  padding:16px 20px;
+  font-size:13px;
+  font-weight:600;
+  text-align:left;
+  color:#aee4ff;
+  border-bottom:2px solid rgba(255,255,255,0.18);
+  border-right:2px solid rgba(255,255,255,0.15);
 }
 thead th:last-child{border-right:none;}
 tbody td{
-padding:16px 20px;
-font-size:13px;
-border-bottom:2px solid rgba(255,255,255,0.12);
-border-right:2px solid rgba(255,255,255,0.12);
+  padding:16px 20px;
+  font-size:13px;
+  border-bottom:2px solid rgba(255,255,255,0.12);
+  border-right:2px solid rgba(255,255,255,0.12);
 }
 tbody td:last-child{border-right:none;}
 tbody tr{background:rgba(0,0,0,0.35);}
@@ -103,16 +98,16 @@ tbody tr:hover{background:rgba(0,80,80,0.18);}
 
 /* ===== DATABASE CELL ===== */
 .db-name {
-font-weight: 600;
-font-size: 13px;
-line-height: 1.2;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.2;
 }
 .db-number {
-font-size: 15px;
-margin-top: 2px;
-cursor: pointer;
-color:#4a88ff;
-transition:all 0.15s ease;
+  font-size: 15px;
+  margin-top: 2px;
+  cursor: pointer;
+  color:#4a88ff;
+  transition:all 0.15s ease;
 }
 .db-number:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 
@@ -169,6 +164,7 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
     <a href="#"><b>Jackpot Database</b></a>
   </div>
 </div>
+
 <div class="container">
   <div class="title" contenteditable="true">DATABASE JACKPOT PEJUANG KASINO</div>
   <div class="table-wrapper">
@@ -205,26 +201,30 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
         </tr>
       </tbody>
     </table>
-  <div class="pagination">
-    <div class="page-btn active">1</div>
-    <div class="page-btn" onclick="switchPage(2)">2</div>
-    <div class="page-btn">Next</div>
-  </div>
-  <div class="button-wrapper">
-    <button id="addRow">Tambah Baris</button>
-    <button id="deleteRow">Hapus Baris</button>
-    <button id="deleteAll">Hapus Semua</button>
-    <button id="saveTable">Save</button>
-    <button id="importCSV">Import CSV</button>
-    <button id="addMultiple">Masukkan Nomor Banyak</button>
-  </div>
+
+    <div class="pagination">
+      <div class="page-btn active">1</div>
+      <div class="page-btn" onclick="switchPage(2)">2</div>
+      <div class="page-btn">Next</div>
+    </div>
+
+    <div class="button-wrapper">
+      <button id="addRow">Tambah Baris</button>
+      <button id="deleteRow">Hapus Baris</button>
+      <button id="deleteAll">Hapus Semua</button>
+      <button id="saveTable">Save</button>
+      <button id="importCSV">Import CSV</button>
+      <button id="addMultiple">Masukkan Nomor Banyak</button>
+    </div>
   </div>
 </div>
+
 <!-- ===== BAGIAN 2 ===== -->
 <div id="page2" style="display:none;padding:40px 20px;">
   <h2 style="color:#9fdcff;">Halaman 2 (Contoh)</h2>
   <p style="color:#d4d4d4;">Ini bisa diisi konten lain atau tabel berbeda.</p>
 </div>
+
 <div class="footer">
   <div>© 2024 Pejuang Kasino, All rights reserved.</div>
   <div>Privacy Policy | Terms of Service</div>
@@ -253,7 +253,7 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 
 <!-- ===== JS ASLI ===== -->
 <script>
-// JS tetap utuh
+// Semua JS asli tetap utuh
 const table = document.getElementById("jackpotTable");
 const title = document.querySelector(".title");
 const addRowBtn = document.getElementById("addRow");
@@ -276,139 +276,113 @@ function splitNameNumber(input){ const number = (input.match(/\d+/g) || []).join
 function createDBCellFromRaw(raw){ const {name, number} = splitNameNumber(raw); return `<div class="db-name" contenteditable="true">${name}</div><div class="db-number" onclick="window.open('https://wa.me/${number}','_blank')">${number || '-'}</div>`; }
 
 addRowBtn.addEventListener("click", ()=>{
-const tbody = table.querySelector("tbody");
-const newRow = document.createElement("tr");
-newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">Status</td><td>${createDBCellFromRaw("-")}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
-tbody.appendChild(newRow);
-setupBadgeToggle();
+  const tbody = table.querySelector("tbody");
+  const newRow = document.createElement("tr");
+  newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">Status</td><td>${createDBCellFromRaw("-")}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
+  tbody.appendChild(newRow);
+  setupBadgeToggle();
 });
-
-deleteRowBtn.addEventListener("click", ()=>{
-const tbody = table.querySelector("tbody");
-if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1);
-});
-
+deleteRowBtn.addEventListener("click", ()=>{ const tbody = table.querySelector("tbody"); if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1); });
 deleteAllBtn.addEventListener("click", ()=>{ table.querySelector("tbody").innerHTML = ""; });
-
-saveBtn.addEventListener("click", ()=>{
-localStorage.setItem("savedTableData", table.querySelector("tbody").innerHTML);
-localStorage.setItem("savedTitle", title.innerText);
-showNotificationCenter("Data berhasil disimpan!");
-});
-
-importCSVBtn.addEventListener("click", ()=>{
-const input = document.createElement("input");
-input.type = "file";
-input.accept = ".csv";
-input.click();
-input.onchange = ()=>{
-const file = input.files[0];
-const reader = new FileReader();
-reader.onload = e=>{
-e.target.result.split(/\r\n|\n/).forEach(line=>{
-if(!line.trim()) return;
-const tbody = table.querySelector("tbody");
-const newRow = document.createElement("tr");
-newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
-tbody.appendChild(newRow);
-});
-setupBadgeToggle();
-showNotificationCenter("CSV berhasil diimport!");
-};
-reader.readAsText(file);
+saveBtn.addEventListener("click", ()=>{ localStorage.setItem("savedTableData", table.querySelector("tbody").innerHTML); localStorage.setItem("savedTitle", title.innerText); showNotificationCenter("Data berhasil disimpan!"); });
+importCSVBtn.addEventListener("click", ()=>{ const input = document.createElement("input"); input.type = "file"; input.accept = ".csv"; input.click(); input.onchange = ()=>{ const file = input.files[0]; const reader = new FileReader(); reader.onload = e=>{ e.target.result.split(/\r\n|\n/).forEach(line=>{ if(!line.trim()) return; const tbody = table.querySelector("tbody"); const newRow = document.createElement("tr"); newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
+      tbody.appendChild(newRow);
+    });
+    setupBadgeToggle();
+    showNotificationCenter("CSV berhasil diimport!");
+  };
+  reader.readAsText(file);
 };
 });
 
 addMultipleBtn.addEventListener("click", ()=>{
-overlay.classList.add("showtextarea.value="";
-textarea.focus();
+  overlay.classList.add("show");
+  textarea.value="";
+  textarea.focus();
 });
 
 document.getElementById("multiNumberSubmit").addEventListener("click", ()=>{
-    const input = textarea.value;
-    if(!input.trim()){
-        showNotificationCenter("Tidak ada nomor yang dimasukkan!");
-        return;
-    }
-    input.split("\n").forEach(line=>{
-        if(!line.trim()) return;
-        const tbody = table.querySelector("tbody");
-        const newRow = document.createElement("tr");
-        newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td>
-                            <td contenteditable="true">PENDING</td>
-                            <td>${createDBCellFromRaw(line.trim())}</td>
-                            <td contenteditable="true">VIP</td>
-                            <td><span class="badge claim-now">CLAIM NOW</span></td>`;
-        tbody.appendChild(newRow);
-    });
-    overlay.classList.remove("show");
-    setupBadgeToggle();
+  const input = textarea.value;
+  if(!input.trim()){ showNotificationCenter("Tidak ada nomor yang dimasukkan!"); return; }
+  input.split("\n").forEach(line=>{
+    if(!line.trim()) return;
+    const tbody = table.querySelector("tbody");
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td>
+                        <td contenteditable="true">PENDING</td>
+                        <td>${createDBCellFromRaw(line.trim())}</td>
+                        <td contenteditable="true">VIP</td>
+                        <td><span class="badge claim-now">CLAIM NOW</span></td>`;
+    tbody.appendChild(newRow);
+  });
+  overlay.classList.remove("show");
+  setupBadgeToggle();
 });
 
 document.getElementById("multiNumberCancel").addEventListener("click", ()=>{
-    overlay.classList.remove("show");
+  overlay.classList.remove("show");
 });
 
 // ===== Badge toggle 3 mode dengan popup =====
 function setupBadgeToggle(){
-    document.querySelectorAll(".badge").forEach(span=>{
-        span.onclick = ()=>{
-            span.classList.add("animate-click");
-            setTimeout(()=>{span.classList.remove("animate-click");},200);
-            const current = span.innerText.trim().toUpperCase();
-            if(current === "CLAIM NOW"){
-                span.dataset.pendingBadge = true;
-                showPopup();
-            } else if(current === "CLAIMED"){
-                span.innerText = "NOT TAKEN";
-                span.className = "badge not-taken";
-            } else if(current === "NOT TAKEN"){
-                span.innerText = "CLAIM NOW";
-                span.className = "badge claim-now";
-            }
-        };
-    });
+  document.querySelectorAll(".badge").forEach(span=>{
+    span.onclick = ()=>{
+      span.classList.add("animate-click");
+      setTimeout(()=>{span.classList.remove("animate-click");},200);
+      const current = span.innerText.trim().toUpperCase();
+      if(current === "CLAIM NOW"){
+        span.dataset.pendingBadge = true;
+        showPopup();
+      } else if(current === "CLAIMED"){
+        span.innerText = "NOT TAKEN";
+        span.className = "badge not-taken";
+      } else if(current === "NOT TAKEN"){
+        span.innerText = "CLAIM NOW";
+        span.className = "badge claim-now";
+      }
+    };
+  });
 }
 
 // Popup close buttons
 popupCloseBtn.addEventListener("click", ()=>{ closePopup(); });
 popupCloseX.addEventListener("click", ()=>{
-    closePopup();
-    document.querySelectorAll(".badge").forEach(span=>{
-        if(span.dataset.pendingBadge){
-            span.innerText = "CLAIMED";
-            span.className = "badge claimed";
-            delete span.dataset.pendingBadge;
-        }
-    });
+  closePopup();
+  document.querySelectorAll(".badge").forEach(span=>{
+    if(span.dataset.pendingBadge){
+      span.innerText = "CLAIMED";
+      span.className = "badge claimed";
+      delete span.dataset.pendingBadge;
+    }
+  });
 });
 
 // Inisialisasi halaman
 window.onload = ()=>{
-    const savedTable = localStorage.getItem("savedTableData");
-    const savedTitle = localStorage.getItem("savedTitle");
-    if(savedTable) table.querySelector("tbody").innerHTML = savedTable;
-    if(savedTitle) title.innerText = savedTitle;
-    setupBadgeToggle();
+  const savedTable = localStorage.getItem("savedTableData");
+  const savedTitle = localStorage.getItem("savedTitle");
+  if(savedTable) table.querySelector("tbody").innerHTML = savedTable;
+  if(savedTitle) title.innerText = savedTitle;
+  setupBadgeToggle();
 };
 
 // Switch halaman
 function switchPage(page){
-    const header = document.querySelector(".header");
-    const container = document.querySelector(".container");
-    const footer = document.querySelector(".footer");
-    const page2 = document.getElementById("page2");
-    if(page===2){
-        header.style.display="flex"; // tetap tampil
-        container.style.display="none";
-        footer.style.display="none";
-        page2.style.display="block";
-    } else {
-        header.style.display="flex";
-        container.style.display="block";
-        footer.style.display="flex";
-        page2.style.display="none";
-    }
+  const header=document.querySelector(".header");
+  const container=document.querySelector(".container");
+  const footer=document.querySelector(".footer");
+  const page2=document.getElementById("page2");
+  if(page===2){
+    header.style.display="flex"; // tetap tampil
+    container.style.display="none";
+    footer.style.display="none";
+    page2.style.display="block";
+  } else {
+    header.style.display="flex";
+    container.style.display="block";
+    footer.style.display="flex";
+    page2.style.display="none";
+  }
 }
 </script>
 </body>
