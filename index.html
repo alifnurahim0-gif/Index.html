@@ -6,34 +6,90 @@
 <title>Database Jackpot Pejuang Kasino</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* ===== BASE STYLE ===== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat','Inter',sans-serif;}
 html,body{touch-action:manipulation;}
 [contenteditable="true"]{font-size:16px !important;-webkit-text-size-adjust:100%;}
+
+/* ===== BADGE ===== */
 .badge{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:pointer;padding:6px 14px;border-radius:12px;font-size:11px;font-weight:600;transition: all 0.15s ease;}
 .badge:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 .claimed{background:#3e9b8a;color:#001a17;}
 .claim-now{background:#4a88ff;color:#00142b;}
 .not-taken{background:#b34a4a;color:white;}
-body{background:linear-gradient(180deg,#000000 0%,#000c1a 25%,#001a2e 50%,#002b38 75%,#004644 100%);color:#e5e5e5;letter-spacing:0.3px; background-attachment: fixed;}
-.header{background:linear-gradient(90deg,#000000,#001c3d,#004c3c);padding:14px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(255,255,255,0.15);background-attachment: fixed;}
+
+/* ===== BODY & FIX BACKGROUND ===== */
+body{
+  background:linear-gradient(180deg,#000000 0%,#000c1a 25%,#001a2e 50%,#002b38 75%,#004644 100%);
+  background-attachment: fixed; /* FIXED BACKGROUND */
+  color:#e5e5e5;
+  letter-spacing:0.3px;
+}
+
+/* ===== HEADER ===== */
+.header{
+  background:linear-gradient(90deg,#000000,#001c3d,#004c3c);
+  background-attachment: fixed; /* FIXED HEADER BG */
+  padding:14px 40px;
+  display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(255,255,255,0.15);
+}
 .logo{display:flex;align-items:center;font-size:24px;font-weight:700;color:#9fdcff;}
 .logo span{margin-left:10px;}
 .nav{display:flex;gap:24px;flex-wrap:wrap;}
 .nav a{color:#d4d4d4;text-decoration:none;font-size:13px;font-weight:500;}
 .nav a:hover{color:#ffffff;}
+
+/* ===== CONTAINER ===== */
 .container{padding:40px 20px;}
 .title{font-size:24px;margin-bottom:25px;font-weight:700;color:#9fdcff;cursor:text;}
-.table-wrapper{background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);padding:25px;border-radius:8px;border:2px solid rgba(255,255,255,0.10);overflow-x:auto;background-attachment: fixed;}
-table{width:100%;min-width:750px;border-collapse:collapse;border:2px solid rgba(255,255,255,0.15);}
-thead{background:rgba(0,0,0,0.55);}
-thead th{padding:16px 20px;font-size:13px;font-weight:600;text-align:left;color:#aee4ff;border-bottom:2px solid rgba(255,255,255,0.18);border-right:2px solid rgba(255,255,255,0.15);position: sticky; top: 0; z-index: 2;}
+
+/* ===== TABLE ===== */
+.table-wrapper{
+  background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);
+  background-attachment: fixed; /* FIXED TABLE BG */
+  padding:25px;
+  border-radius:8px;
+  border:2px solid rgba(255,255,255,0.10);
+  overflow-x:auto;        /* scroll horizontal tetap ada */
+  overflow-y:auto;        /* scroll vertikal agar sticky header */
+  max-height:450px;       /* tinggi maksimum tabel untuk scroll */
+  position:relative;
+}
+table{
+  width:100%;
+  min-width:750px;
+  border-collapse:collapse;
+  border:2px solid rgba(255,255,255,0.15);
+}
+
+/* ===== THEAD FIX ===== */
+thead{
+  background:rgba(0,0,0,0.55);
+  position: sticky;
+  top: 0;
+  z-index: 999;           /* lebih tinggi agar selalu di atas */
+}
+thead th{
+  padding:16px 20px;
+  font-size:13px;
+  font-weight:600;
+  text-align:left;
+  color:#aee4ff;
+  border-bottom:2px solid rgba(255,255,255,0.18);
+  border-right:2px solid rgba(255,255,255,0.15);
+}
 thead th:last-child{border-right:none;}
-tbody td{padding:16px 20px;font-size:13px;border-bottom:2px solid rgba(255,255,255,0.12);border-right:2px solid rgba(255,255,255,0.12);}
+tbody td{
+  padding:16px 20px;
+  font-size:13px;
+  border-bottom:2px solid rgba(255,255,255,0.12);
+  border-right:2px solid rgba(255,255,255,0.12);
+}
 tbody td:last-child{border-right:none;}
 tbody tr{background:rgba(0,0,0,0.35);}
 tbody tr:hover{background:rgba(0,80,80,0.18);}
-.db-name{font-weight:600;font-size:11px;}
-.db-number{font-size:15px;margin-top:2px;cursor:pointer;color:#4a88ff;transition:all 0.15s ease;}
+
+/* ===== PAGINATION & BUTTON ===== */
 .pagination{margin-top:20px;display:flex;justify-content:center;gap:8px;}
 .page-btn{padding:6px 12px;font-size:12px;background:#000000;border:2px solid rgba(255,255,255,0.12);border-radius:6px;cursor:pointer;transition:all 0.15s ease;}
 .page-btn.active{background:#2f7cff;color:white;}
@@ -45,16 +101,27 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 #saveTable{background:#007c63;color:white;}
 #deleteRow{background:#b23d3d;color:white;}
 #deleteAll{background:#ff4a4a;color:white;}
-.footer{margin-top:35px;padding:18px 40px;font-size:11px;display:flex;justify-content:space-between;flex-wrap:wrap;border-top:2px solid rgba(255,255,255,0.10);color:#bcbcbc;background-attachment: fixed;}
+
+/* ===== FOOTER ===== */
+.footer{margin-top:35px;padding:18px 40px;font-size:11px;display:flex;justify-content:space-between;flex-wrap:wrap;border-top:2px solid rgba(255,255,255,0.10);color:#bcbcbc;}
+
+/* ===== POPUP & OVERLAY ===== */
 #customPopup, #webNotificationCenter{position:fixed;top:0;left:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);z-index:9999;transition:opacity 0.25s ease;}
 #customPopup.show, #webNotificationCenter.show{display:flex;opacity:1;}
-.popupBox, #webNotificationCenter .notifBox{background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);padding:30px 35px;border-radius:8px;border:2px solid rgba(255,255,255,0.12);max-width:420px;text-align:center;color:#d9f4ff;position:relative;background-attachment: fixed;}
+.popupBox, #webNotificationCenter .notifBox{background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);padding:30px 35px;border-radius:8px;border:2px solid rgba(255,255,255,0.12);max-width:420px;text-align:center;color:#d9f4ff;position:relative;}
 .popupIcon{font-size:40px;margin-bottom:12px;}
 .popupText{font-size:14px;margin-bottom:20px;}
 .popupBtn{padding:8px 22px;background:#2f7cff;border:none;border-radius:6px;color:white;font-weight:600;cursor:pointer;transition:all 0.15s ease;}
 .popupBtn:active{transform: scale(0.95);box-shadow:0 0 12px rgba(0,150,255,0.5);}
 #popupCloseX{position:absolute;top:8px;right:8px;background:transparent;color:white;border:none;font-size:18px;font-weight:bold;cursor:pointer;padding:4px 8px;transition:all 0.15s ease;}
 #popupCloseX:active{transform: scale(0.9); box-shadow:0 0 8px rgba(255,255,255,0.5);}
+
+/* ===== DATABASE CELL ===== */
+.db-name{font-weight:600;font-size:11px;} /* lebih kecil dari nomor */
+.db-number{font-size:15px;margin-top:2px;cursor:pointer;color:#4a88ff;transition:all 0.15s ease;}
+.db-number:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
+
+/* ===== MULTI INPUT ===== */
 #webInputOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.25s ease;}
 #webInputOverlay.show{display:flex;opacity:1;}
 #webInputOverlay textarea{width:90%;height:120px;border-radius:8px;padding:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(0,20,40,0.7);color:#d9f4ff;font-family:'Montserrat',sans-serif;font-size:14px;}
@@ -62,13 +129,14 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 .web-btn:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 .web-btn.cancel-btn{background:#b23d3d;color:white;}
 .web-btn:not(.cancel-btn){background:#2f7cff;color:white;}
-#webInputOverlay .buttonsWrapper{margin-top:12px;display:flex;gap:12px;justify-content:center;}
+
+/* ===== ANIMASI BADGE ===== */
 @keyframes badgeClick { 0% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); } 50% { transform: scale(1.2); box-shadow: 0 0 12px rgba(0,150,255,0.5); } 100% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); } }
 .badge.animate-click { animation: badgeClick 0.2s ease-in-out; }
 </style>
 </head>
 <body>
-<!-- BAGIAN 1: HALAMAN UTAMA -->
+<!-- ===== BAGIAN 1 ===== -->
 <div class="header">
   <div class="logo">👑 <span>PEJUANG KASINO</span></div>
   <div class="nav">
@@ -130,7 +198,7 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
   </div>
 </div>
 
-<!-- BAGIAN 2: HALAMAN 2 (contoh) -->
+<!-- ===== BAGIAN 2 ===== -->
 <div id="page2" style="display:none;padding:40px 20px;">
   <h2 style="color:#9fdcff;">Halaman 2 (Contoh)</h2>
   <p style="color:#d4d4d4;">Ini bisa diisi konten lain atau tabel berbeda.</p>
@@ -141,7 +209,7 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
   <div>Privacy Policy | Terms of Service</div>
 </div>
 
-<!-- Popup dan overlay tetap sama -->
+<!-- ===== POPUP & OVERLAY ===== -->
 <div id="customPopup">
   <div class="popupBox">
     <button class="popupBtn" id="popupCloseX">×</button>
@@ -150,6 +218,7 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
     <button class="popupBtn" id="popupCloseBtn">Tutup</button>
   </div>
 </div>
+
 <div id="webNotificationCenter"><div class="notifBox"></div></div>
 <div id="webInputOverlay">
   <div>
@@ -162,8 +231,9 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
   </div>
 </div>
 
+<!-- ===== JS ASLI ===== -->
 <script>
-// Semua JS asli tetap utuh
+// JS asli tetap utuh
 const table = document.getElementById("jackpotTable");
 const title = document.querySelector(".title");
 const addRowBtn = document.getElementById("addRow");
@@ -178,28 +248,48 @@ const notifCenter = document.getElementById("webNotificationCenter").querySelect
 const popup = document.getElementById("customPopup");
 const popupCloseBtn = document.getElementById("popupCloseBtn");
 const popupCloseX = document.getElementById("popupCloseX");
-
 function showPopup(){ popup.classList.add("show"); }
 function closePopup(){ popup.classList.remove("show"); }
 function showNotificationCenter(msg){ notifCenter.innerText = msg; document.getElementById("webNotificationCenter").classList.add("show"); setTimeout(()=>{document.getElementById("webNotificationCenter").classList.remove("show");},2000); }
 function splitNameNumber(input){ const number = (input.match(/\d+/g) || []).join(''); const name = input.replace(/\d+/g,'').trim() || '-'; return {name, number}; }
 function createDBCellFromRaw(raw){ const {name, number} = splitNameNumber(raw); return `<div class="db-name" contenteditable="true">${name}</div><div class="db-number" onclick="window.open('https://wa.me/${number}','_blank')">${number || '-'}</div>`; }
-
 addRowBtn.addEventListener("click", ()=>{ const tbody = table.querySelector("tbody"); const newRow = document.createElement("tr"); newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">Status</td><td>${createDBCellFromRaw("-")}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`; tbody.appendChild(newRow); setupBadgeToggle(); });
-
 deleteRowBtn.addEventListener("click", ()=>{ const tbody = table.querySelector("tbody"); if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1); });
 deleteAllBtn.addEventListener("click", ()=>{ table.querySelector("tbody").innerHTML = ""; });
-
 saveBtn.addEventListener("click", ()=>{ localStorage.setItem("savedTableData", table.querySelector("tbody").innerHTML); localStorage.setItem("savedTitle", title.innerText); showNotificationCenter("Data berhasil disimpan!"); });
-
 importCSVBtn.addEventListener("click", ()=>{ const input = document.createElement("input"); input.type = "file"; input.accept = ".csv"; input.click(); input.onchange = ()=>{ const file = input.files[0]; const reader = new FileReader(); reader.onload = e=>{ e.target.result.split(/\r\n|\n/).forEach(line=>{ if(!line.trim()) return; const tbody = table.querySelector("tbody"); const newRow = document.createElement("tr"); newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`; tbody.appendChild(newRow); }); setupBadgeToggle(); showNotificationCenter("CSV berhasil diimport!"); }; reader.readAsText(file); }; });
+addMultipleaddMultipleBtn.addEventListener("click", ()=>{ 
+  overlay.classList.add("show"); 
+  textarea.value=""; 
+  textarea.focus(); 
+});
 
-addMultipleBtn.addEventListener("click", ()=>{ overlay.classList.add("show"); textarea.value=""; textarea.focus(); });
-document.getElementById("multiNumberSubmit").addEventListener("click", ()=>{ const input=textarea.value; if(!input.trim()){ showNotificationCenter("Tidak ada nomor yang dimasukkan!"); return; } input.split("\n").forEach(line=>{ if(!line.trim()) return; const tbody = table.querySelector("tbody"); const newRow = document.createElement("tr"); newRow.innerHTML=`<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`; tbody.appendChild(newRow); }); overlay.classList.remove("show"); setupBadgeToggle(); });
+document.getElementById("multiNumberSubmit").addEventListener("click", ()=>{
+  const input=textarea.value;
+  if(!input.trim()){ 
+    showNotificationCenter("Tidak ada nomor yang dimasukkan!"); 
+    return; 
+  }
+  input.split("\n").forEach(line=>{
+    if(!line.trim()) return;
+    const tbody = table.querySelector("tbody");
+    const newRow = document.createElement("tr");
+    newRow.innerHTML=`<td contenteditable="true">PG/PRAGMATIC</td>
+      <td contenteditable="true">PENDING</td>
+      <td>${createDBCellFromRaw(line.trim())}</td>
+      <td contenteditable="true">VIP</td>
+      <td><span class="badge claim-now">CLAIM NOW</span></td>`;
+    tbody.appendChild(newRow);
+  });
+  overlay.classList.remove("show");
+  setupBadgeToggle();
+});
 
-document.getElementById("multiNumberCancel").addEventListener("click", ()=>{ overlay.classList.remove("show"); });
+document.getElementById("multiNumberCancel").addEventListener("click", ()=>{
+  overlay.classList.remove("show");
+});
 
-// ===== Badge toggle dengan 3 mode dan popup =====
+// ===== Badge toggle 3 mode dengan popup =====
 function setupBadgeToggle(){
   document.querySelectorAll(".badge").forEach(span=>{
     span.onclick = ()=>{
@@ -220,10 +310,8 @@ function setupBadgeToggle(){
   });
 }
 
-// Tombol Tutup popup → hanya tutup, badge tetap CLAIM NOW
+// Popup close buttons
 popupCloseBtn.addEventListener("click", ()=>{ closePopup(); });
-
-// Tombol X popup → ubah badge menjadi CLAIMED & tutup popup
 popupCloseX.addEventListener("click", ()=>{
   closePopup();
   document.querySelectorAll(".badge").forEach(span=>{
@@ -244,14 +332,23 @@ window.onload = ()=>{
   setupBadgeToggle();
 };
 
-// Switch page (misal halaman 2)
+// Switch halaman
 function switchPage(page){
   const header=document.querySelector(".header");
   const container=document.querySelector(".container");
   const footer=document.querySelector(".footer");
   const page2=document.getElementById("page2");
-  if(page===2){header.style.display="none";container.style.display="none";footer.style.display="none";page2.style.display="block";}
-  else{header.style.display="flex";container.style.display="block";footer.style.display="flex";page2.style.display="none";}
+  if(page===2){
+    header.style.display="none";
+    container.style.display="none";
+    footer.style.display="none";
+    page2.style.display="block";
+  } else {
+    header.style.display="flex";
+    container.style.display="block";
+    footer.style.display="flex";
+    page2.style.display="none";
+  }
 }
 </script>
 </body>
