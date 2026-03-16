@@ -21,7 +21,7 @@ html,body{touch-action:manipulation;}
 /* ===== BODY & FIX BACKGROUND ===== */
 body{
   background:linear-gradient(180deg,#000000 0%,#000c1a 25%,#001a2e 50%,#002b38 75%,#004644 100%);
-  background-attachment: fixed;
+  background-attachment: fixed; /* FIXED BACKGROUND */
   color:#e5e5e5;
   letter-spacing:0.3px;
 }
@@ -29,7 +29,7 @@ body{
 /* ===== HEADER ===== */
 .header{
   background:linear-gradient(90deg,#000000,#001c3d,#004c3c);
-  background-attachment: fixed;
+  background-attachment: fixed; /* FIXED HEADER BG */
   padding:14px 40px;
   display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(255,255,255,0.15);
 }
@@ -43,19 +43,18 @@ body{
 .container{padding:40px 20px;}
 .title{font-size:24px;margin-bottom:25px;font-weight:700;color:#9fdcff;cursor:text;}
 
-/* ===== TABLE WRAPPER ===== */
+/* ===== TABLE ===== */
 .table-wrapper{
   background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);
+  background-attachment: fixed; /* FIXED TABLE BG */
   padding:25px;
   border-radius:8px;
   border:2px solid rgba(255,255,255,0.10);
   overflow-x:auto;
-  max-height:450px; /* untuk scroll vertikal */
   overflow-y:auto;
+  max-height:600px; /* agar scroll vertical muncul tapi header tetap */
   position:relative;
 }
-
-/* ===== TABLE ===== */
 table{
   width:100%;
   min-width:750px;
@@ -65,17 +64,17 @@ table{
 
 /* ===== THEAD FIX & GRADIENT ===== */
 thead{
+  background:linear-gradient(90deg,#002b38,#004644); /* gradasi header */
   position: sticky;
   top: 0;
-  z-index: 5;
-  background: linear-gradient(90deg,#004c3c,#001c3d,#000000); /* gradasi solid */
-  color:#aee4ff;
+  z-index: 10;
 }
 thead th{
   padding:16px 20px;
   font-size:13px;
   font-weight:600;
   text-align:left;
+  color:#aee4ff;
   border-bottom:2px solid rgba(255,255,255,0.18);
   border-right:2px solid rgba(255,255,255,0.15);
 }
@@ -89,6 +88,24 @@ tbody td{
 tbody td:last-child{border-right:none;}
 tbody tr{background:rgba(0,0,0,0.35);}
 tbody tr:hover{background:rgba(0,80,80,0.18);}
+
+/* ===== DATABASE CELL ===== */
+.db-name {
+  font-weight:600;
+  font-size:13px; /* lebih kecil dari nomor */
+  color:#d4f0ff;
+  margin-bottom:4px;
+}
+.db-number {
+  font-size:16px; /* lebih besar dari nama tapi proporsional */
+  cursor:pointer;
+  color:#4a88ff;
+  transition:all 0.15s ease;
+}
+.db-number:active {
+  transform: scale(0.95);
+  box-shadow:0 0 12px rgba(0,150,255,0.5);
+}
 
 /* ===== PAGINATION & BUTTON ===== */
 .pagination{margin-top:20px;display:flex;justify-content:center;gap:8px;}
@@ -116,11 +133,6 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 .popupBtn:active{transform: scale(0.95);box-shadow:0 0 12px rgba(0,150,255,0.5);}
 #popupCloseX{position:absolute;top:8px;right:8px;background:transparent;color:white;border:none;font-size:18px;font-weight:bold;cursor:pointer;padding:4px 8px;transition:all 0.15s ease;}
 #popupCloseX:active{transform: scale(0.9); box-shadow:0 0 8px rgba(255,255,255,0.5);}
-
-/* ===== DATABASE CELL ===== */
-.db-name{font-weight:600;font-size:11px;}
-.db-number{font-size:15px;margin-top:2px;cursor:pointer;color:#4a88ff;transition:all 0.15s ease;}
-.db-number:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 
 /* ===== MULTI INPUT ===== */
 #webInputOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.25s ease;}
@@ -221,6 +233,7 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
     <button class="popupBtn" id="popupCloseBtn">Tutup</button>
   </div>
 </div>
+
 <div id="webNotificationCenter"><div class="notifBox"></div></div>
 <div id="webInputOverlay">
   <div>
@@ -233,9 +246,9 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
   </div>
 </div>
 
-<!-- ===== JS ===== -->
+<!-- ===== JS ASLI ===== -->
 <script>
-// Semua JS tetap utuh (badge, popup, add/delete/save/import CSV, overlay, multi input)
+// JS asli tetap utuh, badge, popup, add/delete/save/import CSV, overlay, multi input
 const table = document.getElementById("jackpotTable");
 const title = document.querySelector(".title");
 const addRowBtn = document.getElementById("addRow");
@@ -250,137 +263,113 @@ const notifCenter = document.getElementById("webNotificationCenter").querySelect
 const popup = document.getElementById("customPopup");
 const popupCloseBtn = document.getElementById("popupCloseBtn");
 const popupCloseX = document.getElementById("popupCloseX");
-
 function showPopup(){ popup.classList.add("show"); }
 function closePopup(){ popup.classList.remove("show"); }
 function showNotificationCenter(msg){ notifCenter.innerText = msg; document.getElementById("webNotificationCenter").classList.add("show"); setTimeout(()=>{document.getElementById("webNotificationCenter").classList.remove("show");},2000); }
 function splitNameNumber(input){ const number = (input.match(/\d+/g) || []).join(''); const name = input.replace(/\d+/g,'').trim() || '-'; return {name, number}; }
 function createDBCellFromRaw(raw){ const {name, number} = splitNameNumber(raw); return `<div class="db-name" contenteditable="true">${name}</div><div class="db-number" onclick="window.open('https://wa.me/${number}','_blank')">${number || '-'}</div>`; }
-
-addRowBtn.addEventListener("click", ()=>{
-  const tbody = table.querySelector("tbody");
-  const newRow = document.createElement("tr");
-  newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">Status</td><td>${createDBCellFromRaw("-")}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
-  tbody.appendChild(newRow);
-  setupBadgeToggle();
-});
-deleteRowBtn.addEventListener("click", ()=>{
-  const tbody = table.querySelector("tbody");
-  if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1);
-});
+addRowBtn.addEventListener("click", ()=>{ const tbody = table.querySelector("tbody"); const newRow = document.createElement("tr"); newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">Status</td><td>${createDBCellFromRaw("-")}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`; tbody.appendChild(newRow); setupBadgeToggle(); });
+deleteRowBtn.addEventListener("click", ()=>{ const tbody = table.querySelector("tbody"); if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1); });
 deleteAllBtn.addEventListener("click", ()=>{ table.querySelector("tbody").innerHTML = ""; });
-saveBtn.addEventListener("click", ()=>{
-  localStorage.setItem("savedTableData", table.querySelector("tbody").innerHTML);
-  localStorage.setItem("savedTitle", title.innerText);
-  showNotificationCenter("Data berhasil disimpan!");
-});
-importCSVBtn.addEventListener("click", ()=>{
-  const input = document.createElement("input");
-  input.type = "file";
-  input.accept = ".csv";
-  input.click();
-  input.onchange = ()=>{
-    const file = input.files[0];
-    const reader = new FileReader();
-    reader.onload = e=>{
-      e.target.result.split(/\r\n|\n/).forEach(line=>{
-        if(!line.trim()) return;
-        const tbody = table.querySelector("tbody");
-        const newRow = document.createElement("tr");
-        newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
-        tbody.appendChild(newRow);
-      });
-      setupBadgeToggle();
-      showNotificationCenter("CSV berhasil diimport!");
-    };
-    reader.readAsText(file);
-  };
-});
-addMultipleBtn.addEventListener("click", ()=>{
-  overlay.classList.add("show");
-  textarea.value="";
-  textarea.focus();
-});
+saveBtn.addEventListener("click", ()=>{ localStorage.setItem("savedTableData", table.querySelector("tbody").innerHTML); localStorage.setItem("savedTitle", title.innerText); showNotificationCenter("Data berhasil disimpan!"); });
+importCSVBtn.addEventListener("click", ()=>{ const input = document.createElement("input"); input.type = "file"; input.accept = ".csv"; input.click(); input.onchange = ()=>{ const file = input.files[0]; const reader = new FileReader(); reader.onload = e=>{ e.target.result.split(/\r\n|\n/).forEach(line=>{ if(!line.trim()) return; const tbody = table.querySelector("tbody"); const newRow = document.createElement("tr"); newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`; 
+        tbody.appendChild(newRow); 
+      }); 
+      setupBadgeToggle(); 
+      showNotificationCenter("CSV berhasil diimport!"); 
+    }; 
+    reader.readAsText(file); 
+  }; 
+}); 
 
-document.getElementById("multiNumberSubmit").addEventListener("click", ()=>{
-  const input=textarea.value;
-  if(!input.trim()){ showNotificationCenter("Tidak ada nomor yang dimasukkan!"); return; }
-  input.split("\n").forEach(line=>{
-    if(!line.trim()) return;
-    const tbody = table.querySelector("tbody");
-    const newRow = document.createElement("tr");
-    newRow.innerHTML=`<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
-    tbody.appendChild(newRow);
-  });
-  overlay.classList.remove("show");
-  setupBadgeToggle();
-});
+addMultipleBtn.addEventListener("click", ()=>{ 
+  overlay.classList.add("show"); 
+  textarea.value=""; 
+  textarea.focus(); 
+}); 
 
-document.getElementById("multiNumberCancel").addEventListener("click", ()=>{
-  overlay.classList.remove("show");
-});
+document.getElementById("multiNumberSubmit").addEventListener("click", ()=>{ 
+  const input=textarea.value; 
+  if(!input.trim()){ 
+    showNotificationCenter("Tidak ada nomor yang dimasukkan!"); 
+    return; 
+  } 
+  input.split("\n").forEach(line=>{ 
+    if(!line.trim()) return; 
+    const tbody = table.querySelector("tbody"); 
+    const newRow = document.createElement("tr"); 
+    newRow.innerHTML=`<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`; 
+    tbody.appendChild(newRow); 
+  }); 
+  overlay.classList.remove("show"); 
+  setupBadgeToggle(); 
+}); 
 
-// ===== Badge toggle 3 mode dengan popup =====
-function setupBadgeToggle(){
-  document.querySelectorAll(".badge").forEach(span=>{
-    span.onclick = ()=>{
-      span.classList.add("animate-click");
-      setTimeout(()=>{span.classList.remove("animate-click");},200);
-      const current = span.innerText.trim().toUpperCase();
-      if(current === "CLAIM NOW"){
-        span.dataset.pendingBadge = true;
-        showPopup();
-      } else if(current === "CLAIMED"){
-        span.innerText = "NOT TAKEN";
-        span.className = "badge not-taken";
-      } else if(current === "NOT TAKEN"){
-        span.innerText = "CLAIM NOW";
-        span.className = "badge claim-now";
-      }
-    };
-  });
-}
+document.getElementById("multiNumberCancel").addEventListener("click", ()=>{ 
+  overlay.classList.remove("show"); 
+}); 
 
-// Popup close buttons
-popupCloseBtn.addEventListener("click", ()=>{ closePopup(); });
-popupCloseX.addEventListener("click", ()=>{
-  closePopup();
-  document.querySelectorAll(".badge").forEach(span=>{
-    if(span.dataset.pendingBadge){
-      span.innerText = "CLAIMED";
-      span.className = "badge claimed";
-      delete span.dataset.pendingBadge;
-    }
-  });
-});
+// ===== Badge toggle 3 mode dengan popup ===== 
+function setupBadgeToggle(){ 
+  document.querySelectorAll(".badge").forEach(span=>{ 
+    span.onclick = ()=>{ 
+      span.classList.add("animate-click"); 
+      setTimeout(()=>{span.classList.remove("animate-click");},200); 
+      const current = span.innerText.trim().toUpperCase(); 
+      if(current === "CLAIM NOW"){ 
+        span.dataset.pendingBadge = true; 
+        showPopup(); 
+      } else if(current === "CLAIMED"){ 
+        span.innerText = "NOT TAKEN"; 
+        span.className = "badge not-taken"; 
+      } else if(current === "NOT TAKEN"){ 
+        span.innerText = "CLAIM NOW"; 
+        span.className = "badge claim-now"; 
+      } 
+    }; 
+  }); 
+} 
 
-// Inisialisasi halaman
-window.onload = ()=>{
-  const savedTable = localStorage.getItem("savedTableData");
-  const savedTitle = localStorage.getItem("savedTitle");
-  if(savedTable) table.querySelector("tbody").innerHTML = savedTable;
-  if(savedTitle) title.innerText = savedTitle;
-  setupBadgeToggle();
-};
+// Popup close buttons 
+popupCloseBtn.addEventListener("click", ()=>{ closePopup(); }); 
+popupCloseX.addEventListener("click", ()=>{ 
+  closePopup(); 
+  document.querySelectorAll(".badge").forEach(span=>{ 
+    if(span.dataset.pendingBadge){ 
+      span.innerText = "CLAIMED"; 
+      span.className = "badge claimed"; 
+      delete span.dataset.pendingBadge; 
+    } 
+  }); 
+}); 
 
-// Switch halaman
-function switchPage(page){
-  const header=document.querySelector(".header");
-  const container=document.querySelector(".container");
-  const footer=document.querySelector(".footer");
-  const page2=document.getElementById("page2");
-  if(page===2){
-    header.style.display="none";
-    container.style.display="none";
-    footer.style.display="none";
-    page2.style.display="block";
-  } else {
-    header.style.display="flex";
-    container.style.display="block";
-    footer.style.display="flex";
-    page2.style.display="none";
-  }
-}
+// Inisialisasi halaman 
+window.onload = ()=>{ 
+  const savedTable = localStorage.getItem("savedTableData"); 
+  const savedTitle = localStorage.getItem("savedTitle"); 
+  if(savedTable) table.querySelector("tbody").innerHTML = savedTable; 
+  if(savedTitle) title.innerText = savedTitle; 
+  setupBadgeToggle(); 
+}; 
+
+// Switch halaman 
+function switchPage(page){ 
+  const header=document.querySelector(".header"); 
+  const container=document.querySelector(".container"); 
+  const footer=document.querySelector(".footer"); 
+  const page2=document.getElementById("page2"); 
+  if(page===2){ 
+    header.style.display="none"; 
+    container.style.display="none"; 
+    footer.style.display="none"; 
+    page2.style.display="block"; 
+  } else { 
+    header.style.display="flex"; 
+    container.style.display="block"; 
+    footer.style.display="flex"; 
+    page2.style.display="none"; 
+  } 
+} 
 </script>
 </body>
 </html>
