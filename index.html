@@ -6,7 +6,6 @@
 <title>Database Jackpot Pejuang Kasino</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ===== Kode Asli ===== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat','Inter',sans-serif;}
 html,body{touch-action:manipulation;}
 [contenteditable="true"]{font-size:16px !important;-webkit-text-size-adjust:100%;}
@@ -54,7 +53,7 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 .popupBtn:active{transform: scale(0.95);box-shadow:0 0 12px rgba(0,150,255,0.5);}
 #popupCloseX{position:absolute;top:8px;right:8px;background:transparent;color:white;border:none;font-size:18px;font-weight:bold;cursor:pointer;padding:4px 8px;transition:all 0.15s ease;}
 #popupCloseX:active{transform: scale(0.9); box-shadow:0 0 8px rgba(255,255,255,0.5);}
-.db-name{font-weight:600;font-size:13px;}
+.db-name{font-weight:600;font-size:12px;} /* huruf lebih kecil dari nomor */
 .db-number{font-size:16px;margin-top:2px;cursor:pointer;color:#4a88ff;transition:all 0.15s ease;}
 .db-number:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 #webInputOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.25s ease;}
@@ -69,20 +68,11 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 @keyframes badgeClick { 0% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); } 50% { transform: scale(1.2); box-shadow: 0 0 12px rgba(0,150,255,0.5); } 100% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); } }
 .badge.animate-click { animation: badgeClick 0.2s ease-in-out; }
 
-/* ===== TAMBAHAN SESUAI PERMINTAAN ===== */
-/* Background & tabel tidak ikut scroll */
-body::before, .table-wrapper::before {
-    content:"";
-    position:fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background:linear-gradient(180deg,#000000 0%,#000c1a 25%,#001a2e 50%,#002b38 75%,#004644 100%);
-    z-index:-1;
+/* ===== Tambahan agar semua background tetap diam saat scroll ===== */
+body, .header, .table-wrapper, table, .footer, #customPopup .popupBox, #webInputOverlay {
+    background-attachment: fixed !important;
 }
-/* Nama di DB lebih kecil dari nomor */
-.db-name{font-size:11px;}
 </style>
-</head>
 <body>
 <!-- BAGIAN 1: HALAMAN UTAMA -->
 <div class="header">
@@ -166,7 +156,9 @@ body::before, .table-wrapper::before {
     <button class="popupBtn" id="popupCloseBtn">Tutup</button>
   </div>
 </div>
+
 <div id="webNotificationCenter"><div class="notifBox"></div></div>
+
 <div id="webInputOverlay">
   <div>
     <div style="margin-bottom:12px;">Masukkan nama dan nomor (pisahkan tiap baris):</div>
@@ -178,9 +170,8 @@ body::before, .table-wrapper::before {
   </div>
 </div>
 
-<!-- ===== JS Asli tetap sama ===== -->
 <script>
-// Semua JS asli tetap ada (tidak diubah)
+// Semua JS asli tetap sama (tidak diubah)
 const table = document.getElementById("jackpotTable");
 const title = document.querySelector(".title");
 const addRowBtn = document.getElementById("addRow");
@@ -206,7 +197,7 @@ deleteAllBtn.addEventListener("click", ()=>{ table.querySelector("tbody").innerH
 saveBtn.addEventListener("click", ()=>{ localStorage.setItem("savedTableData", table.querySelector("tbody").innerHTML); localStorage.setItem("savedTitle", title.innerText); showNotificationCenter("Data berhasil disimpan!"); });
 importCSVBtn.addEventListener("click", ()=>{ const input = document.createElement("input"); input.type = "file"; input.accept = ".csv"; input.click(); input.onchange = ()=>{ const file = input.files[0]; const reader = new FileReader(); reader.onload = e=>{ e.target.result.split(/\r\n|\n/).forEach(line=>{ if(!line.trim()) return; const tbody = table.querySelector("tbody"); const newRow = document.createElement("tr"); newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`; tbody.appendChild(newRow); }); setupBadgeToggle(); showNotificationCenter("CSV berhasil diimport!"); }; reader.readAsText(file); }; });
 addMultipleBtn.addEventListener("click", ()=>{ overlay.classList.add("show"); textarea.value=""; textarea.focus(); });
-document.getElementById("multiNumberSubmit").addEventListener("click", ()=>{ const input=textarea.value; if(!input.trim()){ showNotificationCenter("Tidak ada nomor yang dimasukkan!"); return} input.split("\n").forEach(line=>{ if(!line.trim()) return; const tbody = table.querySelector("tbody"); const newRow = document.createElement("tr"); newRow.innerHTML=`<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`; tbody.appendChild(newRow); }); overlay.classList.remove("show"); setupBadgeToggle(); });
+document.getElementById("multiNumberSubmit").addEventListener("click", ()=>{ const input=textarea.value; if(!input.trim()){ showNotificationCenter("Tidak ada nomor yang dimasukkan!"); return; } input.split("\n").forEach(line=>{ if(!line.trim()) return; const tbody = table.querySelector("tbody"); const newRow = document.createElement("tr"); newRow.innerHTML=`<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true">VIP</td><td><<span class="badge claim-now">CLAIM NOW</span></td>`; tbody.appendChild(newRow); }); overlay.classList.remove("show"); setupBadgeToggle(); });
 document.getElementById("multiNumberCancel").addEventListener("click", ()=>{ overlay.classList.remove("show"); });
 
 // ===== Badge toggle dengan 3 mode dan popup =====
@@ -263,8 +254,17 @@ function switchPage(page){
   const container=document.querySelector(".container");
   const footer=document.querySelector(".footer");
   const page2=document.getElementById("page2");
-  if(page===2){header.style.display="none";container.style.display="none";footer.style.display="none";page2.style.display="block";}
-  else{header.style.display="flex";container.style.display="block";footer.style.display="flex";page2.style.display="none";}
+  if(page===2){
+    header.style.display="none";
+    container.style.display="none";
+    footer.style.display="none";
+    page2.style.display="block";
+  } else {
+    header.style.display="flex";
+    container.style.display="block";
+    footer.style.display="flex";
+    page2.style.display="none";
+  }
 }
 </script>
 </body>
