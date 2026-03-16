@@ -21,17 +21,23 @@ html,body{touch-action:manipulation;}
 /* ===== BODY & FIX BACKGROUND ===== */
 body{
   background:linear-gradient(180deg,#000000 0%,#000c1a 25%,#001a2e 50%,#002b38 75%,#004644 100%);
-  background-attachment: fixed; /* FIXED BACKGROUND */
   color:#e5e5e5;
   letter-spacing:0.3px;
 }
 
 /* ===== HEADER ===== */
 .header{
-  background:linear-gradient(90deg,#000000,#001c3d,#004c3c);
-  background-attachment: fixed; /* FIXED HEADER BG */
-  padding:14px 40px;
-  display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(255,255,255,0.15);
+  background: linear-gradient(90deg,#000000,#001c3d,#004c3c);
+  position: fixed; /* header tetap di atas */
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 14px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:2px solid rgba(255,255,255,0.15);
+  z-index: 1000;
 }
 .logo{display:flex;align-items:center;font-size:24px;font-weight:700;color:#9fdcff;}
 .logo span{margin-left:10px;}
@@ -40,7 +46,9 @@ body{
 .nav a:hover{color:#ffffff;}
 
 /* ===== CONTAINER ===== */
-.container{padding:40px 20px;}
+.container{
+  padding: 100px 20px 40px 20px; /* top padding untuk header fixed */
+}
 .title{font-size:24px;margin-bottom:25px;font-weight:700;color:#9fdcff;cursor:text;}
 
 /* ===== TABLE ===== */
@@ -61,7 +69,7 @@ table{
 
 /* ===== THEAD FIX ===== */
 thead{
-  background:linear-gradient(90deg,#001a2e,#004644); /* GRADIENT HEADER FIXED */
+  background:linear-gradient(90deg,#001a2e,#004644);
   position: sticky;
   top: 0;
   z-index: 3;
@@ -89,7 +97,7 @@ tbody tr:hover{background:rgba(0,80,80,0.18);}
 /* ===== DATABASE CELL ===== */
 .db-name {
     font-weight: 600;
-    font-size: 13px; /* lebih kecil dari nomor */
+    font-size: 13px; /* sedikit lebih kecil dari nomor */
     line-height: 1.2;
 }
 .db-number {
@@ -261,17 +269,18 @@ const notifCenter = document.getElementById("webNotificationCenter").querySelect
 const popup = document.getElementById("customPopup");
 const popupCloseBtn = document.getElementById("popupCloseBtn");
 const popupCloseX = document.getElementById("popupCloseX");
+
 function showPopup(){ popup.classList.add("show"); }
 function closePopup(){ popup.classList.remove("show"); }
 function showNotificationCenter(msg){ notifCenter.innerText = msg; document.getElementById("webNotificationCenter").classList.add("show"); setTimeout(()=>{document.getElementById("webNotificationCenter").classList.remove("show");},2000); }
 function splitNameNumber(input){ const number = (input.match(/\d+/g) || []).join(''); const name = input.replace(/\d+/g,'').trim() || '-'; return {name, number}; }
 function createDBCellFromRaw(raw){ const {name, number} = splitNameNumber(raw); return `<div class="db-name" contenteditable="true">${name}</div><div class="db-number" onclick="window.open('https://wa.me/${number}','_blank')">${number || '-'}</div>`; }
+
 addRowBtn.addEventListener("click", ()=>{ const tbody = table.querySelector("tbody"); const newRow = document.createElement("tr"); newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">Status</td><td>${createDBCellFromRaw("-")}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`; tbody.appendChild(newRow); setupBadgeToggle(); });
 deleteRowBtn.addEventListener("click", ()=>{ const tbody = table.querySelector("tbody"); if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1); });
 deleteAllBtn.addEventListener("click", ()=>{ table.querySelector("tbody").innerHTML = ""; });
 saveBtn.addEventListener("click", ()=>{ localStorage.setItem("savedTableData", table.querySelector("tbody").innerHTML); localStorage.setItem("savedTitle", title.innerText); showNotificationCenter("Data berhasil disimpan!"); });
-importCSVBtn.addEventListener("click", ()=>{ const input = document.createElement("input"); input.type = "file"; input.accept = ".csv"; input.click(); input.onchange = ()=>{ const file = input.files[0]; const reader = new FileReader(); reader.onload = e=>{ e.target.result.split(/\r\n|\n/).forEach(line=>{ if(!line.trim()) return; const tbody = table.querySelector("tbody"); const newRow = document.createElement("tr"); newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`; tbody.appendChild(newRow); }); setupBadgeToggle(); showNotificationCenter("CSV berhasil diimport!
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        });  
+importCSVBtn.addEventListener("click", ()=>{ const input = document.createElement("input"); input.type = "file"; input.accept = ".csv"; input.click(); input.onchange = ()=>{ const file = input.files[0]; const reader = new FileReader(); reader.onload = e=>{ e.target.result.split(/\r\n|\n/).forEach(line=>{ if(!line.trim()) return; const tbody = table.querySelector("tbody"); const newRow = document.createElement("tr"); newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`; tbody.appendChild(newRow); }); setupBadgeToggle(); showNotificationCenter("CSV berhasil diimport!"); }; reader.readAsText(file); };  
 });  
 
 addMultipleBtn.addEventListener("click", ()=>{  
@@ -352,7 +361,7 @@ function switchPage(page){
   const footer=document.querySelector(".footer");  
   const page2=document.getElementById("page2");  
   if(page===2){  
-    header.style.display="none";  
+    header.style.display="flex"; // tetap tampil
     container.style.display="none";  
     footer.style.display="none";  
     page2.style.display="block";  
@@ -365,4 +374,4 @@ function switchPage(page){
 }  
 </script>
 </body>
-</html>      
+</html>
