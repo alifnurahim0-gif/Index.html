@@ -21,23 +21,19 @@ html,body{touch-action:manipulation;}
 /* ===== BODY & FIX BACKGROUND ===== */
 body{
   background:linear-gradient(180deg,#000000 0%,#000c1a 25%,#001a2e 50%,#002b38 75%,#004644 100%);
+  background-attachment: fixed; /* FIXED BACKGROUND */
   color:#e5e5e5;
   letter-spacing:0.3px;
+  padding-top: 80px; /* space for fixed header */
 }
 
 /* ===== HEADER ===== */
 .header{
-  background: linear-gradient(90deg,#000000,#001c3d,#004c3c);
-  position: fixed; /* header tetap di atas */
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 14px 40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  background:linear-gradient(90deg,#000000,#001c3d,#004c3c);
+  padding:14px 40px;
+  display:flex;justify-content:space-between;align-items:center;
   border-bottom:2px solid rgba(255,255,255,0.15);
-  z-index: 1000;
+  position: fixed; top:0; left:0; right:0; z-index: 10;
 }
 .logo{display:flex;align-items:center;font-size:24px;font-weight:700;color:#9fdcff;}
 .logo span{margin-left:10px;}
@@ -46,9 +42,7 @@ body{
 .nav a:hover{color:#ffffff;}
 
 /* ===== CONTAINER ===== */
-.container{
-  padding: 100px 20px 40px 20px; /* top padding untuk header fixed */
-}
+.container{padding:40px 20px 40px 20px;}
 .title{font-size:24px;margin-bottom:25px;font-weight:700;color:#9fdcff;cursor:text;}
 
 /* ===== TABLE ===== */
@@ -69,10 +63,10 @@ table{
 
 /* ===== THEAD FIX ===== */
 thead{
-  background:linear-gradient(90deg,#001a2e,#004644);
   position: sticky;
-  top: 0;
-  z-index: 3;
+  top: 80px; /* tinggi header utama */
+  z-index: 5;
+  background:linear-gradient(90deg,#001a2e,#004644);
 }
 thead th{
   padding:16px 20px;
@@ -95,18 +89,8 @@ tbody tr{background:rgba(0,0,0,0.35);}
 tbody tr:hover{background:rgba(0,80,80,0.18);}
 
 /* ===== DATABASE CELL ===== */
-.db-name {
-    font-weight: 600;
-    font-size: 13px; /* sedikit lebih kecil dari nomor */
-    line-height: 1.2;
-}
-.db-number {
-    font-size: 15px; /* lebih besar dari nama */
-    margin-top: 2px;
-    cursor: pointer;
-    color:#4a88ff;
-    transition:all 0.15s ease;
-}
+.db-name { font-weight:600; font-size:13px; line-height:1.2; }
+.db-number { font-size:15px; margin-top:2px; cursor:pointer; color:#4a88ff; transition:all 0.15s ease; }
 .db-number:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 
 /* ===== PAGINATION & BUTTON ===== */
@@ -149,11 +133,12 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 /* ===== ANIMASI BADGE ===== */
 @keyframes badgeClick { 0% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); } 50% { transform: scale(1.2); box-shadow: 0 0 12px rgba(0,150,255,0.5); } 100% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); } }
 .badge.animate-click { animation: badgeClick 0.2s ease-in-out; }
+
 </style>
 </head>
 <body>
 
-<!-- ===== BAGIAN 1 ===== -->
+<!-- ===== HEADER ===== -->
 <div class="header">
   <div class="logo">👑 <span>PEJUANG KASINO</span></div>
   <div class="nav">
@@ -164,6 +149,7 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
   </div>
 </div>
 
+<!-- ===== CONTAINER ===== -->
 <div class="container">
   <div class="title" contenteditable="true">DATABASE JACKPOT PEJUANG KASINO</div>
   <div class="table-wrapper">
@@ -188,16 +174,6 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
           <td contenteditable="true">VIP</td>
           <td><span class="badge claim-now">CLAIM NOW</span></td>
         </tr>
-        <tr>
-          <td contenteditable="true">PG/PRAGMATIC</td>
-          <td contenteditable="true">PENDING</td>
-          <td>
-            <div class="db-name" contenteditable="true">Nama</div>
-            <div class="db-number" onclick="window.open('https://wa.me/-','_blank')">-</div>
-          </td>
-          <td contenteditable="true">VIP</td>
-          <td><span class="badge claim-now">CLAIM NOW</span></td>
-        </tr>
       </tbody>
     </table>
 
@@ -218,7 +194,7 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
   </div>
 </div>
 
-<!-- ===== BAGIAN 2 ===== -->
+<!-- ===== HALAMAN 2 ===== -->
 <div id="page2" style="display:none;padding:40px 20px;">
   <h2 style="color:#9fdcff;">Halaman 2 (Contoh)</h2>
   <p style="color:#d4d4d4;">Ini bisa diisi konten lain atau tabel berbeda.</p>
@@ -252,9 +228,9 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
   </div>
 </div>
 
-<!-- ===== JS ASLI ===== -->
+<!-- ===== JS ===== -->
 <script>
-// JS tetap utuh
+// JS tetap utuh seperti versi sebelumnya
 const table = document.getElementById("jackpotTable");
 const title = document.querySelector(".title");
 const addRowBtn = document.getElementById("addRow");
@@ -280,27 +256,21 @@ addRowBtn.addEventListener("click", ()=>{ const tbody = table.querySelector("tbo
 deleteRowBtn.addEventListener("click", ()=>{ const tbody = table.querySelector("tbody"); if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1); });
 deleteAllBtn.addEventListener("click", ()=>{ table.querySelector("tbody").innerHTML = ""; });
 saveBtn.addEventListener("click", ()=>{ localStorage.setItem("savedTableData", table.querySelector("tbody").innerHTML); localStorage.setItem("savedTitle", title.innerText); showNotificationCenter("Data berhasil disimpan!"); });
-importCSVBtn.addEventListener("click", ()=>{ const input = document.createElement("input"); input.type = "file"; input.accept = ".csv"; input.click(); input.onchange = ()=>{ const file = input.files[0]; const reader = new FileReader(); reader.onload = e=>{ e.target.result.split(/\r\n|\n/).forEach(line=>{ if(!line.trim()) return; const tbody = table.querySelector("tbody"); const newRow = document.createElement("tr"); newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`; tbody.appendChild(newRow); }); setupBadgeToggle(); showNotificationCenter("CSV berhasil diimport!"); }; reader.readAsText(file); };  
-});  
+importCSVBtn.addEventListener("click", ()=>{ const input = document.createElement("input"); input.type = "file"; input.accept = ".csv"; input.click(); input.onchange = ()=>{ const file = input.files[0]; const reader = new FileReader(); reader.onload = e=>{ e.target.result.split(/\r\n|\n/).forEach(line=>{ if(!line.trim()) return; const tbody = table.querySelector("tbody"); const newRow = document.createElement("tr"); newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`; tbody.appendChild(newRow); }); setupBadgeToggle(); showNotificationCenter("CSV berhasil diimport!"); };};});  
 
-addMultipleBtn.addEventListener("click", ()=>{  
-  overlay.classList.add("show");  
-  textarea.value="";  
-  textarea.focus();  
-});  
-
+addMultipleBtn.addEventListener("click", ()=>{ overlay.classList.add("show"); textarea.value=""; textarea.focus(); });  
 document.getElementById("multiNumberSubmit").addEventListener("click", ()=>{  
   const input=textarea.value;  
   if(!input.trim()){ showNotificationCenter("Tidak ada nomor yang dimasukkan!"); return; }  
-  input.split("\n").forEach(line=>{  
+  input.split("\input.split("\n").forEach(line => {  
     if(!line.trim()) return;  
     const tbody = table.querySelector("tbody");  
     const newRow = document.createElement("tr");  
-    newRow.innerHTML=`<td contenteditable="true">PG/PRAGMATIC</td>
-                      <td contenteditable="true">PENDING</td>
-                      <td>${createDBCellFromRaw(line.trim())}</td>
-                      <td contenteditable="true">VIP</td>
-                      <td><span class="badge claim-now">CLAIM NOW</span></td>`;  
+    newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td>
+                        <td contenteditable="true">PENDING</td>
+                        <td>${createDBCellFromRaw(line.trim())}</td>
+                        <td contenteditable="true">VIP</td>
+                        <td><span class="badge claim-now">CLAIM NOW</span></td>`;  
     tbody.appendChild(newRow);  
   });  
   overlay.classList.remove("show");  
@@ -313,7 +283,7 @@ document.getElementById("multiNumberCancel").addEventListener("click", ()=>{
 
 // ===== Badge toggle 3 mode dengan popup =====  
 function setupBadgeToggle(){  
-  document.querySelectorAll(".badge").forEach(span=>{  
+  document.querySelectorAll(".badge").forEach(span => {  
     span.onclick = ()=>{  
       span.classList.add("animate-click");  
       setTimeout(()=>{span.classList.remove("animate-click");},200);  
@@ -336,7 +306,7 @@ function setupBadgeToggle(){
 popupCloseBtn.addEventListener("click", ()=>{ closePopup(); });  
 popupCloseX.addEventListener("click", ()=>{  
   closePopup();  
-  document.querySelectorAll(".badge").forEach(span=>{  
+  document.querySelectorAll(".badge").forEach(span => {  
     if(span.dataset.pendingBadge){  
       span.innerText = "CLAIMED";  
       span.className = "badge claimed";  
@@ -356,20 +326,20 @@ window.onload = ()=>{
 
 // Switch halaman  
 function switchPage(page){  
-  const header=document.querySelector(".header");  
-  const container=document.querySelector(".container");  
-  const footer=document.querySelector(".footer");  
-  const page2=document.getElementById("page2");  
-  if(page===2){  
-    header.style.display="flex"; // tetap tampil
-    container.style.display="none";  
-    footer.style.display="none";  
-    page2.style.display="block";  
+  const header = document.querySelector(".header");  
+  const container = document.querySelector(".container");  
+  const footer = document.querySelector(".footer");  
+  const page2 = document.getElementById("page2");  
+  if(page === 2){  
+    header.style.display = "none";  
+    container.style.display = "none";  
+    footer.style.display = "none";  
+    page2.style.display = "block";  
   } else {  
-    header.style.display="flex";  
-    container.style.display="block";  
-    footer.style.display="flex";  
-    page2.style.display="none";  
+    header.style.display = "flex";  
+    container.style.display = "block";  
+    footer.style.display = "flex";  
+    page2.style.display = "none";  
   }  
 }  
 </script>
