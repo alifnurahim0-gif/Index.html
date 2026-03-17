@@ -65,20 +65,26 @@ box-shadow:0 1px 3px rgba(0,0,0,0.25);
 vertical-align:middle;
 }
 
+/* TABEL FIX HEIGHT OTOMATIS */
 table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto; /* biar kolom menyesuaikan isi */
 }
 
 th, td {
-  border: 1px solid black;
-  padding: 8px;
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 12px 10px;
+    text-align: left;
+    vertical-align: top; /* baris tinggi mengikuti isi */
+    word-wrap: break-word; /* kata panjang wrap ke baris baru */
+    white-space: normal; /* biar teks wrap otomatis */
 }
 
-td, th{
-overflow:hidden;
-text-overflow:ellipsis;
+/* Kolom keterangan tetap fleksibel */
+td.keterangan {
+    min-width: 200px; /* opsional, supaya tidak terlalu sempit */
+    max-width: 400px; /* opsional, agar tidak melebar berlebihan */
 }
 /* ===== BASE STYLE ===== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat','Inter',sans-serif;}
