@@ -467,11 +467,7 @@ delete span.dataset.pendingBadge;
 
 // Inisialisasi halaman
 window.onload = ()=>{
-const savedTable = localStorage.getItem("savedTableData");
-const savedTitle = localStorage.getItem("savedTitle");
-if(savedTable) table.querySelector("tbody").innerHTML = savedTable;
-if(savedTitle) title.innerText = savedTitle;
-setupBadgeToggle();
+  setupBadgeToggle();
 };
 
 // Switch halaman
