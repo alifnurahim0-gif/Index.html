@@ -360,7 +360,7 @@ function createDBCellFromRaw(raw){ const {name, number} = splitNameNumber(raw); 
 addRowBtn.addEventListener("click", ()=>{
 const tbody = table.querySelector("tbody");
 const newRow = document.createElement("tr");
-newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">Status</td><td>${createDBCellFromRaw("-")}</td><td class="keterangan"
+newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">Status</td><td>${createDBCellFromRaw("-")}</td><td class="keterangan">
 <span class="check">✓</span> telah di undang<br>
 <span class="check">✓</span> sudah di baca<br>
 <span class="check">✓</span> telah membalas
@@ -397,7 +397,7 @@ e.target.result.split(/\r\n|\n/).forEach(line=>{
 if(!line.trim()) return;
 const tbody = table.querySelector("tbody");
 const newRow = document.createElement("tr");
-newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td class="keterangan"
+newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td class="keterangan">
 <span class="check">✓</span> telah di undang<br>
 <span class="check">✓</span> sudah di baca<br>
 <span class="check">✓</span> telah membalas
@@ -424,7 +424,7 @@ input.split("\n").forEach(line=>{
 if(!line.trim()) return;
 const tbody = table.querySelector("tbody");
 const newRow = document.createElement("tr");
-newRow.innerHTML=`<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td class="keterangan"
+newRow.innerHTML=`<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><<td class="keterangan">
 <span class="check">✓</span> telah di undang<br>
 <span class="check">✓</span> sudah di baca<br>
 <span class="check">✓</span> telah membalas
