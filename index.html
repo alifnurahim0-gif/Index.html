@@ -327,7 +327,7 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 
 <!-- ===== JS ASLI ===== -->
 <script>
-// semua JS tetap utuh
+// ===== ELEMENT REFERENCES =====
 const table = document.getElementById("jackpotTable");
 const title = document.querySelector(".title");
 const addRowBtn = document.getElementById("addRow");
@@ -343,131 +343,171 @@ const popup = document.getElementById("customPopup");
 const popupCloseBtn = document.getElementById("popupCloseBtn");
 const popupCloseX = document.getElementById("popupCloseX");
 
+// ===== HELPERS =====
 function showPopup(){ popup.classList.add("show"); }
 function closePopup(){ popup.classList.remove("show"); }
-function showNotificationCenter(msg){ notifCenter.innerText = msg; document.getElementById("webNotificationCenter").classList.add("show"); setTimeout(()=>{document.getElementById("webNotificationCenter").classList.remove("show");},2000); }
-function splitNameNumber(input){ const number = (input.match(/\d+/g) || []).join(''); const name = input.replace(/\d+/g,'').trim() || '-'; return {name, number}; }
-function createDBCellFromRaw(raw){ const {name, number} = splitNameNumber(raw); return `<div class="db-name" contenteditable="true">${name}</div><div class="db-number" onclick="window.open('https://wa.me/${number}','_blank')">${number || '-'}</div>`; }
+function showNotificationCenter(msg){ 
+    notifCenter.innerText = msg; 
+    document.getElementById("webNotificationCenter").classList.add("show"); 
+    setTimeout(()=>{document.getElementById("webNotificationCenter").classList.remove("show");},2000); 
+}
+function splitNameNumber(input){ 
+    const number = (input.match(/\d+/g) || []).join(''); 
+    const name = input.replace(/\d+/g,'').trim() || '-'; 
+    return {name, number}; 
+}
+function createDBCellFromRaw(raw){ 
+    const {name, number} = splitNameNumber(raw); 
+    return `<div class="db-name" contenteditable="true">${name}</div><div class="db-number" onclick="window.open('https://wa.me/${number}','_blank')">${number || '-'}</div>`; 
+}
 
+// ===== BADGE TOGGLE =====
+function setupBadgeToggle(){
+    document.querySelectorAll(".badge").forEach(span=>{
+        span.onclick = ()=>{
+            span.classList.add("animate-click");
+            setTimeout(()=>{span.classList.remove("animate-click");},200);
+            const current = span.innerText.trim().toUpperCase();
+            if(current === "CLAIM NOW"){
+                span.dataset.pendingBadge = true;
+                showPopup();
+            } else if(current === "CLAIMED"){
+                span.innerText = "NOT TAKEN";
+                span.className = "badge not-taken";
+            } else if(current === "NOT TAKEN"){
+                span.innerText = "CLAIM NOW";
+                span.className = "badge claim-now";
+            }
+        };
+    });
+}
+
+// ===== ROW OPERATIONS =====
 addRowBtn.addEventListener("click", ()=>{
-const tbody = table.querySelector("tbody");
-const newRow = document.createElement("tr");
-newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">Status</td><td>${createDBCellFromRaw("-")}</td><td class="keterangan">
-<span class="check">✓</span> telah di undang<br>
-<span class="check">✓</span> sudah di baca<br>
-<span class="check">✓</span> telah membalas
-</td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
-tbody.appendChild(newRow);
-setupBadgeToggle();
+    const tbody = table.querySelector("tbody");
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
+        <td contenteditable="true">PG/PRAGMATIC</td>
+        <td contenteditable="true">Status</td>
+        <td>${createDBCellFromRaw("-")}</td>
+        <td class="keterangan">
+            <span class="check">✓</span> telah di undang<br>
+            <span class="check">✓</span> sudah di baca<br>
+            <span class="check">✓</span> telah membalas
+        </td>
+        <td><span class="badge claim-now">CLAIM NOW</span></td>`;
+    tbody.appendChild(newRow);
+    setupBadgeToggle();
 });
 
 deleteRowBtn.addEventListener("click", ()=>{
-const tbody = table.querySelector("tbody");
-if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1);
+    const tbody = table.querySelector("tbody");
+    if(tbody.rows.length>0) tbody.deleteRow(tbody.rows.length-1);
 });
 
 deleteAllBtn.addEventListener("click", ()=>{
-table.querySelector("tbody").innerHTML = "";
+    table.querySelector("tbody").innerHTML = "";
 });
 
+// ===== SAVE TABLE =====
 saveBtn.addEventListener("click", ()=>{
-localStorage.setItem("savedTableData", table.querySelector("tbody").innerHTML);
-localStorage.setItem("savedTitle", title.innerText);
-showNotificationCenter("Data berhasil disimpan!");
+    localStorage.setItem("savedTableData", table.querySelector("tbody").innerHTML);
+    localStorage.setItem("savedTitle", title.innerText);
+    showNotificationCenter("Data berhasil disimpan!");
 });
 
+// ===== IMPORT CSV =====
 importCSVBtn.addEventListener("click", ()=>{
-const input = document.createElement("input");
-input.type = "file";
-input.accept = ".csv";
-input.click();
-input.onchange = ()=>{
-const file = input.files[0];
-const reader = new FileReader();
-reader.onload = e=>{
-e.target.result.split(/\r\n|\n/).forEach(line=>{
-if(!line.trim()) return;
-const tbody = table.querySelector("tbody");
-const newRow = document.createElement("tr");
-newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td class="keterangan">
-<span class="check">✓</span> telah di undang<br>
-<span class="check">✓</span> sudah di baca<br>
-<span class="check">✓</span> telah membalas
-</td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
-tbody.appendChild(newRow);
-});
-setupBadgeToggle();
-showNotificationCenter("CSV berhasil diimport!");
-};
-reader.readAsText(file);
-};
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".csv";
+    input.click();
+    input.onchange = ()=>{
+        const file = input.files[0];
+        const reader = new FileReader();
+        reader.onload = e=>{
+            e.target.result.split(/\r\n|\n/).forEach(line=>{
+                if(!line.trim()) return;
+                const tbody = table.querySelector("tbody");
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `
+                    <td contenteditable="true">PG/PRAGMATIC</td>
+                    <td contenteditable="true">PENDING</td>
+                    <td>${createDBCellFromRaw(line.trim())}</td>
+                    <td class="keterangan">
+                        <span class="check">✓</span> telah di undang<br>
+                        <span class="check">✓</span> sudah di baca<br>
+                        <span class="check">✓</span> telah membalas
+                    </td>
+                    <td><span class="badge claim-now">CLAIM NOW</span></td>`;
+                tbody.appendChild(newRow);
+            });
+            setupBadgeToggle();
+            showNotificationCenter("CSV berhasil diimport!");
+        };
+        reader.readAsText(file);
+    };
 });
 
+// ===== ADD MULTIPLE NUMBERS =====
 addMultipleBtn.addEventListener("click", ()=>{
-overlay.classList.add("show");
-textarea.value="";
-textarea.focus();
+    overlay.classList.add("show");
+    textarea.value="";
+    textarea.focus();
 });
 
 document.getElementById("multiNumberSubmit").addEventListener("click", ()=>{
-const input=textarea.value;
-if(!input.trim()){ showNotificationCenter("Tidak ada nomor yang dimasukkan!"); return; }
-input.split("\n").forEach(line=>{
-if(!line.trim()) return;
-const tbody = table.querySelector("tbody");
-const newRow = document.createElement("tr");
-newRow.innerHTML=`<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td class="keterangan">
-<span class="check">✓</span> telah di undang<br>
-<span class="check">✓</span> sudah di baca<br>
-<span class="check">✓</span> telah membalas
-</td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
-tbody.appendChild(newRow);
-});
-overlay.classList.remove("show");
-setupBadgeToggle();
+    const input=textarea.value;
+    if(!input.trim()){ showNotificationCenter("Tidak ada nomor yang dimasukkan!"); return; }
+    input.split("\n").forEach(line=>{
+        if(!line.trim()) return;
+        const tbody = table.querySelector("tbody");
+        const newRow = document.createElement("tr");
+        newRow.innerHTML=`
+            <td contenteditable="true">PG/PRAGMATIC</td>
+            <td contenteditable="true">PENDING</td>
+            <td>${createDBCellFromRaw(line.trim())}</td>
+            <td class="keterangan">
+                <span class="check">✓</span> telah di undang<br>
+                <span class="check">✓</span> sudah di baca<br>
+                <span class="check">✓</span> telah membalas
+            </td>
+            <td><span class="badge claim-now">CLAIM NOW</span></td>`;
+        tbody.appendChild(newRow);
+    });
+    overlay.classList.remove("show");
+    setupBadgeToggle();
 });
 
 document.getElementById("multiNumberCancel").addEventListener("click", ()=>{
-overlay.classList.remove("show");
+    overlay.classList.remove("show");
 });
 
-// ===== Badge toggle 3 mode dengan popup =====
-function setupBadgeToggle(){
-document.querySelectorAll(".badge").forEach(span=>{
-span.onclick = ()=>{
-span.classList.add("animate-click");
-setTimeout(()=>{span.classList.remove("animate-click");},200);
-const current = span.innerText.trim().toUpperCase();
-if(current === "CLAIM NOW"){
-span.dataset.pendingBadge = true;
-showPopup();
-} else if(current === "CLAIMED"){
-span.innerText = "NOT TAKEN";
-span.className = "badge not-taken";
-} else if(current === "NOT TAKEN"){
-span.innerText = "CLAIM NOW";
-span.className = "badge claim-now";
-}
-};
-});
-}
-
-// Popup close buttons
+// ===== POPUP =====
 popupCloseBtn.addEventListener("click", ()=>{ closePopup(); });
 popupCloseX.addEventListener("click", ()=>{
-closePopup();
-document.querySelectorAll(".badge").forEach(span=>{
-if(span.dataset.pendingBadge){
-span.innerText = "CLAIMED";
-span.className = "badge claimed";
-delete span.dataset.pendingBadge;
-}
-});
+    closePopup();
+    document.querySelectorAll(".badge").forEach(span=>{
+        if(span.dataset.pendingBadge){
+            span.innerText = "CLAIMED";
+            span.className = "badge claimed";
+            delete span.dataset.pendingBadge;
+        }
+    });
 });
 
-// Inisialisasi halaman
+// ===== INISIALISASI HALAMAN =====
 window.onload = ()=>{
-    setupBadgeToggle(); // cukup ini, tanpa ambil localStorage
+    const savedTable = localStorage.getItem("savedTableData");
+    const savedTitle = localStorage.getItem("savedTitle");
+
+    // Kalau ada data tersimpan → tampilkan, kalau tidak → kosongkan tbody
+    table.querySelector("tbody").innerHTML = savedTable || "";
+
+    // Kalau ada title tersimpan → tampilkan
+    if(savedTitle) title.innerText = savedTitle;
+
+    setupBadgeToggle();
 };
 
 // Switch halaman
