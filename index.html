@@ -6,8 +6,15 @@
 <title>Database Jackpot Pejuang Kasino</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-.keterangan{
-line-height:24px;
+.keterangan {
+    line-height: 1.4;
+    white-space: normal; /* biarkan teks wrap ke baris baru */
+    word-break: break-word; /* pecah kata panjang agar tetap muat */
+}
+
+td, th {
+    overflow: visible; /* jangan dipotong lagi */
+    text-overflow: clip; /* hilangkan ... */
 }
 
 .status{
