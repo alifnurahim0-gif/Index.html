@@ -6,13 +6,31 @@
 <title>Database Jackpot Pejuang Kasino</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+.keterangan{
+font-size:12px;
+line-height:18px;
+text-align:left;
+}
+
+.keterangan div{
+white-space:nowrap;
+}
 /* ===== BASE STYLE ===== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat','Inter',sans-serif;}
 html,body{touch-action:manipulation;}
 [contenteditable="true"]{font-size:16px !important;-webkit-text-size-adjust:100%;}
 
 /* ===== BADGE ===== */
-.badge{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:pointer;padding:6px 14px;border-radius:12px;font-size:11px;font-weight:600;transition: all 0.15s ease;}
+.badge{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:110px;
+height:28px;
+border-radius:12px;
+font-size:11px;
+font-weight:600;
+}
 .badge:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 .claimed{background:#3e9b8a;color:#001a17;}
 .claim-now{background:#4a88ff;color:#00142b;}
@@ -151,40 +169,7 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 /* ===== ANIMASI BADGE ===== */
 @keyframes badgeClick { 0% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); } 50% { transform: scale(1.2); box-shadow: 0 0 12px rgba(0,150,255,0.5); } 100% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); } }
 .badge.animate-click { animation: badgeClick 0.2s ease-in-out; }
-</style>: .jackpot-table{
-width:100%;
-border-collapse:collapse;
-}
-
-.jackpot-table th{
-background:#0a3d5e;
-color:white;
-padding:10px;
-font-size:14px;
-}
-
-.jackpot-table td{
-padding:10px;
-text-align:center;
-border-bottom:1px solid rgba(255,255,255,0.1);
-}
-
-.keterangan{
-text-align:left;
-font-size:12px;
-line-height:18px;
-}
-
-.claim-btn{
-width:110px;
-height:34px;
-background:#3b82f6;
-border:none;
-border-radius:8px;
-color:white;
-font-size:12px;
-cursor:pointer;
-}
+</style>
 </head>
 <body>
 <!-- ===== BAGIAN 1 ===== -->
@@ -200,46 +185,42 @@ cursor:pointer;
 <div class="container">
 <div class="title" contenteditable="true">DATABASE JACKPOT PEJUANG KASINO</div>
 <div class="table-wrapper">
-<table class="jackpot-table">
-
+<table id="jackpotTable">
+<thead>
 <thead>
 <tr>
-<th>GAME</th>
-<th>STATUS</th>
-<th>DATABASE</th>
-<th>KETERANGAN</th>
-<th>JACKPOT</th>
-<th>ACTION</th>
+<th contenteditable="true">GAME</th>
+<th contenteditable="true">STATUS</th>
+<th contenteditable="true">DATABASE</th>
+<th contenteditable="true">KETERANGAN</th>
+<th contenteditable="true">JACKPOT</th>
 </tr>
 </thead>
-
-<tbody id="tableBody">
-
+<tbody>
 <tr>
-
-<td>PG/PRAGMATIC</td>
-
-<td>DONE</td>
-
+<td contenteditable="true">PG/PRAGMATIC</td>
+<td contenteditable="true">DONE</td>
 <td>
-Nama<br>
-85747166188
+<div class="db-name" contenteditable="true">Nama</div>
+<div class="db-number" onclick="window.open('https://wa.me/85747166188','_blank')">85747166188</div>
 </td>
-
 <td class="keterangan">
-✅ telah di undang<br>
-✅ sudah di baca<br>
-✅ telah membalas
+<div>✅ telah di undang</div>
+<div>✅ sudah di baca</div>
+<div>✅ telah membalas</div>
 </td>
-
-<td>JACKPOT</td>
-
-<td>
-<button class="claim-btn">CLAIM NOW</button>
-</td>
-
+<td><span class="badge claim-now">CLAIM NOW</span></td>
 </tr>
-
+<tr>
+<td contenteditable="true">PG/PRAGMATIC</td>
+<td contenteditable="true">PENDING</td>
+<td>
+<div class="db-name" contenteditable="true">Nama</div>
+<div class="db-number" onclick="window.open('https://wa.me/-','_blank')">-</div>
+</td>
+<td contenteditable="true">VIP</td>
+<td><span class="badge claim-now">CLAIM NOW</span></td>
+</tr>
 </tbody>
 </table>
 <div class="pagination">
@@ -445,4 +426,4 @@ page2.style.display="none";
 }
 </script>
 </body>
-</html>
+  </html>
