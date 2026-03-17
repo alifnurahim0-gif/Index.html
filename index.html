@@ -389,7 +389,7 @@ e.target.result.split(/\r\n|\n/).forEach(line=>{
 if(!line.trim()) return;
 const tbody = table.querySelector("tbody");
 const newRow = document.createElement("tr");
-newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><<td class="keterangan">
+newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td class="keterangan">
 <span class="check">✓</span> telah di undang<br>
 <span class="check">✓</span> sudah di baca<br>
 <span class="check">✓</span> telah membalas
@@ -420,7 +420,7 @@ newRow.innerHTML=`<td contenteditable="true">PG/PRAGMATIC</td><td contenteditabl
 <span class="check">✓</span> telah di undang<br>
 <span class="check">✓</span> sudah di baca<br>
 <span class="check">✓</span> telah membalas
-</td><td><<span class="badge claim-now">CLAIM NOW</span></td>`;
+</td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
 tbody.appendChild(newRow);
 });
 overlay.classList.remove("show");
