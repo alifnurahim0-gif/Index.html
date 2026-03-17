@@ -10,37 +10,9 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat','Inter',sans-serif;}
 html,body{touch-action:manipulation;}
 [contenteditable="true"]{font-size:16px !important;-webkit-text-size-adjust:100%;}
-.keterangan-list{
-font-size:12px;
-line-height:18px;
-text-align:left;
-white-space:nowrap;
-}
-  
+
 /* ===== BADGE ===== */
-.badge{
-user-select:none;
--webkit-user-select:none;
--webkit-touch-callout:none;
-
-display:inline-flex;
-align-items:center;
-justify-content:center;
-
-width:110px;   /* lebar tetap */
-height:26px;   /* tinggi tetap */
-
-cursor:pointer;
-padding:6px 10px;
-border-radius:12px;
-font-size:11px;
-font-weight:600;
-
-text-align:center;
-white-space:nowrap;
-
-transition: all 0.15s ease;
-}
+.badge{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:pointer;padding:6px 14px;border-radius:12px;font-size:11px;font-weight:600;transition: all 0.15s ease;}
 .badge:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 .claimed{background:#3e9b8a;color:#001a17;}
 .claim-now{background:#4a88ff;color:#00142b;}
@@ -179,7 +151,40 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 /* ===== ANIMASI BADGE ===== */
 @keyframes badgeClick { 0% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); } 50% { transform: scale(1.2); box-shadow: 0 0 12px rgba(0,150,255,0.5); } 100% { transform: scale(1); box-shadow: 0 0 0 rgba(0,150,255,0); } }
 .badge.animate-click { animation: badgeClick 0.2s ease-in-out; }
-</style>
+</style>: .jackpot-table{
+width:100%;
+border-collapse:collapse;
+}
+
+.jackpot-table th{
+background:#0a3d5e;
+color:white;
+padding:10px;
+font-size:14px;
+}
+
+.jackpot-table td{
+padding:10px;
+text-align:center;
+border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.keterangan{
+text-align:left;
+font-size:12px;
+line-height:18px;
+}
+
+.claim-btn{
+width:110px;
+height:34px;
+background:#3b82f6;
+border:none;
+border-radius:8px;
+color:white;
+font-size:12px;
+cursor:pointer;
+}
 </head>
 <body>
 <!-- ===== BAGIAN 1 ===== -->
@@ -195,27 +200,36 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 <div class="container">
 <div class="title" contenteditable="true">DATABASE JACKPOT PEJUANG KASINO</div>
 <div class="table-wrapper">
-<table id="jackpotTable">
+<table class="jackpot-table">
+
 <thead>
 <tr>
-<th contenteditable="true">GAME</th>
-<th contenteditable="true">STATUS</th>
-<th contenteditable="true">DATABASE</th>
-<th contenteditable="true">KETERANGAN</th>
-<th contenteditable="true">JACKPOT</th>
+<th>GAME</th>
+<th>STATUS</th>
+<th>DATABASE</th>
+<th>KETERANGAN</th>
+<th>JACKPOT</th>
+<th>ACTION</th>
+</tr>
+</thead>
+
+<tbody id="tableBody">
+
 <tr>
+
 <td>PG/PRAGMATIC</td>
 
 <td>DONE</td>
 
 <td>
-Nama<br>85747166188
+Nama<br>
+85747166188
 </td>
 
-<td class="keterangan-list">
-<div>✅ telah di undang</div>
-<div>✅ sudah di baca</div>
-<div>✅ telah membalas</div>
+<td class="keterangan">
+✅ telah di undang<br>
+✅ sudah di baca<br>
+✅ telah membalas
 </td>
 
 <td>JACKPOT</td>
@@ -225,15 +239,7 @@ Nama<br>85747166188
 </td>
 
 </tr>
-<td contenteditable="true">PG/PRAGMATIC</td>
-<td contenteditable="true">PENDING</td>
-<td>
-<div class="db-name" contenteditable="true">Nama</div>
-<div class="db-number" onclick="window.open('https://wa.me/-','_blank')">-</div>
-</td>
-<td contenteditable="true">VIP</td>
-<td><span class="badge claim-now">CLAIM NOW</span></td>
-</tr>
+
 </tbody>
 </table>
 <div class="pagination">
@@ -309,7 +315,7 @@ function createDBCellFromRaw(raw){ const {name, number} = splitNameNumber(raw); 
 addRowBtn.addEventListener("click", ()=>{
 const tbody = table.querySelector("tbody");
 const newRow = document.createElement("tr");
-newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">Status</td><td>${createDBCellFromRaw("-")}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
+newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">Status</td><td>${createDBCellFromRaw("-")}</td><td contenteditable="true"></td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
 tbody.appendChild(newRow);
 setupBadgeToggle();
 });
@@ -342,7 +348,7 @@ e.target.result.split(/\r\n|\n/).forEach(line=>{
 if(!line.trim()) return;
 const tbody = table.querySelector("tbody");
 const newRow = document.createElement("tr");
-newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true">VIP</td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
+newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true"></td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
 tbody.appendChild(newRow);
 });
 setupBadgeToggle();
@@ -365,7 +371,7 @@ input.split("\n").forEach(line=>{
 if(!line.trim()) return;
 const tbody = table.querySelector("tbody");
 const newRow = document.createElement("tr");
-newRow.innerHTML=`<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true">VIP</td><td><<span class="badge claim-now">CLAIM NOW</span></td>`;
+newRow.innerHTML=`<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true"></td><td><<span class="badge claim-now">CLAIM NOW</span></td>`;
 tbody.appendChild(newRow);
 });
 overlay.classList.remove("show");
@@ -439,4 +445,4 @@ page2.style.display="none";
 }
 </script>
 </body>
-  </html>
+</html>
