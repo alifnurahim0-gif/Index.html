@@ -273,9 +273,22 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 <td contenteditable="true">PG/PRAGMATIC</td>
 <td contenteditable="true">DONE</td>
 <td class="keterangan">
-<span class="check">✓</span> telah di undang<br>
-<span class="check">✓</span> sudah di baca<br>
-<span class="check">✓</span> telah membalas
+
+<div class="row-check">
+<span class="check">✓</span>
+<span>telah di undang</span>
+</div>
+
+<div class="row-check">
+<span class="check">✓</span>
+<span>sudah di baca</span>
+</div>
+
+<div class="row-check">
+<span class="check">✓</span>
+<span>telah membalas</span>
+</div>
+
 </td>
 <td><span class="badge claim-now">CLAIM NOW</span></td>
 </tr>
@@ -365,9 +378,22 @@ addRowBtn.addEventListener("click", ()=>{
 const tbody = table.querySelector("tbody");
 const newRow = document.createElement("tr");
 newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">Status</td><td>${createDBCellFromRaw("-")}</td><td class="keterangan">
-<span class="check">✓</span> telah di undang<br>
-<span class="check">✓</span> sudah di baca<br>
-<span class="check">✓</span> telah membalas
+
+<div class="row-check">
+<span class="check">✓</span>
+<span>telah di undang</span>
+</div>
+
+<div class="row-check">
+<span class="check">✓</span>
+<span>sudah di baca</span>
+</div>
+
+<div class="row-check">
+<span class="check">✓</span>
+<span>telah membalas</span>
+</div>
+
 </td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
 tbody.appendChild(newRow);
 setupBadgeToggle();
@@ -402,9 +428,22 @@ if(!line.trim()) return;
 const tbody = table.querySelector("tbody");
 const newRow = document.createElement("tr");
 newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td class="keterangan">
-<span class="check">✓</span> telah di undang<br>
-<span class="check">✓</span> sudah di baca<br>
-<span class="check">✓</span> telah membalas
+
+<div class="row-check">
+<span class="check">✓</span>
+<span>telah di undang</span>
+</div>
+
+<div class="row-check">
+<span class="check">✓</span>
+<span>sudah di baca</span>
+</div>
+
+<div class="row-check">
+<span class="check">✓</span>
+<span>telah membalas</span>
+</div>
+
 </td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
 tbody.appendChild(newRow);
 });
@@ -428,10 +467,23 @@ input.split("\n").forEach(line=>{
 if(!line.trim()) return;
 const tbody = table.querySelector("tbody");
 const newRow = document.createElement("tr");
-newRow.innerHTML=`<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><<td class="keterangan">
-<span class="check">✓</span> telah di undang<br>
-<span class="check">✓</span> sudah di baca<br>
-<span class="check">✓</span> telah membalas
+newRow.innerHTML=`<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td class="keterangan">
+
+<div class="row-check">
+<span class="check">✓</span>
+<span>telah di undang</span>
+</div>
+
+<div class="row-check">
+<span class="check">✓</span>
+<span>sudah di baca</span>
+</div>
+
+<div class="row-check">
+<span class="check">✓</span>
+<span>telah membalas</span>
+</div>
+
 </td><td><<span class="badge claim-now">CLAIM NOW</span></td>`;
 tbody.appendChild(newRow);
 });
