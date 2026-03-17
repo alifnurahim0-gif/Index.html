@@ -296,7 +296,11 @@ function createDBCellFromRaw(raw){ const {name, number} = splitNameNumber(raw); 
 addRowBtn.addEventListener("click", ()=>{
 const tbody = table.querySelector("tbody");
 const newRow = document.createElement("tr");
-newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">Status</td><td>${createDBCellFromRaw("-")}</td><td contenteditable="true"></td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
+newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">Status</td><td>${createDBCellFromRaw("-")}</td><td class="keterangan">
+✅ telah di undang<br>
+✅ sudah di baca<br>
+✅ telah membalas
+</td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
 tbody.appendChild(newRow);
 setupBadgeToggle();
 });
@@ -329,7 +333,11 @@ e.target.result.split(/\r\n|\n/).forEach(line=>{
 if(!line.trim()) return;
 const tbody = table.querySelector("tbody");
 const newRow = document.createElement("tr");
-newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true"></td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
+newRow.innerHTML = `<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td class="keterangan">
+✅ telah di undang<br>
+✅ sudah di baca<br>
+✅ telah membalas
+</td><td><span class="badge claim-now">CLAIM NOW</span></td>`;
 tbody.appendChild(newRow);
 });
 setupBadgeToggle();
@@ -352,7 +360,11 @@ input.split("\n").forEach(line=>{
 if(!line.trim()) return;
 const tbody = table.querySelector("tbody");
 const newRow = document.createElement("tr");
-newRow.innerHTML=`<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td contenteditable="true"></td><td><<span class="badge claim-now">CLAIM NOW</span></td>`;
+newRow.innerHTML=`<td contenteditable="true">PG/PRAGMATIC</td><td contenteditable="true">PENDING</td><td>${createDBCellFromRaw(line.trim())}</td><td class="keterangan">
+✅ telah di undang<br>
+✅ sudah di baca<br>
+✅ telah membalas
+</td><td><<span class="badge claim-now">CLAIM NOW</span></td>`;
 tbody.appendChild(newRow);
 });
 overlay.classList.remove("show");
