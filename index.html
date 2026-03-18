@@ -96,6 +96,19 @@ td.keterangan {
     min-width: 200px; /* opsional, supaya tidak terlalu sempit */
     max-width: 400px; /* opsional, agar tidak melebar berlebihan */
 }
+
+/* Semua isi tabel berada di tengah kolom */
+table td {
+    text-align: center;      /* horizontal center */
+    vertical-align: middle;  /* vertical center */
+}
+
+/* Jika ada badge atau elemen lain, pastikan tetap menyesuaikan */
+table td .badge {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
 /* ===== BASE STYLE ===== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat','Inter',sans-serif;}
 html,body{touch-action:manipulation;}
