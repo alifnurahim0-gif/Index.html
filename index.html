@@ -178,7 +178,10 @@ min-width:750px;
 border-collapse:collapse;
 border:2px solid rgba(255,255,255,0.15);
 }
-
+    <!-- ==== SEARCH INPUT ==== -->
+    <div style="margin-bottom:15px;">
+        <input type="text" id="searchInput" placeholder="Cari nama atau nomor..." style="padding:8px 12px; width:250px; border-radius:6px; border:1px solid #ccc;">
+    </div>
 /* ===== THEAD FIX ===== */
 thead{
 background:linear-gradient(90deg,#001a2e,#004644);
@@ -450,6 +453,25 @@ saveBtn.addEventListener("click", ()=>{
     showNotificationCenter("Data berhasil disimpan!");
 });
 
+// ===== SEARCH / FILTER DATABASE =====
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("input", ()=>{
+    const filter = searchInput.value.toLowerCase();
+    const rows = table.querySelectorAll("tbody tr");
+
+    rows.forEach(row=>{
+        const dbCell = row.querySelector("td:nth-child(3)"); // kolom Database
+        if(!dbCell) return;
+        const text = dbCell.innerText.toLowerCase();
+        if(text.includes(filter)){
+            row.style.display = ""; // tampilkan baris
+        } else {
+            row.style.display = "none"; // sembunyikan baris
+        }
+    });
+});
+    
 // ===== IMPORT CSV =====
 importCSVBtn.addEventListener("click", ()=>{
     const input = document.createElement("input");
