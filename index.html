@@ -91,23 +91,26 @@ th, td {
     white-space: normal; /* biar teks wrap otomatis */
 }
 
-/* Kolom keterangan tetap fleksibel */
-td.keterangan {
-    min-width: 200px; /* opsional, supaya tidak terlalu sempit */
-    max-width: 400px; /* opsional, agar tidak melebar berlebihan */
-}
-
 /* Semua isi tabel berada di tengah kolom */
 table td {
     text-align: center;      /* horizontal center */
     vertical-align: middle;  /* vertical center */
 }
 
-/* Jika ada badge atau elemen lain, pastikan tetap menyesuaikan */
+/* Jika ada badge atau elemen lain, tetap menyesuaikan */
 table td .badge {
     display: inline-flex;
     justify-content: center;
     align-items: center;
+}
+
+/* Perbaiki kolom keterangan agar ceklis sejajar */
+td.keterangan {
+    display: flex;
+    flex-direction: column;       /* susun vertikal */
+    align-items: center;          /* center horizontal */
+    justify-content: center;      /* center vertikal */
+    gap: 4px;                     /* beri jarak antar baris */
 }
 /* ===== BASE STYLE ===== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat','Inter',sans-serif;}
