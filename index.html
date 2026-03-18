@@ -104,10 +104,35 @@ table td .badge {
     align-items: center;
 }
 
+#searchInput {
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    width: 250px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(0,20,40,0.7);
+    color: #d9f4ff;
+    font-size: 13px;
+}
+
 /* Kolom keterangan tetap teks block dengan jarak antar baris */
 td.keterangan span.check {
     margin-bottom: 4px;      /* beri jarak antar ceklis */
     display: inline-block;   /* supaya margin berfungsi */
+}
+
+#searchInput {
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    width: 250px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(0,20,40,0.7);
+    color: #d9f4ff;
+    font-size: 13px;
+}
+#searchInput::placeholder {
+    color: #a0c4ff;
 }
 /* ===== BASE STYLE ===== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat','Inter',sans-serif;}
@@ -163,6 +188,9 @@ padding: 100px 20px 40px 20px;
 }
 .title{font-size:24px;margin-bottom:25px;font-weight:700;color:#9fdcff;cursor:text;}
 
+<!-- Search Input -->
+<input type="text" id="searchInput" placeholder="Cari nama atau nomor..." style="margin-bottom:12px;padding:8px 12px;width:250px;border-radius:6px;border:1px solid rgba(255,255,255,0.2);background:rgba(0,20,40,0.7);color:#d9f4ff;">
+
 /* ===== TABLE ===== */
 .table-wrapper{
 background:linear-gradient(180deg,#000000,#001421,#002430,#00383a);
@@ -178,10 +206,7 @@ min-width:750px;
 border-collapse:collapse;
 border:2px solid rgba(255,255,255,0.15);
 }
-    <!-- ==== SEARCH INPUT ==== -->
-    <div style="margin-bottom:15px;">
-        <input type="text" id="searchInput" placeholder="Cari nama atau nomor..." style="padding:8px 12px; width:250px; border-radius:6px; border:1px solid #ccc;">
-    </div>
+
 /* ===== THEAD FIX ===== */
 thead{
 background:linear-gradient(90deg,#001a2e,#004644);
@@ -364,6 +389,22 @@ button:active{transform: scale(0.95); box-shadow:0 0 12px rgba(0,150,255,0.5);}
 
 <!-- ===== JS ASLI ===== -->
 <script>
+
+// ===== SEARCH FUNCTION =====
+const searchInput = document.getElementById("searchInput");
+const jackpotTable = document.getElementById("jackpotTable");
+
+searchInput.addEventListener("input", ()=>{
+    const filter = searchInput.value.toLowerCase();
+    const rows = jackpotTable.querySelectorAll("tbody tr");
+    rows.forEach(row=>{
+        const dbCell = row.querySelector("td:nth-child(3)"); // kolom DATABASE
+        if(!dbCell) return;
+        const text = dbCell.innerText.toLowerCase();
+        row.style.display = text.includes(filter) ? "" : "none";
+    });
+});
+    
 // ===== ELEMENT REFERENCES =====
 const table = document.getElementById("jackpotTable");
 const title = document.querySelector(".title");
@@ -453,25 +494,6 @@ saveBtn.addEventListener("click", ()=>{
     showNotificationCenter("Data berhasil disimpan!");
 });
 
-// ===== SEARCH / FILTER DATABASE =====
-const searchInput = document.getElementById("searchInput");
-
-searchInput.addEventListener("input", ()=>{
-    const filter = searchInput.value.toLowerCase();
-    const rows = table.querySelectorAll("tbody tr");
-
-    rows.forEach(row=>{
-        const dbCell = row.querySelector("td:nth-child(3)"); // kolom Database
-        if(!dbCell) return;
-        const text = dbCell.innerText.toLowerCase();
-        if(text.includes(filter)){
-            row.style.display = ""; // tampilkan baris
-        } else {
-            row.style.display = "none"; // sembunyikan baris
-        }
-    });
-});
-    
 // ===== IMPORT CSV =====
 importCSVBtn.addEventListener("click", ()=>{
     const input = document.createElement("input");
