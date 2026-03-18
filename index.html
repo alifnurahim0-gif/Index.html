@@ -92,7 +92,7 @@ th, td {
 }
 
 /* Semua isi tabel berada di tengah kolom, kecuali kolom keterangan */
-table td {
+table td:not(.keterangan) {
     text-align: center;      /* horizontal center */
     vertical-align: middle;  /* vertical center */
 }
@@ -106,8 +106,8 @@ table td .badge {
 
 /* Kolom keterangan tetap teks block dengan jarak antar baris */
 td.keterangan span.check {
-    margin-bottom: 4px; /* beri jarak antar ceklis */
-    display: inline-block; /* biar margin bottom berfungsi */
+    margin-bottom: 4px;      /* beri jarak antar ceklis */
+    display: inline-block;   /* supaya margin berfungsi */
 }
 /* ===== BASE STYLE ===== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat','Inter',sans-serif;}
