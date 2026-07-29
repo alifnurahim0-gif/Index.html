@@ -579,6 +579,28 @@ footer.style.display="flex";
 page2.style.display="none";
 }
 }
+    // ===== SEARCH NAMA / NOMOR =====
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("keyup", function () {
+
+    const keyword = this.value.toLowerCase();
+
+    const rows = table.querySelector("tbody").querySelectorAll("tr");
+
+    rows.forEach(row => {
+
+        const dbName = row.querySelector(".db-name") ?
+            row.querySelector(".db-name").innerText.toLowerCase() : "";
+
+        const dbNumber = row.querySelector(".db-number") ?
+            row.querySelector(".db-number").innerText.toLowerCase() : "";
+
+        if (dbName.includes(keyword) || dbNumber.includes(keyword)) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
+        });
 </script>
 </body>
     </html>
